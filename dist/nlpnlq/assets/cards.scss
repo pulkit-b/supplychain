@@ -1,0 +1,1091 @@
+//https://www.google.com/design/spec/components/cards.html#cards-content-blocks
+// Card resting elevation: 2dp
+$border-radius-base: 3px !default;
+$border-radius-small: 2px !default;
+$border-radius-large: 6px !default;
+$border-radius-huge: 10px !default;
+$border-radius-label: 12px !default;
+$border-radius-extreme: 30px !default;
+$black: #000;
+$white: #fff;
+
+$gray-base:              #000 !default;
+$gray-darker:            lighten($gray-base, 13.5%) !default; // #222
+$gray-dark:              lighten($gray-base, 20%) !default;   // #333
+$gray:                   lighten($gray-base, 33.5%) !default; // #555
+$gray-light:             #999999 !default; // #999999
+$gray-lighter:           lighten($gray-base, 93.5%) !default; // #eee
+$brand-primary:  lighten($gray-base, 93.5%) !default; 
+$white-color: #fff !default;
+$navbar-color: #555 !default;
+$pills-color: $navbar-color !default;
+$black-color: #3C4858 !default;
+$gray-color:  #999999 !default;
+$black-color: #3C4858 !default;
+$link-color: $brand-primary;
+$white-transparent: rgba($white-color, .8);
+$transparent: transparent;
+$padding-general-y: 0.625rem !default;
+$padding-general-x: 0.9375rem !default;
+$padding-card-body-y: 0.9375rem !default;
+$padding-card-body-x: 1.875rem !default;
+$bmd-shadow-umbra-opacity: 0.2 !default;
+$bmd-shadow-penumbra-opacity: 0.14 !default;
+$bmd-shadow-ambient-opacity: 0.12 !default;
+
+$font-size-h1:                 3.3125rem;
+$font-size-h2:                 2.25rem !default;
+$font-size-h3:                 1.5625rem;
+$font-size-h4:                 1.125rem !default;
+$font-size-h5:                 1.0625rem !default;
+$font-size-h6:                 0.75rem !default;
+$font-paragraph:               14px !default;
+$font-size-navbar:             16px !default;
+$font-size-small:              12px !default;
+$red-50: #ffebee !default;
+$red-100: #ffcdd2 !default;
+$red-200: #ef9a9a !default;
+$red-300: #e57373 !default;
+$red-400: #ef5350 !default;
+$red-500: #f44336 !default;
+$red-600: #e53935 !default;
+$red-700: #d32f2f !default;
+$red-800: #c62828 !default;
+$red-900: #b71c1c !default;
+$red-a100: #ff8a80 !default;
+$red-a200: #ff5252 !default;
+$red-a400: #ff1744 !default;
+$red-a700: #d50000 !default;
+$red: $red-500 !default;
+
+$pink-50: #fce4ec !default;
+$pink-100: #f8bbd0 !default;
+$pink-200: #f48fb1 !default;
+$pink-300: #f06292 !default;
+$pink-400: #ec407a !default;
+$pink-500: #e91e63 !default;
+$pink-600: #d81b60 !default;
+$pink-700: #c2185b !default;
+$pink-800: #ad1457 !default;
+$pink-900: #880e4f !default;
+$pink-a100: #ff80ab !default;
+$pink-a200: #ff4081 !default;
+$pink-a400: #f50057 !default;
+$pink-a700: #c51162 !default;
+$pink: $pink-500 !default;
+
+$purple-50: #f3e5f5 !default;
+$purple-100: #e1bee7 !default;
+$purple-200: #ce93d8 !default;
+$purple-300: #ba68c8 !default;
+$purple-400: #ab47bc !default;
+$purple-500: #9c27b0 !default;
+$purple-600: #8e24aa !default;
+$purple-700: #7b1fa2 !default;
+$purple-800: #6a1b9a !default;
+$purple-900: #4a148c !default;
+$purple-a100: #ea80fc !default;
+$purple-a200: #e040fb !default;
+$purple-a400: #d500f9 !default;
+$purple-a700: #a0f !default;
+$purple: $purple-500 !default;
+
+$deep-purple-50: #ede7f6 !default;
+$deep-purple-100: #d1c4e9 !default;
+$deep-purple-200: #b39ddb !default;
+$deep-purple-300: #9575cd !default;
+$deep-purple-400: #7e57c2 !default;
+$deep-purple-500: #673ab7 !default;
+$deep-purple-600: #5e35b1 !default;
+$deep-purple-700: #512da8 !default;
+$deep-purple-800: #4527a0 !default;
+$deep-purple-900: #311b92 !default;
+$deep-purple-a100: #b388ff !default;
+$deep-purple-a200: #7c4dff !default;
+$deep-purple-a400: #651fff !default;
+$deep-purple-a700: #6200ea !default;
+$deep-purple: $deep-purple-500 !default;
+
+$indigo-50: #e8eaf6 !default;
+$indigo-100: #c5cae9 !default;
+$indigo-200: #9fa8da !default;
+$indigo-300: #7986cb !default;
+$indigo-400: #5c6bc0 !default;
+$indigo-500: #3f51b5 !default;
+$indigo-600: #3949ab !default;
+$indigo-700: #303f9f !default;
+$indigo-800: #283593 !default;
+$indigo-900: #1a237e !default;
+$indigo-a100: #8c9eff !default;
+$indigo-a200: #536dfe !default;
+$indigo-a400: #3d5afe !default;
+$indigo-a700: #304ffe !default;
+$indigo: $indigo-500 !default;
+
+$blue-50: #e3f2fd !default;
+$blue-100: #bbdefb !default;
+$blue-200: #90caf9 !default;
+$blue-300: #64b5f6 !default;
+$blue-400: #42a5f5 !default;
+$blue-500: #2196f3 !default;
+$blue-600: #1e88e5 !default;
+$blue-700: #1976d2 !default;
+$blue-800: #1565c0 !default;
+$blue-900: #0d47a1 !default;
+$blue-a100: #82b1ff !default;
+$blue-a200: #448aff !default;
+$blue-a400: #2979ff !default;
+$blue-a700: #2962ff !default;
+$blue: $blue-500 !default;
+
+$light-blue-50: #e1f5fe !default;
+$light-blue-100: #b3e5fc !default;
+$light-blue-200: #81d4fa !default;
+$light-blue-300: #4fc3f7 !default;
+$light-blue-400: #29b6f6 !default;
+$light-blue-500: #03a9f4 !default;
+$light-blue-600: #039be5 !default;
+$light-blue-700: #0288d1 !default;
+$light-blue-800: #0277bd !default;
+$light-blue-900: #01579b !default;
+$light-blue-a100: #80d8ff !default;
+$light-blue-a200: #40c4ff !default;
+$light-blue-a400: #00b0ff !default;
+$light-blue-a700: #0091ea !default;
+$light-blue: $light-blue-500 !default;
+
+$cyan-50: #e0f7fa !default;
+$cyan-100: #b2ebf2 !default;
+$cyan-200: #80deea !default;
+$cyan-300: #4dd0e1 !default;
+$cyan-400: #26c6da !default;
+$cyan-500: #00bcd4 !default;
+$cyan-600: #00acc1 !default;
+$cyan-700: #0097a7 !default;
+$cyan-800: #00838f !default;
+$cyan-900: #006064 !default;
+$cyan-a100: #84ffff !default;
+$cyan-a200: #18ffff !default;
+$cyan-a400: #00e5ff !default;
+$cyan-a700: #00b8d4 !default;
+$cyan: $cyan-500 !default;
+
+$teal-50: #e0f2f1 !default;
+$teal-100: #b2dfdb !default;
+$teal-200: #80cbc4 !default;
+$teal-300: #4db6ac !default;
+$teal-400: #26a69a !default;
+$teal-500: #009688 !default;
+$teal-600: #00897b !default;
+$teal-700: #00796b !default;
+$teal-800: #00695c !default;
+$teal-900: #004d40 !default;
+$teal-a100: #a7ffeb !default;
+$teal-a200: #64ffda !default;
+$teal-a400: #1de9b6 !default;
+$teal-a700: #00bfa5 !default;
+$teal: $teal-500 !default;
+
+$green-50: #e8f5e9 !default;
+$green-100: #c8e6c9 !default;
+$green-200: #a5d6a7 !default;
+$green-300: #81c784 !default;
+$green-400: #66bb6a !default;
+$green-500: #4caf50 !default;
+$green-600: #43a047 !default;
+$green-700: #388e3c !default;
+$green-800: #2e7d32 !default;
+$green-900: #1b5e20 !default;
+$green-a100: #b9f6ca !default;
+$green-a200: #69f0ae !default;
+$green-a400: #00e676 !default;
+$green-a700: #00c853 !default;
+$green: $green-500 !default;
+
+$light-green-50: #f1f8e9 !default;
+$light-green-100: #dcedc8 !default;
+$light-green-200: #c5e1a5 !default;
+$light-green-300: #aed581 !default;
+$light-green-400: #9ccc65 !default;
+$light-green-500: #8bc34a !default;
+$light-green-600: #7cb342 !default;
+$light-green-700: #689f38 !default;
+$light-green-800: #558b2f !default;
+$light-green-900: #33691e !default;
+$light-green-a100: #ccff90 !default;
+$light-green-a200: #b2ff59 !default;
+$light-green-a400: #76ff03 !default;
+$light-green-a700: #64dd17 !default;
+$light-green: $light-green-500 !default;
+
+$lime-50: #f9fbe7 !default;
+$lime-100: #f0f4c3 !default;
+$lime-200: #e6ee9c !default;
+$lime-300: #dce775 !default;
+$lime-400: #d4e157 !default;
+$lime-500: #cddc39 !default;
+$lime-600: #c0ca33 !default;
+$lime-700: #afb42b !default;
+$lime-800: #9e9d24 !default;
+$lime-900: #827717 !default;
+$lime-a100: #f4ff81 !default;
+$lime-a200: #eeff41 !default;
+$lime-a400: #c6ff00 !default;
+$lime-a700: #aeea00 !default;
+$lime: $lime-500 !default;
+
+$yellow-50: #fffde7 !default;
+$yellow-100: #fff9c4 !default;
+$yellow-200: #fff59d !default;
+$yellow-300: #fff176 !default;
+$yellow-400: #ffee58 !default;
+$yellow-500: #ffeb3b !default;
+$yellow-600: #fdd835 !default;
+$yellow-700: #fbc02d !default;
+$yellow-800: #f9a825 !default;
+$yellow-900: #f57f17 !default;
+$yellow-a100: #ffff8d !default;
+$yellow-a200: #ff0 !default;
+$yellow-a400: #ffea00 !default;
+$yellow-a700: #ffd600 !default;
+$yellow: $yellow-500 !default;
+
+$amber-50: #fff8e1 !default;
+$amber-100: #ffecb3 !default;
+$amber-200: #ffe082 !default;
+$amber-300: #ffd54f !default;
+$amber-400: #ffca28 !default;
+$amber-500: #ffc107 !default;
+$amber-600: #ffb300 !default;
+$amber-700: #ffa000 !default;
+$amber-800: #ff8f00 !default;
+$amber-900: #ff6f00 !default;
+$amber-a100: #ffe57f !default;
+$amber-a200: #ffd740 !default;
+$amber-a400: #ffc400 !default;
+$amber-a700: #ffab00 !default;
+$amber: $amber-500 !default;
+
+$orange-50: #fff3e0 !default;
+$orange-100: #ffe0b2 !default;
+$orange-200: #ffcc80 !default;
+$orange-300: #ffb74d !default;
+$orange-400: #ffa726 !default;
+$orange-500: #ff9800 !default;
+$orange-600: #fb8c00 !default;
+$orange-700: #f57c00 !default;
+$orange-800: #ef6c00 !default;
+$orange-900: #e65100 !default;
+$orange-a100: #ffd180 !default;
+$orange-a200: #ffab40 !default;
+$orange-a400: #ff9100 !default;
+$orange-a700: #ff6d00 !default;
+$orange: $orange-500 !default;
+
+$deep-orange-50: #fbe9e7 !default;
+$deep-orange-100: #ffccbc !default;
+$deep-orange-200: #ffab91 !default;
+$deep-orange-300: #ff8a65 !default;
+$deep-orange-400: #ff7043 !default;
+$deep-orange-500: #ff5722 !default;
+$deep-orange-600: #f4511e !default;
+$deep-orange-700: #e64a19 !default;
+$deep-orange-800: #d84315 !default;
+$deep-orange-900: #bf360c !default;
+$deep-orange-a100: #ff9e80 !default;
+$deep-orange-a200: #ff6e40 !default;
+$deep-orange-a400: #ff3d00 !default;
+$deep-orange-a700: #dd2c00 !default;
+$deep-orange: $deep-orange-500 !default;
+
+$brown-50: #efebe9 !default;
+$brown-100: #d7ccc8 !default;
+$brown-200: #bcaaa4 !default;
+$brown-300: #a1887f !default;
+$brown-400: #8d6e63 !default;
+$brown-500: #795548 !default;
+$brown-600: #6d4c41 !default;
+$brown-700: #5d4037 !default;
+$brown-800: #4e342e !default;
+$brown-900: #3e2723 !default;
+$brown-a100: #d7ccc8 !default;
+$brown-a200: #bcaaa4 !default;
+$brown-a400: #8d6e63 !default;
+$brown-a700: #5d4037 !default;
+$brown: $brown-500 !default;
+
+$grey-50: #fafafa !default;
+$grey-100: #f5f5f5 !default;
+$grey-200: #eee !default;
+$grey-300: #e0e0e0 !default;
+$grey-400: #bdbdbd !default;
+$grey-500: #9e9e9e;
+$grey-600: #757575 !default;
+$grey-700: #616161 !default;
+$grey-800: #424242 !default;
+$grey-900: #212121 !default;
+$grey-a100: #f5f5f5 !default;
+$grey-a200: #eee !default;
+$grey-a400: #bdbdbd !default;
+$grey-a700: #616161 !default;
+$grey: $grey-500 !default;
+
+$blue-grey-50: #eceff1 !default;
+$blue-grey-100: #cfd8dc !default;
+$blue-grey-200: #b0bec5 !default;
+$blue-grey-300: #90a4ae !default;
+$blue-grey-400: #78909c !default;
+$blue-grey-500: #607d8b !default;
+$blue-grey-600: #546e7a !default;
+$blue-grey-700: #455a64 !default;
+$blue-grey-800: #37474f !default;
+$blue-grey-900: #263238 !default;
+$blue-grey-a100: #cfd8dc !default;
+$blue-grey-a200: #b0bec5 !default;
+$blue-grey-a400: #78909c !default;
+$blue-grey-a700: #455a64 !default;
+$blue-grey: $blue-grey-500 !default;
+
+$black: #000;
+$white: #fff;
+
+// New colors
+$gray-color:  #999999 !default;
+$black-color: #3C4858 !default;
+
+$black: #000000; $rgb-black: "0,0,0" !default;
+$white: #ffffff; $rgb-white: "255,255,255" !default;
+
+//## Gray and brand colors for use across Bootstrap.
+
+$gray-base:              #000 !default;
+$gray-darker:            lighten($gray-base, 13.5%) !default; // #222
+$gray-dark:              lighten($gray-base, 20%) !default;   // #333
+$gray:                   lighten($gray-base, 33.5%) !default; // #555
+$gray-light:             #999999 !default; // #999999
+$gray-lighter:           lighten($gray-base, 93.5%) !default; // #eee
+$brand-primary:              $purple-500 !default;
+$brand-info:                 $cyan-500 !default;
+$brand-success:              $green-500 !default;
+$brand-warning:              $orange-500 !default;
+$brand-danger:               $red-500 !default;
+$brand-rose:                 $pink-500 !default;
+$brand-inverse:              $black-color !default;
+
+// 14sp font
+%std-font {
+    font-size: .875rem;
+  }
+$bmd-shadow-8dp: 0 8px 10px 1px rgba($black, $bmd-shadow-penumbra-opacity),
+  0 3px 14px 2px rgba($black, $bmd-shadow-ambient-opacity),
+  0 5px 5px -3px rgba($black, $bmd-shadow-umbra-opacity);
+  
+
+@mixin box-shadow($shadow...) {
+    -webkit-box-shadow: $shadow; // iOS <4.3 & Android <4.1
+            box-shadow: $shadow;
+  }
+
+  @mixin media-breakpoint-up-or($breakpoint, $name) {
+    #{unquote($name)} {
+      @content;
+    }
+  
+    @include media-breakpoint-up($breakpoint) {
+      @content;
+    }
+  }
+
+  @mixin shadow-big-dash(){
+    box-shadow: 0 10px 30px -12px rgba(0, 0, 0, $bmd-shadow-penumbra-opacity * 3),
+    0  4px 25px 0px rgba(0, 0, 0, $bmd-shadow-ambient-opacity),
+    0  8px 10px -5px rgba(0, 0, 0, $bmd-shadow-umbra-opacity);
+}
+
+@mixin shadow-big-navbar(){
+    box-shadow: 0 10px 20px -12px rgba(0, 0, 0, $mdb-shadow-key-penumbra-opacity * 3),
+    0  3px 20px 0px rgba(0, 0, 0, $mdb-shadow-ambient-shadow-opacity),
+    0  8px 10px -5px rgba(0, 0, 0, $mdb-shadow-key-umbra-opacity);
+}
+
+@mixin shadow-big-color($color){
+    // new box shadow optimized for Tablets and Phones
+    box-shadow: 0 4px 20px 0px rgba(0, 0, 0, .14),
+                0 7px 10px -5px rgba($color, 0.4)
+}
+
+@mixin shadow-alert-color($color){
+  box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14),
+              0 7px 10px -5px rgba($color, 0.4)
+}
+@mixin shadow-big(){
+    box-shadow: 0 16px 38px -12px rgba(0, 0, 0, $bmd-shadow-penumbra-opacity * 4),
+    0  4px 25px 0px rgba(0, 0, 0, $bmd-shadow-ambient-opacity),
+    0  8px 10px -5px rgba(0, 0, 0, $bmd-shadow-umbra-opacity);
+}
+
+@mixin transform-translate-x($value){
+    -webkit-transform:  translate3d($value, 0, 0);
+       -moz-transform: translate3d($value, 0, 0);
+       -o-transform: translate3d($value, 0, 0);
+       -ms-transform: translate3d($value, 0, 0);
+       transform: translate3d($value, 0, 0);
+}
+
+@mixin transform-translate-y($value){
+    -webkit-transform:  translate3d(0,$value, 0);
+       -moz-transform: translate3d(0, $value, 0);
+       -o-transform: translate3d(0, $value, 0);
+       -ms-transform: translate3d(0, $value, 0);
+       transform: translate3d(0, $value, 0);
+}
+
+.card {
+  border: 0;
+  margin-bottom: 30px;
+  margin-top: 30px;
+  border-radius: $border-radius-large;
+  color: $gray-dark;
+  background: $white-color;
+  width: 100%;
+
+    .card-category:not([class*="text-"]) {
+        color: $gray-color;
+    }
+    .card-category{
+        margin-top: 10px;
+
+        .material-icons{
+            position: relative;
+            top: 8px;
+            line-height: 0;
+          }
+  }
+
+  .form-check {
+      margin-top: 15px;
+  }
+
+    .card-title{
+        margin-top: 0.625rem;
+
+        &:last-child{
+            margin-bottom: 0;
+        }
+    }
+ 
+  @extend %std-font;
+
+
+  &.no-shadow {
+    .card-header-image,
+    .card-header-image img {
+      box-shadow: none !important;
+      }
+  }
+
+  .card-body,
+  .card-footer {
+    padding: $padding-card-body-y $padding-card-body-x;
+  }
+
+  .card-body {
+      & + .card-footer{
+        padding-top: 0rem;
+        border: 0;
+        border-radius: $border-radius-large;
+      }
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: 0;
+
+    .author,
+    .stats {
+        display: inline-flex;
+    }
+
+    .stats {
+        color: $gray-color;
+
+        .material-icons {
+            position: relative;
+            top: -10px;
+            margin-right: 3px;
+            margin-left: 3px;
+            font-size: 18px;
+        }
+    }
+  }
+
+  &.bmd-card-raised {
+    // Card raised elevation: 8dp
+    @include box-shadow($bmd-shadow-8dp);
+  }
+
+ 
+
+    .card-header {
+      border-bottom: none;
+      background: transparent;
+        .title{
+            color: $white-color;
+        }
+
+        &:not([class*="card-header-"]){
+            // @include shadow-big();
+        }
+
+        .nav-tabs {
+            padding: 0;
+        }
+
+        &.card-header-image {
+            position: relative;
+            padding: 0;
+            z-index: 1;
+            margin-left: 15px;
+            margin-right: 15px;
+            margin-top: -30px;
+            border-radius: $border-radius-large;
+
+            img {
+                width: 100%;
+                border-radius: $border-radius-large;
+                pointer-events: none;
+               
+            }
+            .card-title {
+                position: absolute;
+                bottom: 15px;
+                left: 15px;
+                color: $white-color;
+                font-size: $font-size-h4;
+                text-shadow: 0 2px 5px rgba(33, 33, 33, 0.5);
+            }
+
+            .colored-shadow{
+                transform: scale(0.94);
+                top: 12px;
+                filter: blur(12px);
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background-size: cover;
+                z-index: -1;
+                transition: opacity .45s;
+                opacity: 0;
+            }
+
+            &.no-shadow{
+                box-shadow: none;
+
+                &.shadow-normal{
+                    @include shadow-big();
+                }
+
+                .colored-shadow{
+                    display: none !important;
+                }
+            }
+        }
+    }
+
+    .card-header-primary .card-icon,
+    .card-header-primary .card-text,
+    .card-header-primary:not(.card-header-icon):not(.card-header-text),
+    &.bg-primary,
+    &.card-rotate.bg-primary .front,
+    &.card-rotate.bg-primary .back{
+      background: linear-gradient(60deg, $purple-400, $purple-600);
+    }
+    .card-header-info .card-icon,
+    .card-header-info .card-text,
+    .card-header-info:not(.card-header-icon):not(.card-header-text),
+    &.bg-info,
+    &.card-rotate.bg-info .front,
+    &.card-rotate.bg-info .back{
+      background: linear-gradient(60deg, $cyan-400, $cyan-600);
+    }
+    .card-header-success .card-icon,
+    .card-header-success .card-text,
+    .card-header-success:not(.card-header-icon):not(.card-header-text),
+    &.bg-success,
+    &.card-rotate.bg-success .front,
+    &.card-rotate.bg-success .back{
+      background: linear-gradient(60deg, $green-400, $green-600);
+    }
+    .card-header-warning .card-icon,
+    .card-header-warning .card-text,
+    .card-header-warning:not(.card-header-icon):not(.card-header-text),
+    &.bg-warning,
+    &.card-rotate.bg-warning .front,
+    &.card-rotate.bg-warning .back{
+      background: linear-gradient(60deg, $orange-400, $orange-600);
+    }
+    .card-header-danger .card-icon,
+    .card-header-danger .card-text,
+    .card-header-danger:not(.card-header-icon):not(.card-header-text),
+    &.bg-danger,
+    &.card-rotate.bg-danger .front,
+    &.card-rotate.bg-danger .back{
+      background: linear-gradient(60deg, $red-400, $red-600);
+    }
+
+    .card-header-rose .card-icon,
+    .card-header-rose .card-text,
+    .card-header-rose:not(.card-header-icon):not(.card-header-text),
+    &.bg-rose,
+    &.card-rotate.bg-rose .front,
+    &.card-rotate.bg-rose .back{
+      background: linear-gradient(60deg, $pink-400, $pink-600);
+    }
+
+    .card-header-primary .card-icon,
+    .card-header-primary:not(.card-header-icon):not(.card-header-text),
+    .card-header-primary .card-text{
+        @include shadow-big-color($brand-primary);
+
+        //@include shadow-8dp-color($brand-primary);
+        //@include shadow-16dp-color($brand-primary);
+    }
+    .card-header-danger .card-icon,
+    .card-header-danger:not(.card-header-icon):not(.card-header-text),
+    .card-header-danger .card-text{
+        @include shadow-big-color($brand-danger);
+    }
+
+    .card-header-rose .card-icon,
+    .card-header-rose:not(.card-header-icon):not(.card-header-text),
+    .card-header-rose .card-text{
+        @include shadow-big-color($brand-rose);
+    }
+
+    .card-header-warning .card-icon,
+    .card-header-warning:not(.card-header-icon):not(.card-header-text),
+    .card-header-warning .card-text{
+        @include shadow-big-color($brand-warning);
+    }
+
+    .card-header-info .card-icon,
+    .card-header-info:not(.card-header-icon):not(.card-header-text),
+    .card-header-info .card-text{
+        @include shadow-big-color($brand-info);
+    }
+
+    .card-header-success .card-icon,
+    .card-header-success:not(.card-header-icon):not(.card-header-text),
+    .card-header-success .card-text{
+        @include shadow-big-color($brand-success);
+    }
+
+    [class*="card-header-"],
+    &[class*="bg-"]{
+        color: $white-color;
+
+        .card-title a,
+        .card-title,
+        .icon i{
+            color: $white-color;
+        }
+
+        .icon i{
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+        .author a,
+        .stats,
+        .card-category,
+        .card-description{
+            color: $white-transparent;
+        }
+
+        .author a{
+            &:hover,
+            &:focus,
+            &:active{
+                color: $white-color;
+            }
+        }
+    }
+
+    .author{
+        .avatar{
+            width: 30px;
+            height: 30px;
+            overflow: hidden;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        a{
+            color: $black-color;
+            text-decoration: none;
+
+            .ripple-container{
+                display: none;
+            }
+        }
+    }
+
+    .card-category-social{
+        .fa{
+            font-size: 24px;
+            position: relative;
+            margin-top: -4px;
+            top: 2px;
+            margin-right: 5px;
+        }
+
+        .material-icons{
+            position: relative;
+            top: 5px;
+        }
+    }
+
+    &[class*="bg-"],
+    &[class*="bg-"] .card-body{
+        border-radius: $border-radius-large;
+
+        h1,
+        h2,
+        h3{
+          small{
+              color: $white-transparent;
+          }
+        }
+    }
+
+    .card-stats{
+        background: transparent;
+        display: flex;
+
+        .author,
+        .stats{
+            display: inline-flex;
+        }
+    }
+}
+
+.card {
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
+
+  .table tr:first-child td{
+    border-top: none;
+  }
+
+  .card-title{
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+
+  .card-body{
+    padding: $padding-card-body-y 20px;
+    position: relative;
+
+  }
+
+  .card-header {
+    z-index: 3 !important;
+
+    .card-title{
+      margin-bottom: 3px;
+    }
+
+    .card-category{
+      margin: 0;
+    }
+
+    &.card-header-text {
+        display: inline-block;
+
+        &:after {
+            content: "";
+            display: table;
+        }
+    }
+
+    &.card-header-icon,
+    &.card-header-text {
+        i {
+            width: 33px;
+            height: 33px;
+            text-align: center;
+            line-height: 33px;
+        }
+        .card-title{
+          margin-top: 15px;
+          color: $black-color;
+        }
+        h4{
+          font-weight: 300;
+        }
+    }
+
+    &.card-header-tabs {
+        .nav-tabs {
+            background: transparent;
+            padding: 0;
+        }
+        .nav-tabs-title {
+            float: left;
+            padding: 10px 10px 10px 0;
+            line-height: 24px;
+        }
+    }
+  }
+
+  &.card-plain {
+    .card-header {
+      &.card-header-icon + .card-body .card-title,
+      &.card-header-icon + .card-body .card-category {
+          margin-top: -20px;
+      }
+    }
+  }
+
+  .card-actions {
+      position: absolute;
+      z-index: 1;
+      top: -50px;
+      width: calc(100% - 30px);
+      left: 17px;
+      right: 17px;
+      text-align: center;
+
+      .card-header{
+        padding: 0;
+        min-height: 160px;
+      }
+
+      .btn {
+          padding-left: 12px;
+          padding-right: 12px;
+      }
+      .fix-broken-card {
+          position: absolute;
+          top: -65px;
+      }
+  }
+
+  &.card-chart {
+    .card-footer i:nth-child(1n+2){
+      width: 18px;
+      text-align: center;
+    }
+
+    .card-category{
+      margin: 0;
+    }
+  }
+
+  .card-body + .card-footer,
+  .card-footer{
+    padding: 0;
+    padding-top: 10px;
+    margin: 0 15px 10px;
+    border-radius: 0;
+    justify-content: space-between;
+    align-items: center;
+
+    h6 {
+      width: 100%;
+    }
+
+    .stats{
+      color: #999999;
+      font-size: 12px;
+      line-height: 22px;
+
+      .card-category{
+        padding-top: 7px;
+        padding-bottom: 7px;
+        margin: 0;
+      }
+
+      .material-icons{
+        position: relative;
+        top: 4px;
+        font-size: 16px;
+      }
+    }
+  }
+  [class*="card-header-"] {
+      margin: 0px 15px 0;
+      padding: 0;
+
+      .card-title + .card-category{
+        color: rgba(255, 255, 255, 0.62);
+        a {
+          color: $white-color;
+        }
+      }
+
+      &:not(.card-header-icon):not(.card-header-text):not(.card-header-image){
+        border-radius: $border-radius-base;
+        margin-top: -20px;
+        padding: 15px;
+      }
+
+      .card-icon,
+      .card-text{
+        border-radius: $border-radius-base;
+        background-color: $gray-color;
+        padding: 15px;
+        margin-top: -20px;
+        margin-right: 15px;
+        float: left;
+      }
+
+      .card-text{
+        float: none;
+        display: inline-block;
+        margin-right: 0;
+
+        .card-title{
+          color: $white-color;
+          margin-top: 0;
+        }
+      }
+
+      position: relative;
+
+      .ct-chart{
+        .card-title{
+            color: $white-color;
+        }
+        .card-category{
+            margin-bottom: 0;
+            color: rgba($white-color, .62);
+        }
+
+        .ct-label{
+            color: rgba($white-color, .7);
+        }
+        .ct-grid{
+            stroke: rgba(255, 255, 255, 0.2);
+        }
+        .ct-series-a .ct-point,
+        .ct-series-a .ct-line,
+        .ct-series-a .ct-bar,
+        .ct-series-a .ct-slice-donut{
+            stroke: rgba(255,255,255,.8);
+        }
+        .ct-series-a .ct-slice-pie,
+        .ct-series-a .ct-area{
+            fill: rgba(255,255,255,.4);
+        }
+        .ct-series-a .ct-bar{
+          stroke-width: 10px;
+        }
+        .ct-point{
+          stroke-width: 10px;
+          stroke-linecap: round;
+        }
+        .ct-line{
+          fill: none;
+          stroke-width: 4px;
+        }
+      }
+  }
+
+  [data-header-animation="true"] {
+      @include transform-translate-y(0);
+      -webkit-transition: all 300ms cubic-bezier(0.34, 1.61, 0.7, 1);
+      -moz-transition: all 300ms cubic-bezier(0.34, 1.61, 0.7, 1);
+      -o-transition: all 300ms cubic-bezier(0.34, 1.61, 0.7, 1);
+      -ms-transition: all 300ms cubic-bezier(0.34, 1.61, 0.7, 1);
+      transition: all 300ms cubic-bezier(0.34, 1.61, 0.7, 1);
+  }
+
+  &:hover {
+      [data-header-animation="true"]{
+          @include transform-translate-y(-50px);
+      }
+  }
+
+  .map {
+    height: 280px;
+    border-radius: $border-radius-large;
+    margin-top: 15px;
+
+    &.map-big{
+      height: 420px;
+    }
+  }
+
+  .card-body.table-full-width{
+    padding: 0;
+  }
+
+  .card-plain .card-header-icon {
+    margin-right: 15px !important;
+  }
+}
+
+.table-sales{
+    margin-top: 40px;
+}
+
+.iframe-container {
+    width: 100%;
+
+    iframe {
+        width: 100%;
+        height: 500px;
+        border: 0;
+        @include shadow-big();
+    }
+}
+
+.card-wizard {
+  .nav.nav-pills {
+    .nav-item {
+      margin: 0;
+
+      .nav-link {
+        padding: 6px 15px !important;
+      }
+    }
+  }
+  .nav-pills:not(.flex-column) .nav-item + .nav-item:not(:first-child) {
+    margin-left: 0;
+  }
+
+  .nav-item .nav-link.active,
+  .nav-item .nav-link:hover,
+  .nav-item .nav-link:focus {
+    background-color: inherit !important;
+    box-shadow: none !important;
+  }
+
+  .input-group-text {
+    padding: 6px 15px 0px !important;
+  }
+  .card-footer {
+    border-top: none !important;
+  }
+}
+
+.card-chart,
+.card-product {
+  .card-body + .card-footer {
+    border-top: 1px solid #eee;
+  }
+}
+
+.card-product{
+  .price{
+    color: inherit;
+  }
+}
+
+.card-collapse {
+  margin-bottom: 15px;
+
+  .card .card-header a[aria-expanded="true"]{
+    color: #e91e63;
+  }
+}
