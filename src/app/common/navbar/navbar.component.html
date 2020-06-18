@@ -1,0 +1,87 @@
+<nav class="navbar navbar-expand-sm navbar-dark topnav-height customnavbar">
+    <!-- <button type="button" id="sidebarCollapse" class="btn btn-light sidebar-toggler-btn" (click)="toggleSidenav()">
+    <i class="fas fa-align-justify"></i>
+  </button> -->
+    <div class="navbar-collapse" style="flex-direction: column;
+    align-items: flex-start;">
+        <!-- <img src="./assets/images/logo.png" class="logo" /> -->
+        <p class="name-logo">Supplychain</p>
+        <p class="subname-logo">Powered by <img src="./assets/images/gcp.png" style="width: 5%;"></p>
+        <!-- <button class="btn btn-primary">Shift links right</button> -->
+
+    </div>
+    <div ngbDropdown class="d-inline-block userDetails">
+        {{loginUser}}
+        <div (click)="logoutuser()" class="d-inline">
+        <i class="fa fa-sign-out-alt" style="    color: #FF5722;
+    position: relative;
+    top: 2px;
+    cursor: pointer;
+"></i></div>
+        <!-- <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle></button> -->
+        <!-- <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <a (click)="logoutuser()" ngbDropdownItem>Logout</a>
+
+
+        </div> -->
+    </div>
+</nav>
+<nav class="navbar navbar-expand-sm navbar-dark topnav-height customnavbar menubar">
+    <div class="navbar-element" id="topnav">
+        <div class="menuitems" [ngClass]="{'active menuitmes':currentPage=='/home'}">
+            <a href="#/home">Home</a>
+        </div>
+
+
+        <div ngbDropdown class="d-inline-block menuitems" [ngClass]="{'active menuitmes':currentPage=='/designplan-results' || currentPage=='/designplan' }">
+            <!-- <a href="#/planning">Planning</a> -->
+            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Design Plan</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <a href="#/designplan-results" ngbDropdownItem>Design Plan </a>
+                <a href="#/designplan" ngbDropdownItem>Design Plan Results</a>
+
+
+            </div>
+        </div>
+        <div class="menuitems" [ngClass]="{'active':currentPage=='/shippingdashboard'}">
+            <a href="#/shippingdashboard">Shipping Dashboard</a>
+        </div>
+        <div class="menuitems" [ngClass]="{'active':currentPage=='/top-manage'}">
+            <a href="#/top-manage">CxO Analytics</a>
+        </div>
+
+        <div class="menuitems" [ngClass]="{'active':currentPage=='/intelligencescheduler'}">
+            <a href="#/intelligencescheduler">iScheduler</a>
+        </div>
+        <div class="menuitems" [ngClass]="{'active':currentPage=='/acquisition'}">
+            <a href="#/acquisition">Acquisition</a>
+        </div>
+        <div class="menuitems" [ngClass]="{'active':currentPage=='/vessel-portal'|| currentPage=='/vessel-logistics' || currentPage=='/hss-update' }">
+            <a href="#/vessel-portal">Vessel Logistics</a>
+        </div>
+        <div class="menuitems" [ngClass]="{'active':currentPage=='/chartering' || currentPage=='/chartering-details'}">
+            <a href="#/chartering">Chartering</a>
+        </div>
+
+        <div ngbDropdown class="d-inline-block menuitems" [ngClass]="{'active':currentPage=='/logistic' || currentPage=='/logisticdashboard' || currentPage=='/logisticcalender'}">
+            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>iLogistics</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <a href="#/logistic" ngbDropdownItem>iLogistics</a>
+                <a href="#/logisticdashboard" ngbDropdownItem>iLogistics Dashboard</a>
+                <a href="#/logisticcalender" ngbDropdownItem>iLogistics Calendar</a>
+
+            </div>
+        </div>
+
+        <!-- <div class="menuitems" [ngClass]="{'active':currentPage=='/inbounddashboard'}">
+      <a href="#/inbounddashboard">Inbound Dashboard</a>
+    </div>
+    <div class="menuitems" [ngClass]="{'active':currentPage=='/inboundcalender'}">
+      <a href="#/inboundcalender">Inbound Calender</a>
+    </div> -->
+        <div class="menuitems" [ngClass]="{'active':currentPage=='/financedashboard'}">
+            <a href="#/financedashboard">Financial Dashboard</a>
+        </div>
+
+    </div>
+</nav>

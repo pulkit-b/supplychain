@@ -1,0 +1,35 @@
+  #next {
+      position: absolute;
+      right: 10px;
+      top: 5px;
+      background: #1456ad;
+    border: none;
+    color: #fff;
+  }
+  
+  #previous {
+      position: absolute;
+      left: 10px;
+      top: 5px;
+      background: #1456ad;
+    border: none;
+    color: #fff;
+  }
+  
+  .calendarNaviagaiton {
+      padding-bottom: 6px;
+  }
+  /* 
+table {
+    border-collapse: collapse;
+    border-radius: 1em;
+    overflow: hidden;
+}
+
+th,
+td {
+    padding: 1em;
+    background: #ddd;
+    border-bottom: 2px solid white;
+    text-align: center;
+}  */

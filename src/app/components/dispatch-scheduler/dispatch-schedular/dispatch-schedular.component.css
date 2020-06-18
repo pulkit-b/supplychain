@@ -1,0 +1,183 @@
+.header>div,
+.bodyvalue>div {
+    float: left;
+    max-width: 41px;
+    min-width: 41px;
+    /* border-width: thin; */
+    /* border-color: #000; */
+    /* border-style: dotted; */
+    border-right: 1px solid #cacaca;
+    text-align: center;
+    /* animation: mymove 5s; */
+}
+
+
+/* @keyframes mymove {
+    from {
+        left: 0px;
+    }
+    to {
+        right: 41px;
+    }
+} */
+
+.bodyvalue {
+    display: flex;
+}
+
+.bodyvalue>div {
+    font-size: 11px;
+}
+
+.header {
+    display: flex;
+    text-align: center;
+}
+
+.header>div {
+    font-size: 10px;
+}
+
+app-leftpanel.closed {
+    width: 0px !important;
+}
+
+
+/* .bodyvalue > div ::after {
+    content: "";
+    border:1px solid red;
+    width:50px;
+  }
+  .bodyvalue > div ::before {
+    content: "";
+    border:1px solid green;
+    width:50px;
+  } */
+
+.L {
+    border-bottom: 4px solid yellow;
+}
+
+.J,
+.B {
+    border-bottom: 4px solid green;
+}
+
+.V {
+    border-bottom: 4px solid blue;
+}
+
+.T,
+.K-T {
+    border-bottom: 4px solid #171617;
+}
+
+.K {
+    border-bottom: 4px solid red;
+}
+
+.mainsec {
+    width: 100%;
+    position: relative;
+    font-size: 9px;
+}
+
+.mainsec>div {
+    float: left;
+    cursor: pointer;
+}
+
+.title {
+    width: 100%;
+}
+
+.dispatch-scheduler.portion {
+    width: 80% !important;
+}
+
+.dispatch-scheduler.full {
+    width: 100% !important;
+}
+
+.manual-select {
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+    padding: 5px;
+}
+
+.xl-modal .madal-dialog {
+    max-width: 1366px;
+}
+
+.table td {
+    padding: 0rem !important;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+.plantTimePrePost {
+    border-bottom: 4px solid blue;
+}
+
+
+/* .form-control {
+  border: 0px !important;
+} */
+
+.calendar {
+    background-image: url('/assets/images/cal.png');
+    background-color: #cccccc;
+    /* Used if the image is unavailable */
+    background-color: #c7c0c0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    right: 16px;
+    top: 29px;
+    position: absolute;
+    height: 42px;
+    width: 39px;
+}
+
+ngb-datepicker .ngb-dp-day,
+ngb-datepicker .ngb-dp-week-number,
+ngb-datepicker .ngb-dp-weekday {
+    width: 2rem !important;
+    height: 2rem !important;
+}
+
+.row {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+
+th,
+td {
+    white-space: nowrap;
+}
+
+.hold {
+    border-bottom: 20px solid blue;
+}
+
+.btap-status-table th,
+.btap-status-table td {
+    white-space: nowrap;
+    text-align: left;
+}
+
+.card-header {
+    font-family: 'Cocogoose Pro Regular' !important;
+}
+
+.btn-vedanta {
+    font-family: 'Avenir LT Std 45 Book' !important;
+}
+
+.vedtext{
+        vertical-align: text-bottom;
+    padding: 6px 0 0 0;
+    line-height: 23px;
+}

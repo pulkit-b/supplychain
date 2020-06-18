@@ -1,0 +1,38 @@
+<app-navbar [open]="open" (event)="open=$event"></app-navbar>
+<div class="mainpanel">
+    <!-- <div class="mainpanel_leftsect">
+        <app-leftpanel [openValue]="open"></app-leftpanel>
+    </div> -->
+    <div class="mainpanel_rightsect">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="calendarNaviagaiton">
+                    <button type="button" class="btn btn-secondary" id="previous" (click)="previous()">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+          </button>
+                    <h3 id="monthAndYear"></h3>
+                    <button type="button" class="btn btn-secondary" id="next" (click)="next()">
+            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          </button>
+                </div>
+                <table class="table table-bordered table-responsive-sm" id="calendar">
+                    <thead>
+                        <tr>
+                            <th>Sun</th>
+                            <th>Mon</th>
+                            <th>Tue</th>
+                            <th>Wed</th>
+                            <th>Thu</th>
+                            <th>Fri</th>
+                            <th>Sat</th>
+                        </tr>
+                    </thead>
+                    <tbody id="calendar-body">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>

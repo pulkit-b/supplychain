@@ -1,0 +1,282 @@
+<app-navbar [open]="open" (event)="open=$event"></app-navbar>
+
+<div class="mainpanel">
+
+    <!-- <div class="mainpanel_leftsect">
+    <app-leftpanel [openValue]="open"></app-leftpanel>
+  </div> -->
+
+    <div class="mainpanel_rightsect">
+        <div class="container-fluid">
+            <!-- <div class="row">
+        
+           
+            <div *ngIf="vesselDetails">
+              Vessel Name: {{vesselDetails?.VesselName ?  vesselDetails?.VesselName : ''}} <br>
+              Supplier:{{vesselDetails?.VesselOwner ?  vesselDetails?.VesselOwner : ''}}<br>
+              Load Port :{{vesselDetails?.LoadPort ?  vesselDetails?.LoadPort : ''}}<br>
+              Laycan Period: {{vesselDetails?.LaycanSelected ?  vesselDetails?.LaycanSelected : ''}}<br>
+              ETA / ATA : ?<br>
+              Discharge Port
+              :{{vesselDetails?.DischargePortSuggested ?  vesselDetails?.DischargePortSuggested : ''}}<br>
+              FOB Cost: ?<br>
+              Ocean Freight: ?<br>
+              Vessel Type: ?<br>
+              Gross Tonnage:{{vesselDetails?.Quantity ?  vesselDetails?.Quantity : 0}}<br>
+              IMO Number:?<br>
+              P Type: ?<br>
+              C Type: ?<br>
+            </div>
+
+          </div> -->
+            <div class="row">
+                <div class="vesselmodalbox_management col-md-12 text-center">
+                    <div class="vessesmanagement">
+                        <img src="/assets/images/vesselmanagement.png" />
+                    </div>
+
+                    <div class="commonmodal_bubble moadlbox1">
+                        <div>
+                            <span class="boldfont">Supplier : </span>
+                            <span>{{vesselDetails?.VesselOwner ? vesselDetails?.VesselOwner : ''}}</span>
+                        </div>
+                        <div>
+                            <span class="boldfont">Load Port : </span>
+                            <span>{{vesselDetails?.LoadPort ? vesselDetails?.LoadPort : ''}}</span>
+                        </div>
+
+                        <!-- <h4>Supplier:{{vesselDetails?.VesselOwner ? vesselDetails?.VesselOwner : ''}}</h4>
+                        <p>Load Port :{{vesselDetails?.LoadPort ? vesselDetails?.LoadPort : ''}}</p>
+                        <p>FOB Cost:{{vesselDetails?.FOB_Cost ? vesselDetails?.FOB_Cost : ''}}</p> -->
+                    </div>
+                    <div class="commonmodal_bubble moadlbox2">
+                        <div>
+                            <span class="boldfont">Laycan Period : </span>
+                            <!-- <span>{{vesselDetails?.LaycanSelected ? vesselDetails?.LaycanSelected : ''}}</span> -->
+                            <span>13 April - 20 April</span>
+                        </div>
+                        <div>
+                            <span class="boldfont">ETA / ATA : </span>
+                            <!-- <span>{{vesselDetails?.ETA ? vesselDetails?.ETA : vesselDetails?.ArrivalDate?.split("T")[0]}}</span> -->
+                            <span>2020-4-30</span>
+                        </div>
+                        <div>
+                            <span class="boldfont">Discharge Port : </span>
+                            <span>{{vesselDetails?.DischargePortSuggested ? vesselDetails?.DischargePortSuggested : ''}}</span>
+                        </div>
+                        <!-- <h4>Laycan Period:{{vesselDetails?.LaycanSelected ? vesselDetails?.LaycanSelected : ''}}</h4>
+                        <p>ETA / ATA
+                            :{{vesselDetails?.ETA ? vesselDetails?.ETA : vesselDetails?.ArrivalDate?.split("T")[0]}}</p>
+                        <p>Discharge
+                            Port:{{vesselDetails?.DischargePortSuggested ? vesselDetails?.DischargePortSuggested : ''}}
+                        </p> -->
+                    </div>
+                    <div class="commonmodal_bubble moadlbox3">
+                        <h4 (click)="openModel(content)" class="boldfont">Document Checklist</h4>
+
+                    </div>
+
+                    <div class="commonmodal_bubble moadlbox4">
+                        <div>
+                            <span class="boldfont">Vessel Type : </span>
+                            <!-- <span>{{vesselDetails?.VesselType ? vesselDetails?.VesselType : ''}}</span> -->
+                            <span>Handysize</span>
+                        </div>
+                        <div>
+                            <span class="boldfont">Gross Tonnage : </span>
+                            <!-- <span>{{vesselDetails?.Gross_Tonnage ? vesselDetails?.Gross_Tonnage : ''}}</span> -->
+                            <span>31500</span>
+                        </div>
+                        <div>
+                            <span class="boldfont">IMO Number : </span>
+                            <!-- <span>{{vesselDetails?.IMO_Vessel ? vesselDetails?.IMO_Vessel : ''}}</span> -->
+                            <span>9649110</span>
+                        </div>
+                        <!-- <h4>Vessel Type:{{vesselDetails?.VesselType ? vesselDetails?.VesselType : ''}}</h4>
+                        <p>Gross Tonnage:{{vesselDetails?.Gross_Tonnage ? vesselDetails?.Gross_Tonnage : ''}}</p>
+                        <p>IMO Number:{{vesselDetails?.IMO_Vessel ? vesselDetails?.IMO_Vessel : ''}}</p> -->
+                    </div>
+                    <div class="commonmodal_bubble moadlbox5">
+                        <div>
+                            <span class="boldfont">P Type : </span>
+                            <!-- <span>{{vesselDetails?.P_Type ? vesselDetails?.P_Type : ''}}</span> -->
+                            <span>Spot</span>
+                        </div>
+                        <div>
+                            <span class="boldfont">C Type :</span>
+                            <!-- <span>{{vesselDetails?.C_Type ? vesselDetails?.C_Type : ''}}</span> -->
+                            <span>Spot</span>
+                        </div>
+                        <div>
+                            <span class="boldfont">Ocean Freight : </span>
+                            <!-- <span>{{vesselDetails?.Ocean_Frieght ? vesselDetails?.Ocean_Frieght : ''}}</span> -->
+                            <span>20</span>
+                        </div>
+                        <!-- <h4>P Type: {{vesselDetails?.P_Type ? vesselDetails?.P_Type : ''}}</h4>
+                        <div>
+                            <span>C Type:</span> <span>{{vesselDetails?.C_Type ? vesselDetails?.C_Type : ''}}</span>
+                        </div>
+                        <p>Ocean Freight:{{vesselDetails?.Ocean_Frieght ? vesselDetails?.Ocean_Frieght : ''}}</p> -->
+                    </div>
+                    <div class="commonmodal_bubble moadlbox6">
+                        <div>
+                            <span class="boldfont">FOB Cost : </span>
+                            <!-- <span>{{vesselDetails?.FOB_Cost ? vesselDetails?.FOB_Cost : ''}}</span> -->
+                            <span>5000</span>
+                        </div>
+
+                        <div>
+                            <span class="boldfont">Total Demurrage: </span>
+                            <!-- <span>{{totaldemmurage}}</span> -->
+                            <span>9000</span>
+                        </div>
+
+                        <!-- <div>
+                            <span class="boldfont">Demurrage DP : </span>
+                            <span>{{vesselDetails?.Demurrage_DP ? vesselDetails?.Demurrage_DP : ''}}</span>
+                        </div> -->
+                        <!-- <h4>Demurrage LP:{{vesselDetails?.Demurrage_LP ? vesselDetails?.Demurrage_LP : ''}}</h4>
+                        <p>Demurrage DP:{{vesselDetails?.Demurrage_DP ? vesselDetails?.Demurrage_DP : ''}}</p> -->
+
+                    </div>
+
+                    <div class="commonmodal_bubble moadlbox7" (click)="openportactivities(content)">
+                        <h4 class="boldfont">Port Activities </h4>
+
+                    </div>
+                    <div class="commonmodal_bubble moadlbox8">
+                        <!-- <h4>Vessel Name: {{vesselDetails?.VesselName ? vesselDetails?.VesselName : ''}} </h4> -->
+                        <div>
+                            <span class="boldfont">Vessel Name : </span>
+                            <span>{{vesselDetails?.VesselName ? vesselDetails?.VesselName : ''}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-sm-5 col-md-5">
+                </div>
+            </div>
+            <div class="customform_design">
+                <form [formGroup]="authForm2">
+                    <h4>Vessel Delay Input</h4>
+                    <div class="row">
+                        <div class="col-4">
+                            <label class="main_label">New Arrival Date </label>
+                        </div>
+                        <div class="col-4">
+                            <label class="main_label">Port Name </label>
+                        </div>
+                        <div class="col-3">
+                            <label class="main_label">Delta Freight W.R.T VIZAG</label>
+                        </div>
+                    </div>
+                    <div formArrayName="items" *ngFor="let item of addmoredata; let j = index">
+                        <div class="row" [formGroupName]="j">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <input [disabled]="j>0" type="text" class="form-control" placeholder="yyyy-mm-dd"
+                                        name="dp" [(ngModel)]="NewArrivalDate" ngbDatepicker
+                                        #NewArrivalDateForm="ngbDatepicker" placement="bottom"
+                                        formControlName="NewArrivalDate" [minDate]="minDate" positionTarget="buttonEl"
+                                        ngModelOptions="standalone" id="NewArrivalDateForm" required>
+                                    <button [disabled]="j>0" #buttonEl class="btn btn-outline-secondary calendar"
+                                        (click)="NewArrivalDateForm.toggle()" type="button"></button>
+                                </div>
+                            </div>
+
+                            <div class="col-4">
+                                <select class="form-control" id="deltaFreight" formControlName="deltaFreight" required
+                                    (change)="portchangedata(j)">
+                                    <option value="">Select</option>
+                                    <option *ngFor="let suggested of deltafreightdropdown" [ngValue]="suggested">
+                                        {{suggested}}</option>
+                                </select>
+                            </div>
+                            <div class="col-3">
+                                <input class="form-control" formControlName="deltaFreightparadip" name="dp"
+                                    id="deltaFreightparadip" type="text" required>
+                            </div>
+                            <div class="col">
+                                <div class="close" (click)='deleteRow(j)' *ngIf="j>0">x</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-right" style="padding-top: 30px;">
+                            <button [disabled]="disableadd" class="btn-primary mainbutton" style="margin-right: 10px;"
+                                (click)="Addmoreport()">Add</button>
+                            <button class="btn-primary mainbutton" style="margin-right: 10px;"
+                                (click)="checkCharteringDate()" type="submit">Check</button>
+                        </div>
+                        <!-- <div class="col text-right" style="padding-top: 30px;">
+                           
+                        </div> -->
+                    </div>
+                </form>
+            </div>
+            <div class="customform_design mt-4">
+                <form [formGroup]="authForm" class="pt-4">
+                    <h4>Suggested Port</h4>
+                    <div class="row">
+                        <div class="col-3">
+                            <label class="main_label">Discharge port suggested </label>
+                            <select class="form-control" disabled id="dischargePortSuggested"
+                                formControlName="dischargePortSuggested" required>
+                                <option value="">Select</option>
+                                <option *ngFor="let suggested of suggestedDropValue"
+                                    [selected]="suggested.source == authForm.controls.dischargePortSuggested.value"
+                                    [ngValue]="suggested.source">{{suggested.source}}</option>
+                            </select>
+                        </div>
+                        <div class="col-3">
+                            <label class="main_label">Potential Demurrage</label>
+                            <input class="form-control" disabled placeholder="" type="text" id="potentialDemurrage"
+                                formControlName="potentialDemurrage" required>
+                        </div>
+                        <div class="col-3">
+                            <label class="main_label">Trade off reason</label>
+                            <textarea class="form-control" disabled placeholder="" type="text" id="tradeOffReason"
+                                formControlName="tradeOffReason" required></textarea>
+                        </div>
+                        <div class="col-3 text-right" style="padding-top: 40px;">
+                            <button class="btn-primary mainbutton" style="margin-right: 10px;" (click)="submitData()"
+                                type="submit">Update Vessel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row mt-4">
+                <div class="col-sm-12 text-right" style="padding-right: 22px;">
+                    <button class="btn-primary mainbutton" (click)="editchartering(id)" type="submit">Edit
+                        Vessel</button>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
+</div>
+
+<ng-template #content let-modal>
+    <app-document-list [procurement_id]="id" (closePopup)="getDismissReason($event)"></app-document-list>
+
+</ng-template>
+<ng-template #content2 let-modal>
+    <div>
+        <!-- <h4 class="modal-title">Vessel confirmation</h4> -->
+        <button type="button" class="close" aria-label="Close" (click)="closeModal()" style="padding-right: 10px;">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body text-center">
+        Thank You For Vessel Information Updated Scussessfully
+
+    </div>
+
+</ng-template>

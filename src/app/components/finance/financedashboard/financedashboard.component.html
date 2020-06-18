@@ -1,0 +1,189 @@
+<app-navbar [open]="open" (event)="open=$event"></app-navbar>
+
+<div class="wrapper">
+
+    <!-- <div class="mainpanel_leftsect">
+    <app-leftpanel [openValue]="open"></app-leftpanel>
+  </div> -->
+
+    <div class="table-div table-responsive">
+
+        <div id="reportContainer" [ngStyle]="{'height':  windowHeight}"></div>
+        <!-- <iframe src="https://app.powerbi.com/view?r=eyJrIjoiMzY0MmNkNzgtMGJhZi00ZTJlLWIyNDgtZmYyN2NmYjI3YWU1IiwidCI6ImU0ZTM0MDM4LWVhMWYtNDg4Mi1iNmU4LWNjZDc3NjQ1OWNhMCJ9" style="    border: 0;
+width: 100%;
+height: 100%;
+float: left;"></iframe> -->
+
+
+        <!-- <div class="container">
+      <div>
+        <h3 style="text-align: center; text-decoration: underline;">ACT - FINANCE DASHBOARD</h3>
+        <h4 style="text-align: end;vertical-align: top;">(M/Q/Y)</h4>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3 first-column">
+            Total Cost(Target vs Actual Goal)
+            <br>
+            $ per Ton / Metal
+          </div>
+          <div class="col-md-5 first-column">
+            Total Cost Trend(M/Q/Y)
+            <br>
+            $ per Ton / Metal
+          </div>
+          <div class="col-md-3 first-column">
+            Rail Freight($/t Alumina)
+            <br>
+            LNJ
+            <br>
+            KSPL
+            <br>
+            GPL
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-4 second-first-column">
+            <table>
+              <thead>
+                <tr>
+                  <th colspan="2">Exchange Rate</th>
+                  <th colspan="2">66.46</th>
+                </tr>
+                <tr>
+                  <td colspan="2" style="font-weight: bold;">
+                    Cost
+                  </td>
+                  <td colspan="2" style="background-color: #2F75B5;color: white;font-size: 18px;">
+                    &lt; Apr-16 &gt;
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+
+                  </td>
+                  <td style="background-color: #2F75B5;color: white;font-size: 18px;">Qty (Kt)</td>
+                  <td style="background-color: #2F75B5;color: white;font-size: 18px;">$/Mt</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="background-color: #E7E6E6;font-weight: bold">Alumina</td>
+                  <td style="background-color: #E7E6E6;font-weight: bold">111</td>
+                  <td colspan="2" style="background-color: #E7E6E6;font-weight: bold">25</td>
+                </tr>
+                <tr>
+                  <td style="background-color: #DDEBF7;font-weight: bold;">Import</td>
+                  <td style="background-color: #DDEBF7;font-weight: bold;">66</td>
+                  <td colspan="2" style="background-color: #DDEBF7;font-weight: bold;">36</td>
+                </tr>
+                <tr>
+                  <td style="font-weight: bold;">Ocean Freight</td>
+                  <td></td>
+                  <td colspan="2" style="font-weight: bold;">10</td>
+                </tr>
+                <tr>
+                  <td style="font-weight: bold;">Rail</td>
+                  <td style="font-weight: bold;">59</td>
+                  <td colspan="2" style="font-weight: bold;">23</td>
+                </tr>
+
+                <tr>
+                  <td style="font-weight: bold;">Rail</td>
+                  <td style="font-weight: bold;">59</td>
+                  <td colspan="2" style="font-weight: bold;">23</td>
+                </tr>
+                <tr>
+                  <td style="font-weight: bold;">Road</td>
+                  <td style="font-weight: bold;">7</td>
+                  <td colspan="2" style="font-weight: bold;">44</td>
+                </tr>
+                <tr>
+                  <td style="font-weight: bold;">KSPL - Bulker</td>
+                  <td style="font-weight: bold;">7</td>
+                  <td colspan="2" style="font-weight: bold;">44</td>
+                </tr>
+
+                <tr>
+                  <td style="font-weight: bold;">GPL - Bulker</td>
+                  <td style="font-weight: bold;"></td>
+                  <td colspan="2" style="font-weight: bold;"></td>
+                </tr>
+                <tr>
+                  <td style="font-weight: bold;">Truck</td>
+                  <td style="font-weight: bold;"></td>
+                  <td colspan="2" style="font-weight: bold;"></td>
+                </tr>
+                <tr>
+                  <td style="background-color: #DDEBF7;font-weight: bold;">Lanjigarh</td>
+                  <td style="background-color: #DDEBF7;font-weight: bold;">46</td>
+                  <td colspan="2" style="background-color: #DDEBF7;font-weight: bold;">10</td>
+                </tr>
+                <tr>
+                  <td style="font-weight: bold;">Rail</td>
+                  <td style="font-weight: bold;">46</td>
+                  <td colspan="2" style="font-weight: bold;">10</td>
+                </tr>
+                <tr>
+                  <td style="height: 36px;"></td>
+                  <td></td>
+                  <td colspan="2"></td>
+                </tr>
+                <tr>
+                  <td style="background-color: #A9D18E;font-weight: bold;">Total Cost $/t Metal</td>
+                  <td style="background-color: #A9D18E;font-weight: bold;"></td>
+                  <td colspan="2" style="background-color: #A9D18E;font-weight: bold;">49</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          &nbsp;&nbsp;
+          <div class="col-md-3" style="height: auto">
+            <div class=" second-column">
+              Import Cost Trend(M/Q/Y)
+              <br>
+              $ Per Ton / Alumina
+            </div>
+            <div class="second-column" style="bottom: 50%;position: absolute;">
+              Rail Mix - %;LNJ Mix - %
+            </div>
+            <div class="second-column" style="position: absolute;
+                        bottom: 0;padding: 33px;">
+              Demurrage Cost Trend(M/Q/Y)
+              <br>
+              <br>
+              <br>
+              $ Per Ton / Alumina
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="second-column">
+              Bulker Freight($/t Alumina)
+              <br>
+              KSPL
+              <br>
+              GPL
+              <br>
+              Paradip
+            </div>
+            <div class="second-column" style="position: absolute;
+                        bottom: 0;padding: 33px;">
+              Dead Freight & Punitive Cost Trend
+              (M/Q/Y)(Color)
+              <br>
+              <br>
+              <br>
+              $ Per Ton / Alumina
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div> -->
+    </div>
+</div>

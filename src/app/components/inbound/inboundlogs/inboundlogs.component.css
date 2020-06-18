@@ -1,0 +1,30 @@
+/* .col-3{
+    padding-left: 0px !important;
+    padding-right: 0px !important
+}
+.col-2{
+    padding-left: 5px !important;
+    padding-right: 5px !important
+}
+
+.vl {
+    border-left: 15px solid green;
+    height: 20px;
+    margin-left: 20px;
+  } */
+
+.row {
+  margin-bottom: 20px !important;
+}
+
+.cardshadow {
+  box-shadow: 2px 2px 8px 3px #ccc;
+}
+
+.cardshadow .row {
+  margin-bottom: 15px !important;
+}
+
+.cardshadow .row:last-child {
+  margin-bottom: 0px !important;
+}

@@ -1,0 +1,61 @@
+<app-navbar [open]="open" (event)="open=$event"></app-navbar>
+
+<div class="wrapper">
+    <!-- Sidebar -->
+
+
+    <!-- <app-leftpanel [openValue]="open"></app-leftpanel> -->
+
+
+    <div style="padding:15px;width: 100%;overflow: scroll;">
+
+        <div class="table-div table-responsive">
+            <div class="col-sm-4">
+                <button class="btn-primary mainbutton" type="button" (click)="backTopage()">Back</button>
+            </div>
+            <div class="row" style="margin:10px">
+                <table class="table ">
+                    <thead>
+                        <tr>
+                            <td scope="col" *ngFor="let key of header;let i = index">
+                                <span class="upperword"> {{key.split("_").join(' ')}}</span>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="inputVals" *ngFor="let item of charteringDataDetails;let i = index">
+                            <td *ngFor="let key of item;let j = index">
+                                {{key[header[j]]}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <!-- <div class="row" style="margin:0" *ngIf="planningResults.length > 0">
+            <table class="table ">
+                <thead>
+                    <tr>
+                        <td scope="col"></td>
+                        <td scope="col" *ngFor="let key of JSObject.keys(planningResults[0]?.BTAP_capacity_we_can_get_from_KSPL);let i = index">
+                            <span *ngIf="key.indexOf('Quarter')>=0">
+                                {{key.split('_').join(' ')}}
+                            </span>
+                            <span *ngIf="key.indexOf('Quarter')!=0"> {{key.split('_').join(' ')}}</span>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="inputVals" *ngFor="let item of planningResults;let i = index">
+                        <td> {{cKey[i].split('_').join(' ')}} </td>
+                        <td *ngFor="let key of JSObject.keys(item[cKey[i]]);let j = index">
+                            <span>{{item[cKey[i]][key]}}</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div> -->
+
+        </div>
+    </div>

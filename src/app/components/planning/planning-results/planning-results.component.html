@@ -1,0 +1,84 @@
+<app-navbar [open]="open" (event)="open=$event"></app-navbar>
+
+
+<div class="wrapper container-fluid">
+    <div class="table-div table-responsive">
+
+        <div class="customform_design customform_resultdesign  mb-4">
+            <div class="row justify-content-end">
+                <div class="col-sm-3">
+                    <div class="inputform-group row">
+                        <div class="col-12">
+                            <label class="main_label">Fiscal Year</label>
+                            <select class="form-control" (change)="changeYear($event.target.value)">
+                                       
+                                        <option value="{{year.key}}" [selected]="year.key==selectedYear" *ngFor="let year of yearObject; let i = index">{{year.key}}</option>
+                                       
+                                    </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="inputform-group row">
+                        <div class="col-12">
+                            <label class="main_label">Month</label>
+                            <ng-multiselect-dropdown [data]="mdata" [(ngModel)]="selectedItems" [settings]="dropdownSettings" (onDeSelect)="onItemDeSelect($event)" (onSelect)="onItemSelect($event)">
+                            </ng-multiselect-dropdown>
+
+                            <!-- <select class="form-control" multiple (change)="changeMonth($event.target.value)">
+                                        <option value="none">All Month</option>
+                                        <option value="1">Jan</option>
+                                        <option value="2">Feb</option>
+                                        <option value="3">Mar</option>
+                                        <option value="4">Apr</option>
+                                        <option value="5">May</option>
+                                        <option value="6">Jun</option>
+                                        <option value="7">Jul</option>
+                                        <option value="8">Aug</option>
+                                        <option value="9">Sep</option>
+                                        <option value="10">Oct</option>
+                                        <option value="11">Nov</option>
+                                        <option value="12">Dec</option>
+                                    </select> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row" style="overflow: hidden;margin: 0;" *ngIf="planningResults.length > 0">
+            <div class="tbl-header">
+                <table class="table planningresult_table" id="tbl1">
+                    <thead>
+                        <tr class="headVals">
+                            <td scope="col" style="width: 10%"></td>
+                            <td scope="col" *ngFor="let key of JSONbject.keys(loginType=='balco'? planningResults[0]?.total_alumina_req_balco :planningResults[0]?.alumina_req_P1);let i = index">
+                                <span *ngIf="key.indexOf('Quarter')>=0">
+                                {{key.split('_').join(' ')}}
+                            </span>
+                                <span *ngIf="key.indexOf('Quarter')!=0"> {{key.split('_').join(' ')}}</span>
+                            </td>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="tbl-content">
+                <table class="table planningresult_table" id="tbl1">
+
+                    <tbody>
+                        <tr class="inputVals" *ngFor="let item of planningResults;let i = index">
+                            <td style="width: 10%"> {{capitalizeFirstLetter(cKey[i].split('_').join(' ')).replace('Alumina' , 'Iron Ore').replace('Lanjigarh' , 'LONI')}}</td>
+                            <td *ngFor="let key of JSONbject.keys(item[cKey[i]]);let j = index">
+                                <input type="number" value="{{item[cKey[i]][key]}}" name="{{cKey[i]}}:{{item[cKey[i]][key]}}:{{JSONbject.keys(item[cKey[i]])[j]}}" [readOnly]="readonlyField(i,j,JSONbject.keys(item[cKey[i]])[j], item[cKey[i]][key])" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="my-4">
+                <button class="btn btn-primary mainbutton" (click)="onSubmitData()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>

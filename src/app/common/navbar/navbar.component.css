@@ -1,0 +1,159 @@
+.navbar-element {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+    width: 100%;
+}
+
+.menubar {
+    background-color: #1A73E8 !important;
+    padding: 0px 50px;
+    border: 0;
+    margin-top: 3px;
+}
+
+.menuitems {
+    letter-spacing: 1.1px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-family: sans-serif;
+    font-weight: bold !important;
+    /* font-family: 'Cocogoose Pro Regular' !important; */
+}
+
+.menuitems a {
+    color: #FFFFFF;
+    font-size: 16px;
+    padding: 0 15px;
+}
+
+.menuitems a:hover {
+    text-decoration: none !important;
+}
+
+.menuitems.active {
+    background-color: rgb(20, 86, 173) !important;
+}
+
+.menuitems:hover {
+    background-color: rgb(20, 86, 173) !important;
+}
+
+.logo {
+    /* margin: 0px auto; */
+}
+
+.btn-outline-primary:hover {
+    background-color: rgb(20, 86, 173) !important;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+
+#dropdownBasic1 {
+    border: 0;
+    align-items: center;
+    vertical-align: middle;
+    padding: 15px 0;
+    color: #FFFFFF;
+    font-size: 16px;
+    padding: 16px 15px;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+
+#dropdownBasic1:hover {
+    padding: 16px 15px !important;
+    border-radius: 0;
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled).active,
+.btn-outline-primary:not(:disabled):not(.disabled):active,
+.show>.btn-outline-primary.dropdown-toggle {
+    background-color: rgb(20, 86, 173)!important;
+    /*background-color: rgba(112, 191, 65, .7)!important*/
+}
+
+.dropdown-menu {
+    background-color: #fff !important;
+    box-shadow: 2.9px 23.8px 30px 0 rgba(0,0,0,.2);
+}
+
+.dropdown-menu>a {
+    color: #000;
+    font-weight: 100!important;
+    font-size: 16px;
+    padding: 10px 15px;
+    width: 100%;
+    float: left;
+}
+
+.userDetails {
+    font-family: "Avenir LT Std 45 Book" !important;
+}
+
+.userDetails>button {
+    color: #000 !important;
+    background-color: transparent;
+}
+
+.name-logo{
+font-size: 25px;
+    position: relative;
+    top: 0.7em;
+    color: #015ba2;
+    font-weight: 900;
+    font-family: 'Muli', sans-serif!important;
+    text-transform: uppercase;
+}
+
+.subname-logo{
+font-size: 1em;
+    position: relative;
+    top: -0.5em;
+    letter-spacing: 3.6px;
+    color: #015ba2;
+    font-family: 'Muli', sans-serif!important;
+    font-weight: 600;
+    left: 5px;
+}
+
+.subname-logo span:nth-child(1){
+    color: #4285F4;
+    font-weight: bolder;
+}
+.subname-logo span:nth-child(2){
+    color: #DB4437;
+    font-weight: bolder;
+}
+.subname-logo span:nth-child(3){
+    color: #F4B400;
+    font-weight: bolder;
+}

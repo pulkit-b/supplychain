@@ -1,0 +1,129 @@
+/* .loginside {
+    background-image: url(/assets/images/nlpbg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+    width: 100%;
+    height: 100vh;
+  } */
+
+.wrapper {
+    position: relative;
+    top: 50px;
+}
+
+.loginside {
+    background-image: url(/assets/images/nlpbg.jpg);
+    background-repeat: no-repeat;
+    background-size: 145% 100%;
+    background-position: top center;
+    width: 100%;
+    height: 100vh;
+}
+
+.loginmain {
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+    /* overflow: hidden; */
+}
+
+.login-form {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.tatalogo {
+    margin: 50px 30px;
+}
+
+.tatalogo img {
+    width: 100%;
+    height: auto;
+}
+
+tr>td {
+    text-align: center;
+    width: 5.88%;
+    border: 1px solid;
+}
+
+td>input {
+    width: 100%;
+    border: none;
+    text-align: right;
+}
+
+#sidebarCollapse {
+    padding: 0;
+}
+
+.submitBtn {
+    padding: 10px;
+    text-align: right;
+    float: right;
+    width: 100%;
+}
+
+.black {
+    background-color: black;
+}
+
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.tbl-header {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.tbl-header>.planningresult_table {
+    margin-bottom: 0 !important;
+}
+
+.tbl-content {
+    height: 359px;
+    overflow-x: auto;
+    margin-top: 0px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+::-webkit-scrollbar {
+    width: 0.1px;
+}
+
+.inputVals td:nth-child(1){
+    background: #1456ad!important;
+    color: #fff;
+}
+
+.inputVals input {
+    background: transparent;
+    overflow: auto;
+}
+.inputVals:nth-child(odd){
+    background: #efefef;
+    color: #fff;
+}
+
+.inputVals:nth-child(even) {
+    background: #d5d2d2;
+    color: #fff;
+}
+
+/* .inputVals:nth-child(odd) td:nth-child(even){
+    background: #efefef;
+    color: #fff;
+} */
+
+/* .inputVals:nth-child(odd) td:nth-child(odd){
+    background: #d5d2d2;
+    color: #fff;
+} */
+
+.headVals td{
+    color: #fff;
+    background: #1456ad;
+}

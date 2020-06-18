@@ -1,0 +1,151 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">DOCUMENT CHECKLIST</h4>
+  <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+
+  <form [formGroup]="documentGrp" (ngSubmit)="OnSubmit(documentGrp.value)" #uploadDocumentsForm="ngForm"
+    ngNativeValidate>
+
+
+
+    <div class="box box-solid box-primary">
+      <div class="box-body">
+        <table id="tbl-upload" class="table table-bordered">
+          <tbody>
+            <tr class="active">
+              <th scope="col">Uploaded Document</th>
+              <th scope="col">Comment</th>
+              <th scope="col">Upload</th>
+              <th>Remove</th>
+            </tr>
+            <tr *ngFor="let a of uploadedDocument; let i = index;">
+              <td>
+                <span *ngFor="let b of forShowListofDocument">
+                  {{a.document_type == b.id ? b.name : ''}}
+                </span>
+              </td>
+
+              <td>
+                {{a.comments}}
+              </td>
+              <td>
+                <a href="{{vedantaService.url}}temp/{{a.file_name}}" download>{{a.DisplayName}}</a>
+              </td>
+              <td class="remove" (click)="deleteDocument(a, i)">
+                <a title="Remove" class="fa fa-minus-square fa-lg text-red"></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="box-body" formArrayName="items">
+
+
+        <h2 class="page-header  text-blue ">
+          <i class="fa fa-files-o"></i> List of Vessels Documents
+        </h2>
+        <div class="row">
+          <div class="col-sm-12">
+
+
+            <div *ngFor="let item of items.controls; let i = index;">
+              <div [formGroupName]="i">
+                <table id="tbl-upload" class="table table-bordered">
+                  <tbody>
+                    <tr *ngIf="i==0" class="active">
+                      <th scope="col">List of Document</th>
+                      <th scope="col">Comment</th>
+                      <th scope="col">Upload</th>
+                      <th></th>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="form-group required">
+                          <select formControlName="doc_name" required="">
+                            <option>Select</option>
+                            <option value="{{a.id}}" *ngFor="let a of listOfDocument">
+                              {{a.name}}</option>
+                          </select>
+
+                          <div class="help-block"></div>
+                        </div>
+                      </td>
+
+                      <td>
+                        <div class="form-group ">
+                          <textarea rows="2" name="doc_description" formControlName="doc_description"></textarea>
+                          <div class="help-block"></div>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-group  required">
+
+                          <input type="file" title="Browse Document" accept=".xls, .doc,.docx,.xlsx"
+                            (change)="fileSelectionEvent($event,i)" required="">
+                          <div class="help-block"></div>
+                        </div>
+                      </td>
+                      <td class="remove" *ngIf=" i!=0 ">
+                        <a title="Remove" (click)="removeItem(i)" class="fa fa-minus-square fa-lg text-red"></a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="text-right">
+              <button type="submit" class="btn btn-sm btn-success " title="Add More" style="" (click)="addItem()">Add
+                More</button>
+
+            </div>
+          </div>
+          <!--./col-->
+        </div>
+        <!--./row-->
+      </div>
+      <!--./box-body-->
+      <div class="box-footer" style="align-content: center">
+        <button type="submit" class="btn btn-primary pull-right">Save</button>
+      </div>
+    </div>
+  </form>
+  <!-- <form [formGroup]="productForm" enctype="multipart/form-data">
+
+
+
+        <div formArrayName="selling_points">
+            <div *ngFor="let item of sellingPoints.controls; let pointIndex=index" [formGroupName]="pointIndex">
+                <select formControlName="document">
+                    <option>Select</option>
+                    <option *ngFor="let a of listOfDocument">{{a}}</option>
+                  </select>
+
+                <input type="text" formControlName="textvalue" />
+                <input type="file" class="array-item-title" formControlName="filedocument" (change)="getFileDetails($event)" />
+            </div>
+        </div>
+        <div (click)="addSellingPoint()">Add More</div>
+        <button type="submit" (click)="submitmodal()">Submit</button>
+    </form> -->
+</div>
+<!-- <form [formGroup]="demoForm" (ngSubmit)="submitmodal(demoForm.value)">
+        <div [formArrayName]="demoArray[i]" *ngFor="let arrayItem of arrayItems; let i=index">
+            <select [id]="arrayItem.vesselDoc">
+        <option>Select</option>
+        <option *ngFor="let a of listOfDocument">{{a}}</option>
+      </select>
+            <input [id]="arrayItem.id" type="text" [formControl]="demoArray[i]">
+            <label [for]="arrayItem.id" class="array-item-title">
+        {{arrayItem.title}}</label>
+
+            </div>
+            <div (click)="addItem(arrayItems)">Add More</div>
+            <button type="submit">Submit</button>
+    </form>
+    </div>-->
+<div class="modal-footer">
+  <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button> -->
+</div>

@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-sm-3">
+    <div class="vesselmodalbox">
+      <!-- <div class="hssDetails" style="background-image: url(/assets/images/ship.jpg)"></div> -->
+      <img class="vesselmodalbox" src="/assets/images/ship.jpg" />
+    </div>
+  </div>
+  <div class="col-sm-9">
+    <div class="detailmodals_header">
+      <label>Vessel Name :</label>
+      {{data?.VesselName ?  data?.VesselName : ''}}
+    </div>
+    <div class="detailmodals_header">
+      <label>Vessel Owner :</label>
+      {{data?.VesselOwner ?  data?.VesselOwner : ''}}
+    </div>
+    <div class="detailmodals_header">
+      <label>Load Port :</label>
+      {{data?.LoadPort ?  data?.LoadPort : ''}}
+    </div>
+    <div class="detailmodals_header">
+      <label>Vessel For Plant :</label>
+      {{data?.Plant ?  data?.Plant : ''}}
+    </div>
+    <div class="detailmodals_header">
+      <label>Quantity (in Tons) :</label>
+      {{data?.Quantity ?  data?.Quantity : ''}}
+    </div>
+    <div class="detailmodals_header">
+      <label>Laycan :</label>
+      {{data?.LaycanSelected ?  data?.LaycanSelected : ''}}
+    </div>
+    <div class="detailmodals_header">
+      <label>Arrival Date :</label>
+      {{data?.ArrivalDate.split('T')[0] ?  data?.ArrivalDate.split('T')[0] : ''}}
+    </div>
+  </div>
+
+</div>

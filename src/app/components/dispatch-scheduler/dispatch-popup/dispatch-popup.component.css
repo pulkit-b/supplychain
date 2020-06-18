@@ -1,0 +1,35 @@
+.flex{
+    border-bottom: 1px solid lightgray;
+    margin-bottom: 13px;
+}
+.L {
+    border-bottom: 20px solid yellow;
+  }
+  
+  .J, .B {
+    border-bottom: 20px solid green;
+  }
+  
+  .V {
+    border-bottom: 20px solid blue;
+  }
+  
+  .T,
+  .K-T {
+    border-bottom: 20px solid #171617;
+  }
+  
+  .K {
+    border-bottom: 20px  solid red;
+  }
+  
+  .mainsec {
+    width: 100%;
+    position: relative;
+    font-size: 9px;
+  }
+  
+  .mainsec > div {
+    float: left;
+    cursor: pointer;
+  } 

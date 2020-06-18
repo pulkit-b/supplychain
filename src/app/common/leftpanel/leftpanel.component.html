@@ -1,0 +1,39 @@
+<div id="sidebar" [ngClass]="open ? '' : 'active'">
+    <ul class="list-unstyled components">
+        <li [ngClass]="{'active':currentPage=='/'}">
+            <a href="#">Planning</a>
+        </li>
+        <li [ngClass]="{'active':currentPage=='/portdashboard'}">
+            <a href="#/portdashboard">Port Dashboard</a>
+        </li>
+        <li [ngClass]="{'active':currentPage=='/top-manage'}">
+            <a href="#/top-manage">Top Management</a>
+        </li>
+
+        <li [ngClass]="{'active':currentPage=='/dispatch'}">
+            <a href="#/dispatch">Dispatch Scheduler</a>
+        </li>
+        <li [ngClass]="{'active':currentPage=='/procurement'}">
+            <a href="#/procurement">Procurement</a>
+        </li>
+        <li [ngClass]="{'active':currentPage=='/vessel-portal'}">
+            <a href="#/vessel-portal">Vessel Management</a>
+        </li>
+        <li [ngClass]="{'active':currentPage=='/chartering'}">
+            <a href="#/chartering">Chartering Management</a>
+        </li>
+        <li [ngClass]="{'active':currentPage=='/inbound'}">
+            <a href="#/inbound">Inbound</a>
+        </li>
+        <li [ngClass]="{'active':currentPage=='/inbounddashboard'}">
+            <a href="#/inbounddashboard">Inbound Dashboard</a>
+        </li>
+        <li [ngClass]="{'active':currentPage=='/inboundcalender'}">
+            <a href="#/inboundcalender">Inbound Calender</a>
+        </li>
+        <li [ngClass]="{'active':currentPage=='/financedashboard'}">
+            <a href="#/financedashboard">Finance Dashboard</a>
+        </li>
+
+    </ul>
+</div>

@@ -1,0 +1,70 @@
+<app-navbar [open]="open" (event)="open=$event"></app-navbar>
+
+<div class="wrapper">
+    <!-- Sidebar -->
+
+
+    <!-- <app-leftpanel [openValue]="open"></app-leftpanel> -->
+
+
+    <div class="table-div table-responsive">
+        <div id="reportContainer" [ngStyle]="{'height':  widnowHeight}"></div>
+        <!-- <iframe src="https://app.powerbi.com/view?r=eyJrIjoiMzk1OGE4ZDItODM5MS00ZGRlLWFhY2QtZDAzZGU1Yjk5YTFlIiwidCI6ImU0ZTM0MDM4LWVhMWYtNDg4Mi1iNmU4LWNjZDc3NjQ1OWNhMCJ9" height="{{widnowHeight}}" style=" border: 0;
+        width: 100%;
+        height: widnowHeight;
+        float: left;"></iframe> -->
+        <!-- <div class="row" style="margin:0" *ngIf="dbfinaldata.length > 0">
+            <table class="table ">
+                <thead>
+                    <tr>
+                        <td scope="col"></td>
+                        <td scope="col"
+                            *ngFor="let key of JSObject.keys(dbfinaldata[0]?.total_alumina_req);let i = index">
+                            <span *ngIf="key.indexOf('Quarter')>=0">
+                                {{key}}
+                            </span>
+                            <span *ngIf="key.indexOf('Quarter')!=0"> {{key}}</span>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="inputVals" *ngFor="let item of dbfinaldata;let i = index">
+                        <td> {{keysData[i]}}</td>
+                        <td *ngFor="let key of JSObject.keys(item[nlgnlqService.childKey[i]]);let j = index">
+                            <input type="text" name="{{nlgnlqService.childKey[i]}}--{{key}}--{{i}}"
+                                (keyup)="updatevalue($event, key, j, i)" id="{{createId(key, i, j)}}"
+                                readonly="{{nlgnlqService.getTextType(key, i)}}"
+                                value="{{item[nlgnlqService.childKey[i]][key]}}" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="submitBtn"><input type="button" value="submit" (click)="submitData()" /></div>
+        </div>
+        <div class="row" style="margin:0" *ngIf="planningResults.length > 0">
+            <table class="table ">
+                <thead>
+                    <tr>
+                        <td scope="col"></td>
+                        <td scope="col"
+                            *ngFor="let key of JSObject.keys(planningResults[0]?.BTAP_capacity_we_can_get_from_KSPL);let i = index">
+                            <span *ngIf="key.indexOf('Quarter')>=0">
+                                {{key.split('_').join(' ')}}
+                            </span>
+                            <span *ngIf="key.indexOf('Quarter')!=0"> {{key.split('_').join(' ')}}</span>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="inputVals" *ngFor="let item of planningResults;let i = index">
+                        <td> {{cKey[i].split('_').join(' ')}} </td>
+                        <td *ngFor="let key of JSObject.keys(item[cKey[i]]);let j = index">
+                            <span>{{item[cKey[i]][key]}}</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> -->
+    </div>
+
+</div>

@@ -1,0 +1,71 @@
+<div class="modal-header">
+  <h4 class="modal-title">
+    <!-- {{showtitle.destination + '-' + showtitle.next_destination}} -->
+    {{popupValue[0]['Datetime']}}
+  </h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div *ngFor="let item of popupValue ; let j = index">
+    <div *ngIf="j==0">
+      <div class="{{popupValue[j]['destination']}} float-left"
+        [ngStyle]="{'width':((((popupValue[j]['remainingTimeofTrip'] /24) * 41 ) / (((popupValue[j]['remainingTimeofTrip'] /24) * 41 ) + (popupValue[j+1] ? ((popupValue[j+1]['remainingTimeofTrip'] /24) * 41 ) : 0)))*100)+'%' }">
+      </div>
+      <div class="{{popupValue[j]['next_destination']}} float-left"
+        [ngStyle]="{'width':(((popupValue[j+1] ? ((popupValue[j+1]['remainingTimeofTrip'] /24) * 41 ) : 0) / (((popupValue[j]['remainingTimeofTrip'] /24) * 41 ) + (popupValue[j+1] ? ((popupValue[j+1]['remainingTimeofTrip'] /24) * 41 ) : 0)))*100)+'%' }">
+      </div>
+      <div class="flex">
+        <span>Current Destination : </span>
+        <span style="float: right;">{{popupValue[j]['destination']}}</span>
+      </div>
+      <div class="flex" *ngIf="popupValue[j]['destination']!=popupValue[j]['next_destination']">
+        <span>Next Destination : </span>
+        <span style="float: right;">{{popupValue[j]['next_destination']}}</span>
+      </div>
+      <div class="flex">
+        <span>Remaining Time (in Hr) : </span>
+        <span style="float: right;">{{popupValue[j]['remainingTimeofTrip']}}</span>
+      </div>
+      <div class="flex">
+        <span>Status : </span>
+        <span style="float: right;">{{popupValue[j]['status']}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="row p-3">
+    <div style="width:100%">Hold</div>
+    <div class="box-body" style="width:100%">
+      <table id="tbl-upload" class="table table-bordered table-sm" *ngIf="!loading.holdStatus">
+        <tbody>
+          <tr class="active">
+            <th scope="col">Btap Name</th>
+            <th scope="col">Destination</th>
+            <th scope="col">Hold Time</th>
+          </tr>
+          <tr *ngFor="let a of holdStatus; let i = index;">
+            <td>
+              {{a.btap_name}}
+            </td>
+            <td>
+              {{a.current_location}}
+            </td>
+            <td>
+              {{a.Diff}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="loading.holdStatus">
+        Loading Hold Status...
+      </div>
+    </div>
+  </div>
+  <div class="row p-3">
+    <button type="button" class="btn btn-primary">Add Delay</button>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>

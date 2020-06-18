@@ -1,0 +1,119 @@
+<app-navbar [open]="open" (event)="open=$event"></app-navbar>
+<div class="mainpanel">
+
+    <!-- <div class="mainpanel_leftsect">
+    <app-leftpanel [openValue]="open"></app-leftpanel>
+  </div> -->
+
+    <div class="mainpanel_rightsect">
+        <div class="container-fluid">
+            <div class="col-sm-6">
+                <div class="inputform-group row">
+                    <div class="col-6">
+                        <label class="main_label">Month</label>
+                        <select class="custom-select" required [(ngModel)]="currentMonth" (change)="updateData($event, 'month')">
+              <option value="">select</option>
+              <option *ngFor="let m of vedentaService.Month; let i = index;"
+                [selected]="((i)==vedentaService.currentMonth) ? 'selected' : ''" value={{i+1}}>{{m}}
+              </option>
+            </select>
+                    </div>
+                    <div class="col-6">
+                        <label class="main_label">Year </label>
+                        <select class="custom-select" required [(ngModel)]="currentYear" (change)="updateData($event, 'year')">
+              <option value="">select</option>
+              <option *ngFor="let m of vedentaService.Year; let i = index;"
+                [selected]="(m==vedentaService.currentYear) ? 'selected' : ''" value={{m}}>{{m}}
+              </option>
+            </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-7">
+                    <div class="vesselmodalbox">
+
+                        <div class="centermodal" style="background-image: url(/assets/images/ship.jpg)"></div>
+
+                        <div class="commonmodal_bubble moadlbox1">
+                            <h4>TOTAL VESSEL</h4>
+                            <p>{{vesselPortal?.TotalVessel ? vesselPortal?.TotalVessel : 0}}</p>
+                        </div>
+                        <div class="commonmodal_bubble moadlbox2">
+                            <h4>TOTAL QTY. <br>(KT)</h4>
+                            <p>{{vesselPortal?.TotalQuantity ? (vesselPortal?.TotalQuantity | number : '1.2-2') : 0}}</p>
+                        </div>
+                        <div class="commonmodal_bubble moadlbox3">
+                            <h4>MATERIAL ON <br>WATER (KT)</h4>
+                            <p>{{laycandata?.MaterialOnWater==null ? 0 :laycandata?.MaterialOnWater}}</p>
+                        </div>
+                        <div class="commonmodal_bubble moadlbox4">
+                            <h4>OVER LAPPING <br>LAYCAN</h4>
+                            <p>{{laycandata?.LaycanOverLap==null ? 0+'%' :laycandata?.LaycanOverLap}}</p>
+                        </div>
+                        <div class="commonmodal_bubble moadlbox5">
+                            <h4>PRE BERTHING <br>DELAY AT DP <br>(DAYS / VESSEL)</h4>
+                            <p>{{laycandata?.PrebirthingDelayDP==null ? 0 :laycandata?.PrebirthingDelayDP}}</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-sm-4" *ngIf="vesselPortal">
+                    <app-charts  *ngIf="domastic" [domastic]="domastic.total_lanjigarh_supply" [chartColors]="colors" [import]="vesselPortal?.TotalQuantity ? vesselPortal?.TotalQuantity : 0">
+                    </app-charts>
+                </div> -->
+                <div class="col-sm-5">
+                 <div class="vesseldetail_block" style="top: -3em">
+                        <div class="detailmodals">
+                            <div class="detailmodals_header">Voyage Tracker</div>
+                            <div class="detailmodals_body">
+                                <div id="map" style="width:100%; height:35em"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-7">
+                   
+                     <div class="vesseldetail_block" style="margin-top: -13em">
+                        <!-- <h4>{{vedentaService.Month[currentMonth-1]}} {{currentYear}}</h4> -->
+
+                        <div class="detailmodals" style="height: 10em;">
+                            <div class="detailmodals_header">Vessel Detail</div>
+                            <div class="detailmodals_body">
+                                <ul>
+                                    <li *ngFor="let db of vesselPortalDetails" (contextmenu)="onRightClick($event, db); false" [ngClass]="db.Parent!=db.VesselConfirmationID && db.Parent!=null?'childdata':''"> {{db.VesselName}} – {{db.Plant}} – {{db.Quantity | number : '1.2-2'}} KT – {{db.LoadPort}} -> {{db.DischargePortSuggested}} </li>
+                                </ul>
+
+                                <!-- <div class="row">
+                  <div class="col-sm-6 text-center">
+                    <button class="btn-primary mainbutton" (click)="viewvessel()" type="submit">View Vessel</button>
+                  </div>
+                  <div class="col-sm-6 text-center">
+                    <button class="btn-primary mainbutton" (click)="hssUpdate()" type="submit">HSS Update</button>
+                  </div>
+                </div> -->
+
+                            </div>
+                        </div>
+
+                        <!-- <h5>From 5 May 2019 to 10 May 2019</h5> -->
+                    </div>
+                    
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<nav #contextMenu [ngClass]="this.menuState?'context-active':'context-menu'" [ngStyle]="{'left':this.menuPositionX,'top':this.menuPositionY}">
+    <ul>
+        <li (click)="viewvessel(rightClicked)">View Vessel </li>
+        <li (click)="hssUpdate(rightClicked)">HSS Update </li>
+    </ul>
+
+</nav>

@@ -1,0 +1,220 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+/* You can add global styles to this file, and also import other style files */
+html,body{
+    height: 100%;
+    width: 100%;
+}
+.bd-navbar {
+    position: sticky !important;
+    top: 0 !important;
+    transition-property: top, bottom, width;
+    transition-duration: .2s, .2s, .35s;
+    transition-timing-function: linear, linear, ease;
+}
+
+.table td,
+.table th {
+    padding: 1.25rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+    text-align: center;
+}
+
+.main-section {
+    padding: 81px 0 10px;
+}
+
+.loader3 {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    padding: 0px;
+    text-align: left;
+}
+
+.loader3 span {
+    position: absolute;
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    background: rgb(124, 167, 211);
+    -webkit-animation: loader3 1.5s linear infinite;
+    animation: loader3 1.5s linear infinite;
+    top: 50%;
+}
+
+.loader3 span:last-child {
+    animation-delay: -0.9s;
+    -webkit-animation-delay: -0.9s;
+}
+
+#loader {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+    z-index: 9999;
+    display: none;
+}
+
+.errorModel {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+    z-index: 9999;
+    display: none;
+}
+
+@keyframes loader3 {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.8;
+        top: 50%;
+    }
+    100% {
+        transform: scale(1, 1);
+        opacity: 0;
+        top: 50%;
+    }
+}
+
+@-webkit-keyframes loader3 {
+    0% {
+        -webkit-transform: scale(0, 0);
+        opacity: 0.8;
+        top: 50%;
+    }
+    100% {
+        -webkit-transform: scale(1, 1);
+        opacity: 0;
+        top: 50%;
+    }
+}
+
+.btn-vedanta {
+    /* background: #0064a8; */
+    color: #fff !important;
+    background-color: #0064a8 !important;
+    border-color: #0064a8 !important;
+}
+
+.dotinboundcalender {
+    height: 30px;
+    width: 30px;
+    background-color: #517dbf;
+    color: #fff;
+    border-radius: 50%;
+    display: inline-block;
+    float: right;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    margin-right: 3px;
+    line-height: 30px;
+}
+
+.inboundcalendertableDiv {
+    width: 100%;
+}
+
+.inboundcalendertable {
+    /* margin-right: 14px; */
+    font-size: xx-small;
+}
+
+#calendar {
+    background: rgba(249, 248, 248, 0.56);
+}
+
+#calendar-body {
+    width: 100%
+}
+
+#calendar-body td,
+#calendar-body th {
+    padding: 0.2rem 0.2rem;
+    border: 0;
+}
+
+.dateDiv article {
+    background: #517dbf!important;
+    border: 0;
+    color: #fff;
+    border-radius: 4px;
+    -webkit-backface-visibility: hidden;
+    -webkit-transition: 
+		opacity 0.4s linear, 
+		-webkit-transform 0.4s ease-in-out, 
+		box-shadow 0.4s ease-in-out;
+	-moz-transition: 
+		opacity 0.4s linear, 
+		-moz-transform 0.4s ease-in-out, 
+		box-shadow 0.4s ease-in-out;
+	-o-transition: 
+		opacity 0.4s linear, 
+		-o-transform 0.4s ease-in-out, 
+		box-shadow 0.4s ease-in-out;
+	-ms-transition: 
+		opacity 0.4s linear, 
+		-ms-transform 0.4s ease-in-out, 
+		box-shadow 0.4s ease-in-out;
+	transition: 
+		opacity 0.4s linear, 
+		transform 0.4s ease-in-out, 
+		box-shadow 0.4s ease-in-out;
+}
+
+/* .dateDiv:hover {
+    transform: scale(1.3);
+  } */
+
+  .dateDiv article.blur{
+    -webkit-transform: scale(0.9);
+	-moz-transform: scale(0.9);
+	-o-transform: scale(0.9);
+	-ms-transform: scale(0.9);
+	transform: scale(0.9);
+	opacity: 0.3;
+  }
+
+  .dateDiv article.active{
+    -webkit-transform: scale(1.15);
+	-moz-transform: scale(1.15);
+	-o-transform: scale(1.15);
+	-ms-transform: scale(1.15);
+	transform: scale(1.15);
+	z-index: 100;	
+	opacity: 1;
+  }
+
+.emptydiv {
+    background: #F6F6F6!important;
+    border: 0;
+    color: #fff;
+    border-radius: 4px;
+}
+
+.inboundcalendertable {
+    width: 100%;
+}
+
+.inboundcalendertable thead tr:first-child {
+    background: #517dbf!important;
+    color: #fff;
+}
+
+.mainpanel_rightsect {
+    overflow-y: inherit !important;
+}
+.comp-name{
+    color: #517dbf;
+}

@@ -1,0 +1,119 @@
+<app-navbar [open]="open" (event)="open=$event"></app-navbar>
+<div class="wrapper">
+
+    <div class="table-div table-responsive">
+
+        <div id="reportContainer" [ngStyle]="{'height':  windowHeight}"></div>
+
+    </div>
+</div>
+<!-- <div class="mainpanel">
+
+    <div class="mainpanel_rightsect">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-7 clearfix">
+                    <div class="inputform-group row">
+
+                        <div class="col-12">
+                            <label class="main_label">Arrival Month</label>
+                        </div>
+                        <div class="innerdiv">
+                            <div *ngFor="let a of vedentaService.Month; let i=index;" [ngClass]="{
+                    'active':((i+1)==currentMonth)}" class="monthvalue" (click)="updateVal('arrivalMonthVal', (i+1));">
+                                <span> {{a}} </span></div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class=" col-12 row">
+                    <div class="col-sm-7">
+                        <div class="vesselmodalbox">
+                            <div class="centermodal" style="background-image: url(/assets/images/ship.jpg)"></div>
+                            <div class="commonmodal_bubble moadlbox1">
+                                <h4>TOTAL VESSEL</h4>
+                                <p>{{maindata ? maindata['total'][0]['TotalVessel']:0}}</p>
+                            </div>
+                            <div class="commonmodal_bubble moadlbox2">
+                                <h4>AT LOAD<br> PORT</h4>
+                                <p>{{maindata ? maindata['LoadPort'][0]['AtLoadPort']:0}}</p>
+                            </div>
+                            <div class="commonmodal_bubble moadlbox3">
+                                <h4>IN WATERS</h4>
+                                <p>{{maindata ? maindata['water'][0]['AtLoadPort']:0}}</p>
+                            </div>
+                            <div class="commonmodal_bubble moadlbox4">
+                                <h4>AT DISCHARGE<br> PORT</h4>
+                                <p>{{maindata ? maindata['discharge'][0]['AtLoadPort']:0}}</p>
+                            </div>
+                            <div class="commonmodal_bubble moadlbox5">
+                                <h4>DISCHARGED</h4>
+                                <p>{{maindata ? maindata['discharged'][0]['AtLoadPort']:0}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="chatteringgrap">
+                            <label>Preberthing delay at load port</label>
+                            <app-chart-chartering *ngIf="startdisplay==1" [chartData]="chartsData?.preberthing.data" [chartLabels]="chartsData?.preberthing?.labels" [chartType]="barChartType" [legend]="false">
+                            </app-chart-chartering>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-4">
+                    <div class="chatteringgrap">
+                        <label>Preberthing delay at discharge port</label>
+                        <app-chart-chartering *ngIf="startdisplay==1" [chartData]="chartsData?.preberthingdischarge?.data" [chartLabels]="chartsData?.preberthingdischarge?.labels" [chartType]="barChartType" [legend]="false">
+                        </app-chart-chartering>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="chatteringgrap">
+                        <label>Avg Pre Berthing Delay LP vs DP
+                        </label>
+                        <app-chart-chartering *ngIf="startdisplay==1" [chartData]="chartsData?.avgpreberthing?.data" [chartLabels]="chartsData?.avgpreberthing?.labels" [chartType]="doughnutChartType" [legend]="barChartLegend" [chartColors]="chartsData?.avgpreberthing?.colors">
+                        </app-chart-chartering>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="chatteringgrap">
+                        <label> Month Wise Port Wise Trend<br /> Total Load Port Demurrage </label>
+                        <app-chart-chartering *ngIf="startdisplay==1" [chartData]="chartsData?.linelp?.data" [chartLabels]="chartsData?.linelp?.labels" [chartType]="lineChartType" [legend]="barChartLegend">
+                        </app-chart-chartering>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-4">
+                    <div class="chatteringgrap">
+                        <label> Month Wise Port Wise Trend<br /> Total Discharge Port Demurrage </label>
+                        <app-chart-chartering *ngIf="startdisplay==1" [chartData]="chartsData?.linedp?.data" [chartLabels]="chartsData?.linedp?.labels" [chartType]="lineChartType" [legend]="barChartLegend">
+                        </app-chart-chartering>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="chatteringgrap">
+                        <label> % Vessels berthed after laycans </label>
+                        <app-chart-chartering *ngIf="startdisplay==1" [chartData]="chartsData?.adherancetolaycan?.data" [chartLabels]="chartsData?.adherancetolaycan?.labels" [chartType]="doughnutChartType" [legend]="barChartLegend" [chartColors]="chartsData?.
+            adherancetolaycan?.colors">
+                        </app-chart-chartering>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="chatteringgrap">
+                        <label> Voyage Time Trend </label>
+                        <app-chart-chartering *ngIf="startdisplay==1" [chartData]="chartsData?.voyage?.data" [chartLabels]="chartsData?.voyage?.labels" [chartType]="barChartType" [legend]="barChartLegend">
+                        </app-chart-chartering>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div> -->

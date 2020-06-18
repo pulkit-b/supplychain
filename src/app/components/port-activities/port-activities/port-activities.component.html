@@ -1,0 +1,63 @@
+<div class="modal-header">
+  <h4 class="modal-title">Port Activities</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div>
+    <p>Load Port</p>
+    <div class="centerdiv">
+      <span [ngClass]="{'dotdischarge': (portdata.ActualArrivalDate_LP!=null&&portdata.ActualArrivalDate_LP!='1900-01-01T00:00:00.000Z' && portdata.ActualArrivalDate_LP!='1900-01-01'),'dot': !(portdata.ActualArrivalDate_LP!=null&&portdata.ActualArrivalDate_LP!='1900-01-01T00:00:00.000Z' && portdata.ActualArrivalDate_LP!='1900-01-01')}"></span>
+      <span class="line "></span>
+      <span  [ngClass]="{'dotdischarge': (portdata.BerthingDate_LP!=null&&portdata.BerthingDate_LP!='1900-01-01T00:00:00.000Z' && portdata.BerthingDate_LP!='1900-01-01'),'dot': !(portdata.BerthingDate_LP!=null&&portdata.BerthingDate_LP!='1900-01-01T00:00:00.000Z' && portdata.BerthingDate_LP!='1900-01-01')}"></span>
+      <span class="line "></span>
+      <span  [ngClass]="{'dotdischarge': (portdata.VesselCompletionDate_LP!=null&&portdata.VesselCompletionDate_LP!='1900-01-01T00:00:00.000Z'&& portdata.VesselCompletionDate_LP!='1900-01-01'),'dot': !(portdata.VesselCompletionDate_LP!=null&&portdata.VesselCompletionDate_LP!='1900-01-01T00:00:00.000Z'&& portdata.VesselCompletionDate_LP!='1900-01-01')}"></span>
+      <span class="line "></span>
+      <span  [ngClass]="{'dotdischarge': (portdata.ActualArrivalDate_DP!=null&&portdata.ActualArrivalDate_DP!='1900-01-01T00:00:00.000Z'&& portdata.ActualArrivalDate_DP!='1900-01-01'),'dot': !(portdata.ActualArrivalDate_DP!=null&&portdata.ActualArrivalDate_DP!='1900-01-01T00:00:00.000Z'&& portdata.ActualArrivalDate_DP!='1900-01-01')}"></span>
+    </div>
+    <div class="centerdiv" style="justify-content: space-between;">
+      <span >NOR&nbsp;Date</span>
+      <span  >Date&nbsp;of&nbsp;Berthing</span>
+      <span  >Loading&nbsp;Completion</span>
+      <span   >Arrival&nbsp;Date</span>
+    </div>
+
+    <div class="centerdiv row" style="justify-content: space-between;">
+      <span  class="col">{{(portdata?.ActualArrivalDate_LP=='1900-01-01T00:00:00.000Z' || portdata?.ActualArrivalDate_LP=='1900-01-01')?'':portdata?.ActualArrivalDate_LP}}</span>
+      <span  style="margin-left: 13%;" class="col" >{{(portdata?.BerthingDate_LP=='1900-01-01T00:00:00.000Z' || portdata?.BerthingDate_LP=='1900-01-01')?'':portdata?.BerthingDate_LP}}</span>
+      <span style="margin-left: 15%;" class="col">{{(portdata?.VesselCompletionDate_LP=='1900-01-01T00:00:00.000Z' || portdata?.VesselCompletionDate_LP=='1900-01-01')?'':portdata?.VesselCompletionDate_LP}}</span>
+      <span style="margin-left: 13%;" class="col">{{(portdata?.ActualArrivalDate_DP=='1900-01-01T00:00:00.000Z' || portdata?.ActualArrivalDate_DP=='1900-01-01')?'':portdata?.ActualArrivalDate_DP}}</span>
+    </div>
+
+  </div>
+  <div style="margin-top: 80px">
+
+    <p>Discharge Port</p>
+    <div class="centerdiv">
+      <span  [ngClass]="{'dotdischarge': (portdata.ActualArrivalDate_DP!=null&&portdata.ActualArrivalDate_DP!='1900-01-01T00:00:00.000Z' && portdata.ActualArrivalDate_DP!='1900-01-01'),'dot': !(portdata.ActualArrivalDate_DP!=null&&portdata.ActualArrivalDate_DP!='1900-01-01T00:00:00.000Z' && portdata.ActualArrivalDate_DP!='1900-01-01')}"></span>
+      <span class="line "></span>
+      <span  [ngClass]="{'dotdischarge': (portdata.BerthingDate_DP!=null&&portdata.BerthingDate_DP!='1900-01-01T00:00:00.000Z' && portdata.BerthingDate_DP!='1900-01-01'),'dot':!(portdata.BerthingDate_DP!=null&&portdata.BerthingDate_DP!='1900-01-01T00:00:00.000Z' && portdata.BerthingDate_DP!='1900-01-01')}"></span>
+      <span class="line "></span>
+      <span  [ngClass]="{'dotdischarge': (portdata.VesselCompletionDate_DP!=null && portdata.VesselCompletionDate_DP!='1900-01-01T00:00:00.000Z' && portdata.VesselCompletionDate_DP!='1900-01-01'),'dot': !(portdata.VesselCompletionDate_DP!=null && portdata.VesselCompletionDate_DP!='1900-01-01T00:00:00.000Z' && portdata.VesselCompletionDate_DP!='1900-01-01')}"></span>
+      <span class="line "></span>
+      <span  [ngClass]="{'dotdischarge': (portdata.VesselCompletionDate_DP!=null && portdata.VesselCompletionDate_DP!='1900-01-01T00:00:00.000Z' && portdata.VesselCompletionDate_DP!='1900-01-01'),'dot': !(portdata.VesselCompletionDate_DP!=null && portdata.VesselCompletionDate_DP!='1900-01-01T00:00:00.000Z' && portdata.VesselCompletionDate_DP!='1900-01-01')}"></span>
+    </div>
+    <div class="centerdiv " style="justify-content: space-between;" >
+      <span >NOR&nbsp;Date</span>
+      <span >Date&nbsp;of&nbsp;Berthing</span>
+      <span  >Discharge&nbsp;Completion</span>
+      <span  >Unberthed&nbsp;Date</span>
+    </div>
+
+    <div class="centerdiv row" style="justify-content: space-between;">
+      <span class="col">{{(portdata?.ActualArrivalDate_DP=='1900-01-01T00:00:00.000Z' || portdata?.ActualArrivalDate_DP=='1900-01-01')?'':portdata?.ActualArrivalDate_DP}}</span>
+      <span  style="margin-left: 13%;" class="col">{{(portdata?.BerthingDate_DP=='1900-01-01T00:00:00.000Z' || portdata?.BerthingDate_DP=='1900-01-01')?'':portdata?.BerthingDate_DP==null?'':portdata?.BerthingDate_DP.split("T")[0]}}</span>
+      <span  style="margin-left: 15%;" class="col">{{(portdata?.VesselCompletionDate_DP=='1900-01-01T00:00:00.000Z' || portdata?.VesselCompletionDate_DP=='1900-01-01')?'':portdata?.VesselCompletionDate_DP==null?'':portdata?.VesselCompletionDate_DP.split("T")[0]}}</span>
+      <span style="margin-left: 13%;" class="col">{{(portdata?.VesselCompletionDate_DP=='1900-01-01T00:00:00.000Z' || portdata?.VesselCompletionDate_DP=='1900-01-01')?'':portdata?.VesselCompletionDate_DP==null?'':portdata?.VesselCompletionDate_DP.split("T")[0]}}</span>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.dismiss('Cross click')">Close</button>
+</div>

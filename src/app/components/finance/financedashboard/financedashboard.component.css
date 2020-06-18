@@ -1,0 +1,40 @@
+.first-column {
+    border: 1px solid black;
+    height: auto;
+    width: auto;
+    margin: 5px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 18px;
+}
+
+.second-first-column {
+    height: auto;
+    width: auto;
+}
+
+.second-column {
+    border: 1px solid black;
+    height: auto;
+    width: auto;
+    margin: 5px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 18px;
+    padding: 14px;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+}
+
+.table td {
+    height: 10px;
+}

@@ -1,0 +1,36 @@
+.hssDetails {
+    width: 235px;
+    height: 235px; 
+    box-shadow: 0 0 4px 0; 
+    border: 1px solid #1e1e1e; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    left: 0;
+    right: 0;
+    top: 20px;
+    margin: 0px auto;
+    z-index: 120;
+}
+
+.vesselmodalbox {
+    width: auto;
+    height: 110px;
+    position: relative;
+    border-radius: 10%;
+}
+
+
+.btn-primary:disabled,
+button[disabled]{
+  border: 1px solid #999999 !important;
+  background-color: #cccccc !important;
+  color: #666666 !important;
+  cursor: not-allowed !important
+}
+
+.card-header:first-child {
+    background: rgba(112, 191, 65, 0.7);
+    /* margin-left: -0.5%;
+    margin-right: -0.5%; */
+}

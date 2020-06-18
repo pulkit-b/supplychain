@@ -1,0 +1,37 @@
+.vesselmodalbox .commonmodal_bubble_m {
+    position: absolute;
+    width: 277px;
+    height: auto;
+    border: 1.2px solid #0063a7;
+    /* border-radius: 50%; */
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background-color: #ffffff;
+}
+
+.calendar {
+    background-image: url('/assets/images/cal.png');
+    background-color: #cccccc;
+    /* Used if the image is unavailable */
+    background-color: #c7c0c0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    right: 16px;
+    top: -2px;
+    position: absolute;
+    height: 42px;
+    width: 39px;
+}
+.error {
+    border-color: red;
+    border-style: solid;
+  }
+
+  .boldfont{
+    font-weight: bold !important;
+  }

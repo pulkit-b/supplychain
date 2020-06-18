@@ -1,0 +1,171 @@
+<app-navbar [open]="open" (event)="open=$event"></app-navbar>
+
+<div class="mainpanel">
+
+    <!-- <div class="mainpanel_leftsect">
+    <app-leftpanel [openValue]="open"></app-leftpanel>
+  </div> -->
+
+    <div class="mainpanel_rightsect">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div  class="card col-6 p-0" style="margin-left: 3%;" *ngIf="data && data[0]">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="vesselmodalbox col-4">
+                                <!-- <div class="hssDetails" style="background-image: url(/assets/images/ship.jpg)"></div> -->
+                                <img class="vesselmodalbox" src="/assets/images/ship.jpg" />
+                            </div>
+                            <div class="col">
+                                <div class="detailmodals_header">
+                                    <label>Vessel Name :</label>
+                                    {{data[0]?.VesselName ?  data[0]?.VesselName : ''}}
+                                </div>
+                                <div class="detailmodals_header">
+                                    <label>Vessel Owner :</label>
+                                    {{data[0]?.VesselOwner ?  data[0]?.VesselOwner : ''}}
+                                </div>
+                                <div class="detailmodals_header">
+                                    <label>Load Port :</label>
+                                    {{data[0]?.LoadPort ?  data[0]?.LoadPort : ''}}
+                                </div>
+                                <div class="detailmodals_header">
+                                    <label>Vessel For Plant :</label>
+                                    {{data[0]?.Plant ?  data[0]?.Plant : ''}}
+                                </div>
+                                <div class="detailmodals_header">
+                                    <label>Quantity (in Tons) :</label>
+                                    {{data[0]?.Quantity ?  data[0]?.Quantity : ''}}
+                                </div>
+                                <div class="detailmodals_header">
+                                    <label>Laycan :</label>
+                                    {{data[0]?.LaycanSelected ?  data[0]?.LaycanSelected : ''}}
+                                </div>
+                                <div class="detailmodals_header">
+                                    <label>Arrival Date :</label>
+                                    {{data[0]?.ArrivalDate.split('T')[0] ?  data[0]?.ArrivalDate.split('T')[0] : ''}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+                <div *ngIf="data && data[1]" class="card col p-0" style="margin-left: 3%;margin-right: 5%;" >
+                    <div class="card-header">
+                        <h4 style="text-align: center">HSS UPDATE</h4>
+                    </div>
+                    <div class="card-body row">
+                        <div class="col-6" *ngIf="data && data[1]">
+                            <div class="detailmodals_header">
+                                <label>Vessel Name :</label>
+                                {{data[1]?.VesselName ?  data[1]?.VesselName : ''}}
+                            </div>
+                            <div class="detailmodals_header">
+                                <label>Vessel Owner :</label>
+                                {{data[1]?.VesselOwner ?  data[1]?.VesselOwner : ''}}
+                            </div>
+                            <div class="detailmodals_header">
+                                <label>Vessel For Plant :</label>
+                                {{data[1]?.Plant ?  data[1]?.Plant : ''}}
+                            </div>
+                            <div class="detailmodals_header">
+                                <label>Quantity (in Tons) :</label>
+                                {{data[1]?.Quantity ?  data[1]?.Quantity : ''}}
+                            </div>
+                        </div>
+                        <div class="col-6" *ngIf="data && data[2]">
+                            <div class="detailmodals_header">
+                                <label>Vessel Name :</label>
+                                {{data[2]?.VesselName ?  data[2]?.VesselName : ''}}
+                            </div>
+                            <div class="detailmodals_header">
+                                <label>Vessel Owner :</label>
+                                {{data[2]?.VesselOwner ?  data[2]?.VesselOwner : ''}}
+                            </div>
+                            <div class="detailmodals_header">
+                                <label>Vessel For Plant :</label>
+                                {{data[2]?.Plant ?  data[2]?.Plant : ''}}
+                            </div>
+                            <div class="detailmodals_header">
+                                <label>Quantity (in Tons) :</label>
+                                {{data[2]?.Quantity ?  data[2]?.Quantity : ''}}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+
+            <div class="row">
+                <div class="col-sm-12 procurement">
+                    <div class="container-fluid">
+                        <form>
+                            <div class="row procurement_header">
+                                <div class="col-sm">
+                                    From
+                                </div>
+                                <div class="col-sm">
+                                    To
+                                </div>
+                                <div class="col-sm">
+                                    Quantity (in Tons)
+                                </div>
+                            </div>
+
+                            <div class="row procurement_table inputform-group"
+                                *ngFor="let formdatav of addMoreData; let j = index">
+                                <div class="col-sm">
+
+                                    <input type="hidden" name="VesselConfirmationID" value="" />
+                                    <input type="hidden" name="DischargePortSuggested"
+                                        value="{{data?data[0]?.DischargePortSuggested:''}}" />
+                                    <input type="hidden" name="VesselName" value="{{data?data[0]?.VesselName:''}}" />
+                                    <input type="hidden" name="LoadPort" value="{{data?data[0]?.LoadPort:''}}" />
+                                    <input class="form-control" readonly name="LoadPort"
+                                        value="{{data ?  data[0]?.Plant : ''}}" placeholder="From" type="text" />
+                                </div>
+                                <div class="col-sm">
+                                    <!-- <input class="form-control" name="to[]" placeholder="To" type="text" /> -->
+                                    <select class="custom-select" name="to">
+                                        <option>Select</option>
+                                        <option *ngFor="let p of plantInfo" value="{{p.Name}}">
+                                            {{p.Name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-sm">
+                                    <input class="form-control" name="quantity" placeholder="Quantity" type="number"
+                                        min="0" />
+                                </div>
+                                <div class="removeButton" (click)='deleteRow(j)' *ngIf="j>0">x</div>
+
+                            </div>
+                            <div class="float-right">
+                                <button [disabled]="disableadd" class="btn-primary mainbutton" type="button"
+                                    (click)="addMore()">Add
+                                    More</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <div class="col-sm-12 procurement">
+                    <div class="container-fluid text-right">
+                        <button [disabled]="disablesubmit" class="btn-primary mainbutton buttonadd" type="button"
+                            (click)="submitHss()">Submit HSS</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

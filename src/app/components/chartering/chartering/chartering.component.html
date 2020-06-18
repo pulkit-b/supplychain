@@ -1,0 +1,741 @@
+<app-navbar [open]="open" (event)="open=$event"></app-navbar>
+
+<div class="mainpanel">
+
+    <!-- <div class="mainpanel_leftsect">
+        <app-leftpanel [openValue]="open"></app-leftpanel>
+    </div> -->
+
+    <div class="mainpanel_rightsect">
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <div class="col-12">
+
+                    <div class="col-12 clearfix mb-4">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <button class="btn-primary mainbutton" type="button" (click)="showBasicDetails()">Basic
+                                    Vessel
+                                    Details</button>
+                            </div>
+                            <div class="col-sm-4" [ngClass]="{
+                      'showForm': step1==true && step2==false,
+                      'hideForm': step1==false && step2==true}">
+                                <button class="btn-primary mainbutton" type="button" (click)="hssUpdate()">HSS
+                                    Details</button>
+                            </div>
+
+
+                            <div class="col-sm-4">
+                                <button class="btn-primary mainbutton" type="button" (click)="charteringdetails()">Chartering
+                                    Details</button>
+                            </div>
+                            <div class="col-sm-4" [ngClass]="{
+                      'showForm': step1==false && step2==true,
+                      'hideForm': step1==true && step2==false}">
+                                Load Port : {{this.vesselDetails!=undefined?this.vesselDetails.LoadPort:''}} <br> Discharge Port :{{this.vesselDetails!=undefined?this.vesselDetails.DischargePortSuggested:''}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="" [ngClass]="{
+              'showForm': step1==true && step2==false,
+              'hideForm': step1==false && step2==true}">
+                        <form [formGroup]="authForm">
+                            <div class="col-12 clearfix">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="inputform-group row " style="position: relative">
+                                            <div class="col-12">
+                                                <label class="main_label">Vessel Name</label>
+                                                <input class="form-control" placeholder="Vessel Name" type="text" id="Vessel_name" formControlName="Vessel_name" required [ngClass]="{
+                                            'has-danger':authForm.controls.Vessel_name.hasError('required')&&(authForm.controls.Vessel_name.touched || formSubmit),
+                                            'has-success':!authForm.controls.Vessel_name.hasError('required')&&(authForm.controls.Vessel_name.touched || formSubmit)}">
+                                                <div _ngcontent-c9="" class="" style="
+                                            
+                                            position: absolute;
+                                            top: 35px;
+                                            right: 17px;
+                                            border-radius: 0;
+                                        " (click)="updateVesselName()"><button _ngcontent-c9="" class="btn-primary mainbutton" type="button" style="
+                                            border-radius: 5px !important;
+                                        ">Update Name</button></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="inputform-group row">
+                                            <div class="col-12">
+                                                <label class="main_label">IMO - Vessel</label>
+                                                <input class="form-control" placeholder="Vessel" type="text" id="Imo_vessel" formControlName="Imo_vessel" required [ngClass]="{
+                            'has-danger':authForm.controls.Imo_vessel.hasError('required')&&(authForm.controls.Imo_vessel.touched || formSubmit),
+                            'has-success':!authForm.controls.Imo_vessel.hasError('required')&&(authForm.controls.Imo_vessel.touched || formSubmit)}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 clearfix">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="inputform-group row">
+                                            <div class="col-12">
+                                                <label class="main_label">Vessel Type</label>
+                                                <input class="form-control" placeholder="Vessel Type" type="text" id="Vessel_type" formControlName="Vessel_type" required [ngClass]="{
+                          'has-danger':authForm.controls.Vessel_type.hasError('required')&&(authForm.controls.Vessel_type.touched || formSubmit),
+                          'has-success':!authForm.controls.Vessel_type.hasError('required')&&(authForm.controls.Vessel_type.touched || formSubmit)}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="inputform-group row">
+                                            <div class="col-12">
+                                                <label class="main_label">ETA</label>
+                                                <input class="form-control" placeholder="yyyy-mm-dd" name="Eta" [minDate]="minimumetadate" [(ngModel)]="Eta" ngbDatepicker #ppos="ngbDatepicker" [placement]="placementBottom" positionTarget="buttonEl" ngModelOptions="standalone" id="Eta" formControlName="Eta"
+                                                    required [ngClass]="{
+                                                    'error':(authForm.controls.Eta.status=='INVALID'), 
+                                                    'has-danger':authForm.controls.Eta.hasError('required')&&(authForm.controls.Eta.touched || formSubmit),
+                                'has-success':!authForm.controls.Eta.hasError('required')&&(authForm.controls.Eta.touched || formSubmit)}">
+                                                <button #buttonEl class="btn btn-outline-secondary calendar" (click)="ppos.toggle()" type="button"></button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 clearfix">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="inputform-group row">
+                                            <div class="col-12">
+                                                <label class="main_label">Total Demurrage LP</label>
+                                                <input class="form-control" placeholder="Demurrage LP" type="number" min="0" id="Demurrage_lP" formControlName="Demurrage_lP" required [ngClass]="{
+                          'has-danger':authForm.controls.Demurrage_lP.hasError('required')&&(authForm.controls.Demurrage_lP.touched || formSubmit),
+                          'has-success':!authForm.controls.Demurrage_lP.hasError('required')&&(authForm.controls.Demurrage_lP.touched || formSubmit)}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="inputform-group row">
+                                            <div class="col-12">
+                                                <label class="main_label">Demurrage Rate per Day at DP</label>
+                                                <input class="form-control" [(ngModel)]="Demurrage_dP" (keyup)="demurragedpchange()" placeholder="Demurrage DP" type="number" min="0" id="Demurrage_dP" formControlName="Demurrage_dP" required [ngClass]="{
+                          'has-danger':authForm.controls.Demurrage_dP.hasError('required')&&(authForm.controls.Demurrage_dP.touched || formSubmit),
+                          'has-success':!authForm.controls.Demurrage_dP.hasError('required')&&(authForm.controls.Demurrage_dP.touched || formSubmit)}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 clearfix">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="inputform-group row">
+                                            <div class="col-12">
+                                                <label class="main_label">Ocean Freight</label>
+                                                <input class="form-control" placeholder="Ocean Freight" type="number" min="0" id="Ocean_freight" formControlName="Ocean_freight" required [ngClass]="{
+                              'has-danger':authForm.controls.Ocean_freight.hasError('required')&&(authForm.controls.Ocean_freight.touched || formSubmit),
+                              'has-success':!authForm.controls.Ocean_freight.hasError('required')&&(authForm.controls.Ocean_freight.touched || formSubmit)}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="inputform-group row">
+                                            <!-- <div class="col-12">
+                            <label class="main_label">COA / Spot</label>
+                            <input class="form-control" placeholder="COA / Spot" type="text"  id="COA_spot" formControlName="COA_spot" required [ngClass]="{
+                              'has-danger':authForm.controls.COA_spot.hasError('required')&&(authForm.controls.COA_spot.touched || formSubmit),
+                              'has-success':!authForm.controls.COA_spot.hasError('required')&&(authForm.controls.COA_spot.touched || formSubmit)}">
+                          </div> -->
+                                            <div class="col-12">
+                                                <label class="main_label">C Type</label>
+                                                <select class="custom-select" formControlName="COA_spot" required [ngClass]="{
+                                'has-danger':authForm.controls.COA_spot.hasError('required')&&(authForm.controls.COA_spot.touched || formSubmit),
+                                'has-success':!authForm.controls.COA_spot.hasError('required')&&(authForm.controls.COA_spot.touched || formSubmit)}">
+                                                    <option value="">select</option>
+                                                    <option *ngFor="let m of cTypeArray; let i = index;"
+                                                        [selected]="((i+1)==currentMonth) ? 'selected' : ''"
+                                                        value={{m}}>{{m}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 clearfix">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="inputform-group row">
+                                            <div class="col-12">
+                                                <label class="main_label">BL Quantity</label>
+                                                <input class="form-control" placeholder="BL Quantity" type="number" min="0" id="BL_quantity" formControlName="BL_quantity" required [ngClass]="{
+                                'has-danger':authForm.controls.BL_quantity.hasError('required')&&(authForm.controls.BL_quantity.touched || formSubmit),
+                                'has-success':!authForm.controls.BL_quantity.hasError('required')&&(authForm.controls.BL_quantity.touched || formSubmit)}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="inputform-group row">
+                                            <div class="col-12">
+                                                <label class="main_label">P Type</label>
+                                                <select class="custom-select" formControlName="pType" required [ngClass]="{
+                                  'has-danger':authForm.controls.pType.hasError('required')&&(authForm.controls.pType.touched || formSubmit),
+                                  'has-success':!authForm.controls.pType.hasError('required')&&(authForm.controls.pType.touched || formSubmit)}">
+                                                    <option value="">select</option>
+                                                    <option *ngFor="let m of pTypeArray; let i = index;"
+                                                        [selected]="((i+1)==currentMonth) ? 'selected' : ''"
+                                                        value={{m}}>{{m}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 clearfix">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="inputform-group row">
+                                            <div class="col-12">
+                                                <label class="main_label">FOB Cost</label>
+                                                <input class="form-control" placeholder="FOB Cost" type="number" min="0" id="FOB_cost" formControlName="FOB_cost" required [ngClass]="{
+                            'has-danger':authForm.controls.FOB_cost.hasError('required')&&(authForm.controls.FOB_cost.touched || formSubmit),
+                            'has-success':!authForm.controls.FOB_cost.hasError('required')&&(authForm.controls.FOB_cost.touched || formSubmit)}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="inputform-group row">
+                                            <div class="col-12">
+                                                <label class="main_label">Gross Tonnage</label>
+                                                <input class="form-control" placeholder="Gross Tonnage" type="number" min="0" id="Gross_tonnage" formControlName="Gross_tonnage" required [ngClass]="{
+                      'has-danger':authForm.controls.Gross_tonnage.hasError('required')&&(authForm.controls.Gross_tonnage.touched || formSubmit),
+                      'has-success':!authForm.controls.Gross_tonnage.hasError('required')&&(authForm.controls.Gross_tonnage.touched || formSubmit)}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 clearfix">
+                                <h3>FINANCE</h3>
+                            </div>
+
+                            <div class="col-12 clearfix">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="inputform-group row">
+                                            <div class="col-12">
+                                                <label class="main_label">Type of Payment</label>
+                                                <input class="form-control" placeholder="Type of Payment" type="text" id="Type_of_payment" formControlName="Type_of_payment" [ngClass]="{
+                                  'has-danger':authForm.controls.Type_of_payment.hasError('required')&&(authForm.controls.Type_of_payment.touched || formSubmit),
+                                  'has-success':!authForm.controls.Type_of_payment.hasError('required')&&(authForm.controls.Type_of_payment.touched || formSubmit)}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="inputform-group row">
+                                            <div class="col-11">
+                                                <label class="main_label">Payment Processed On</label>
+
+                                                <input class="form-control" [minDate]="minimumetadate" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="paymentProcessedOn" ngbDatepicker #ppo="ngbDatepicker" [placement]="placement" positionTarget="buttonEl" ngModelOptions="standalone" id="Payment_processed_on"
+                                                    formControlName="Payment_processed_on" [ngClass]="{
+                                  'has-danger':authForm.controls.Payment_processed_on.hasError('required')&&(authForm.controls.Payment_processed_on.touched || formSubmit),
+                                  'has-success':!authForm.controls.Payment_processed_on.hasError('required')&&(authForm.controls.Payment_processed_on.touched || formSubmit)}">
+                                                <button #buttonEl class="btn btn-outline-secondary calendar" (click)="ppo.toggle()" type="button"></button>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 clearfix">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="inputform-group row">
+                                            <div class="col-11">
+                                                <label class="main_label">Document to Treasury</label>
+                                                <input class="form-control" [minDate]="minimumetadate" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="documentToTreasury" ngbDatepicker #d="ngbDatepicker" [placement]="placement" positionTarget="buttonEl" ngModelOptions="standalone" id="Document_to_treasury"
+                                                    formControlName="Document_to_treasury" [ngClass]="{
+                                    'has-danger':authForm.controls.Document_to_treasury.hasError('required')&&(authForm.controls.Document_to_treasury.touched || formSubmit),
+                                    'has-success':!authForm.controls.Document_to_treasury.hasError('required')&&(authForm.controls.Document_to_treasury.touched || formSubmit)}">
+
+                                                <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="inputform-group row">
+                                            <div class="col-11">
+                                                <label class="main_label">Payment Completed</label>
+                                                <input class="form-control" [minDate]="minimumetadate" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="paymentComplete" ngbDatepicker #pc="ngbDatepicker" [placement]="placement" positionTarget="buttonEl" ngModelOptions="standalone" id="Payment_completed"
+                                                    formControlName="Payment_completed" [ngClass]="{
+                                    'has-danger':authForm.controls.Payment_completed.hasError('required')&&(authForm.controls.Payment_completed.touched || formSubmit),
+                                    'has-success':!authForm.controls.Payment_completed.hasError('required')&&(authForm.controls.Payment_completed.touched || formSubmit)}">
+                                                <button #buttonEl class="btn btn-outline-secondary calendar" (click)="pc.toggle()" type="button"></button>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="inputform-group row">
+                                            <div class="col-11">
+                                                <label class="main_label">Payment Completion Date</label>
+                                                <input class="form-control" [minDate]="minimumetadate" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="paymentCompletionDate" ngbDatepicker #pcd="ngbDatepicker" [placement]="placement" positionTarget="buttonEl" formControlName="Payment_completion_date"
+                                                    ngModelOptions="standalone" [ngClass]="{
+                                      'has-danger':authForm.controls.Payment_completion_date.hasError('required')&&(authForm.controls.Payment_completion_date.touched || formSubmit),
+                                      'has-success':!authForm.controls.Payment_completion_date.hasError('required')&&(authForm.controls.Payment_completion_date.touched || formSubmit)}">
+                                                <button #buttonEl class="btn btn-outline-secondary calendar" (click)="pcd.toggle()" type="button"></button>
+
+                                            </div>
+                                            <div class="input-group-append col-1">
+                                            </div>
+                                            <!-- <input class="form-control" placeholder="Payment Completion Date" type="text"  id="Payment_completion_date" formControlName="Payment_completion_date" required [ngClass]="{
+                                      'has-danger': authForm.controls.Payment_completion_date.invalid && authForm.controls.Payment_completion_date.dirty,
+                                      'has-success': authForm.controls.Payment_completion_date.valid && authForm.controls.Payment_completion_date.dirty}"> -->
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 text-right offset-6" style="padding-top: 30px;">
+                                    <button style="margin-right: 10px;" class="btn-primary mainbutton" (click)="save()">SAVE</button>
+
+                                    <button class="btn-primary mainbutton" (click)="next()">NEXT</button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="" [ngClass]="{
+    'showForm': step1==false && step2==true,
+    'hideForm': step1==true && step2==false}">
+                        <form [formGroup]="authFormStep2">
+                            <div class="col-12 clearfix">
+                                <div class="col-12 clearfix">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h2>Load Port</h2>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="inputform-group row">
+                                                <div class="col-11">
+                                                    <label class="main_label">Arrival Date (NOR Date)</label>
+                                                    <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="arrivalDate_NorDate" ngbDatepicker #arrivalDate_NorDated="ngbDatepicker" placement="bottom" positionTarget="buttonEl" ngModelOptions="standalone" id="arrival_date_NorDate" formControlName="arrival_date_NorDate"
+                                                        required (dateSelect)="arrivaldatechange_lp($event)" [ngClass]="{
+                            'has-danger':authFormStep2.controls.arrival_date_NorDate.hasError('required')&&(authFormStep2.controls.arrival_date_NorDate.touched || formSubmit),
+                            'has-success':!authFormStep2.controls.arrival_date_NorDate.hasError('required')&&(authFormStep2.controls.arrival_date_NorDate.touched || formSubmit)}">
+                                                    <button #buttonEl class="btn btn-outline-secondary calendar" (click)="arrivalDate_NorDated.toggle()" type="button"></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="inputform-group row">
+                                                <div class="col-11">
+                                                    <label class="main_label">Berthing Date</label>
+                                                    <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="berthingDate" ngbDatepicker (dateSelect)="berthingdatechange_lp($event)" #berthingDatepc="ngbDatepicker" placement="bottom" ngModelOptions="standalone" id="Berthing_date" formControlName="Berthing_date"
+                                                        required [ngClass]="{
+                              'has-danger':authFormStep2.controls.Berthing_date.hasError('required')&&(authFormStep2.controls.Berthing_date.touched || formSubmit),
+                              'has-success':!authFormStep2.controls.Berthing_date.hasError('required')&&(authFormStep2.controls.Berthing_date.touched || formSubmit)}">
+                                                    <button #buttonEl class="btn btn-outline-secondary calendar" (click)="berthingDatepc.toggle()" type="button"></button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="inputform-group row">
+                                                <div class="col-11">
+                                                    <label class="main_label">Pre-berthing Delay</label>
+                                                    <input class="form-control" placeholder="Pre-berthing Delay" type="number" min="0" id="Pre_berthing_delay" formControlName="Pre_berthing_delay" required [ngClass]="{
+                              'has-danger':authFormStep2.controls.Pre_berthing_delay.hasError('required')&&(authFormStep2.controls.Pre_berthing_delay.touched || formSubmit),
+                              'has-success':!authFormStep2.controls.Pre_berthing_delay.hasError('required')&&(authFormStep2.controls.Pre_berthing_delay.touched || formSubmit)}">
+
+                                                    <!-- <input class="form-control" placeholder="Payment Completion Date" type="text"  id="Payment_completion_date" formControlName="Payment_completion_date" required [ngClass]="{
+                              'has-danger': authFormStep2.controls.Payment_completion_date.invalid && authFormStep2.controls.Payment_completion_date.dirty,
+                              'has-success': authFormStep2.controls.Payment_completion_date.valid && authFormStep2.controls.Payment_completion_date.dirty}"> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="inputform-group row">
+                                                <div class="col-11">
+                                                    <label class="main_label">Vessel Completion Date</label>
+                                                    <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="vesselCompletionDate" ngbDatepicker (dateSelect)="completiondatechange_lp($event)" #vesselCompletionDated="ngbDatepicker" placement="bottom" positionTarget="buttonEl" ngModelOptions="standalone"
+                                                        id="vessel_completion_date" [minDate]="minimumcompletion_lpdate" formControlName="vessel_completion_date" required [ngClass]="{
+                            'has-danger':authFormStep2.controls.vessel_completion_date.hasError('required')&&(authFormStep2.controls.vessel_completion_date.touched || formSubmit),
+                            'has-success':!authFormStep2.controls.vessel_completion_date.hasError('required')&&(authFormStep2.controls.vessel_completion_date.touched || formSubmit)}">
+                                                    <button #buttonEl class="btn btn-outline-secondary calendar" (click)="vesselCompletionDated.toggle()" type="button"></button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="inputform-group row">
+                                                <div class="col-11">
+                                                    <label class="main_label">Reason for Delay</label>
+                                                    <input class="form-control" placeholder="Reason for Delay" type="text" id="Reason_for_Delay" formControlName="Reason_for_Delay" [ngClass]="{
+                        'has-danger':authFormStep2.controls.Reason_for_Delay.hasError('required')&&(authFormStep2.controls.Reason_for_Delay.touched || formSubmit),
+                        'has-success':!authFormStep2.controls.Reason_for_Delay.hasError('required')&&(authFormStep2.controls.Reason_for_Delay.touched || formSubmit)}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="inputform-group row">
+                                                <label class="main_label">Upload Doc</label>
+                                                <input class="form-control" type="file" id="upload_doc">
+                                                <!--  formControlName="upload_doc" required [ngClass]="{
+                              'has-danger':authFormStep2.controls.upload_doc.hasError('required')&&(authFormStep2.controls.upload_doc.touched || formSubmit),
+                              'has-success':!authFormStep2.controls.upload_doc.hasError('required')&&(authFormStep2.controls.upload_doc.touched || formSubmit)}" -->
+                                                <!-- <input class="form-control" placeholder="Payment Completion Date" type="text"  id="Payment_completion_date" formControlName="Payment_completion_date" required [ngClass]="{
+                              'has-danger': authFormStep2.controls.Payment_completion_date.invalid && authFormStep2.controls.Payment_completion_date.dirty,
+                              'has-success': authFormStep2.controls.Payment_completion_date.valid && authFormStep2.controls.Payment_completion_date.dirty}"> -->
+
+                                            </div>
+                                        </div>
+                                        <div class="col text-right offset-6" style="padding-top: 30px;">
+                                            <button style="margin-right: 10px;" class="btn-primary mainbutton" type="submit" (click)="savelpdata()">SAVE</button>
+                                        </div>
+                                        <div class="col-12">
+                                            <h2>Discharge Port</h2>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="inputform-group row">
+                                                <div class="col-11">
+                                                    <label class="main_label">Arrival Date (NOR Date)</label>
+                                                    <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="arrivalDateDischarge" ngbDatepicker #arrivalDate_Discharge="ngbDatepicker" placement="bottom" positionTarget="buttonEl" ngModelOptions="standalone" (dateSelect)="arrivaldatechange($event)"
+                                                        id="arrival_date_Discharge" [minDate]="minDatearrival" formControlName="arrival_date_Discharge" required [ngClass]="{
+                              'error':(authFormStep2.controls.arrival_date_Discharge.status=='INVALID'),
+                          'has-danger':authFormStep2.controls.arrival_date_Discharge.hasError('required')&&(authFormStep2.controls.arrival_date_Discharge.touched || formSubmit),
+                          'has-success':!authFormStep2.controls.arrival_date_Discharge.hasError('required')&&(authFormStep2.controls.arrival_date_Discharge.touched || formSubmit)}">
+                                                    <button #buttonEl class="btn btn-outline-secondary calendar" (click)="arrivalDate_Discharge.toggle()" type="button"></button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="inputform-group row">
+                                                <div class="col-11">
+                                                    <label class="main_label">Arrival time</label>
+                                                    <input class="form-control" placeholder="Reason for Delay" type="time" id="arrivaltime" formControlName="Arrival_time" required [ngClass]="{
+                      'has-danger':authFormStep2.controls.Arrival_time.hasError('required')&&(authFormStep2.controls.Arrival_time.touched || formSubmit),
+                      'has-success':!authFormStep2.controls.Arrival_time.hasError('required')&&(authFormStep2.controls.Arrival_time.touched || formSubmit)}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="inputform-group row">
+                                                <div class="col-11">
+                                                    <label class="main_label">LayTime Commencement Date</label>
+                                                    <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="Laytime_date" [minDate]="minDatelaytime" ngbDatepicker #Laytime_Dated="ngbDatepicker" placement="bottom" positionTarget="buttonEl" (dateSelect)="laytimedatechange($event)" ngModelOptions="standalone"
+                                                        id="Laytime_date" formControlName="Laytime_date" required [ngClass]="{
+                              'error':(authFormStep2.controls.Laytime_date.status=='INVALID'),
+                              'has-danger':authFormStep2.controls.Laytime_date.hasError('required')&&(authFormStep2.controls.Laytime_date.touched || formSubmit),
+                              'has-success':!authFormStep2.controls.Laytime_date.hasError('required')&&(authFormStep2.controls.Laytime_date.touched || formSubmit)}">
+                                                    <button #buttonEl class="btn btn-outline-secondary calendar" (click)="Laytime_Dated.toggle()" type="button"></button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="inputform-group row">
+                                                <div class="col-11">
+                                                    <label class="main_label">Lay Time Commencement time</label>
+                                                    <input class="form-control" placeholder="Lay Time Commencement" type="time" id="laytimecommencement" formControlName="Lay_time_commencement" required [ngClass]="{
+                        'has-danger':authFormStep2.controls.Lay_time_commencement.hasError('required')&&(authFormStep2.controls.Lay_time_commencement.touched || formSubmit),
+                        'has-success':!authFormStep2.controls.Lay_time_commencement.hasError('required')&&(authFormStep2.controls.Lay_time_commencement.touched || formSubmit)}"
+                                                        (change)="laytimechange()">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="inputform-group row">
+                                                <div class="col-11">
+                                                    <label class="main_label">Berthing Date</label>
+                                                    <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="berthingDateDischarge" [minDate]="minDateberthing" ngbDatepicker #berthingDate_Discharge="ngbDatepicker" placement="bottom" ngModelOptions="standalone" id="Berthing_date_Discharge"
+                                                        formControlName="Berthing_date_Discharge" required (dateSelect)="berthingdatechange($event)" [ngClass]="{
+                              'error':(authFormStep2.controls.Berthing_date_Discharge.status=='INVALID'),
+                          'has-danger':authFormStep2.controls.Berthing_date_Discharge.hasError('required')&&(authFormStep2.controls.Berthing_date_Discharge.touched || formSubmit),
+                          'has-success':!authFormStep2.controls.Berthing_date_Discharge.hasError('required')&&(authFormStep2.controls.Berthing_date_Discharge.touched || formSubmit)}">
+                                                    <button #buttonEl class="btn btn-outline-secondary calendar" (click)="berthingDate_Discharge.toggle()" type="button"></button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="inputform-group row">
+                                                <div class="col-11">
+                                                    <label class="main_label">Vessel Berthed time</label>
+                                                    <input class="form-control" placeholder="Vessel Berthed Time" type="time" id="Vessel_berthed_time" formControlName="Vessel_Berthed_time" required [ngClass]="{
+                      'has-danger':authFormStep2.controls.Vessel_Berthed_time.hasError('required')&&(authFormStep2.controls.Vessel_Berthed_time.touched || formSubmit),
+                      'has-success':!authFormStep2.controls.Vessel_Berthed_time.hasError('required')&&(authFormStep2.controls.Vessel_Berthed_time.touched || formSubmit)}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="inputform-group row">
+                                                <div class="col-11">
+                                                    <label class="main_label">Discharge Commenced Date</label>
+                                                    <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [minDate]="minDatedischarge" [(ngModel)]="dischargecommencedDate" ngbDatepicker #discharge_date="ngbDatepicker" placement="bottom" ngModelOptions="standalone" id="discharge_commenced_date"
+                                                        (dateSelect)="dischargecommenceddatechange($event)" formControlName="Dischrge_commenced_date" required [ngClass]="{
+                              'error':(authFormStep2.controls.Dischrge_commenced_date.status=='INVALID'),
+                              'has-danger':authFormStep2.controls.Dischrge_commenced_date.hasError('required')&&(authFormStep2.controls.Dischrge_commenced_date.touched || formSubmit),
+                              'has-success':!authFormStep2.controls.Dischrge_commenced_date.hasError('required')&&(authFormStep2.controls.Dischrge_commenced_date.touched || formSubmit)}">
+                                                    <button #buttonEl class="btn btn-outline-secondary calendar" (click)="discharge_date.toggle()" type="button"></button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="inputform-group row">
+                                                <div class="col-11">
+                                                    <label class="main_label">Discharge Commenced time</label>
+                                                    <input class="form-control" placeholder="Reason for Delay" type="time" id="DischargeCommencedtime" formControlName="Discharge_time" required [ngClass]="{
+                          'has-danger':authFormStep2.controls.Discharge_time.hasError('required')&&(authFormStep2.controls.Discharge_time.touched || formSubmit),
+                          'has-success':!authFormStep2.controls.Discharge_time.hasError('required')&&(authFormStep2.controls.Discharge_time.touched || formSubmit)}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="inputform-group row">
+                                                <div class="col-11">
+                                                    <label class="main_label">Discharge Rate (T/Day)</label>
+                                                    <input class="form-control" placeholder="Discharge Rate" disabled type="number" min="0" id="dischargerate" formControlName="Discharge_rate" required [ngClass]="{
+                            'has-danger':authFormStep2.controls.Discharge_rate.hasError('required')&&(authFormStep2.controls.Discharge_rate.touched || formSubmit),
+                            'has-success':!authFormStep2.controls.Discharge_rate.hasError('required')&&(authFormStep2.controls.Discharge_rate.touched || formSubmit)}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="inputform-group row">
+                                                <div class="col-11">
+                                                    <label class="main_label">Demurrage Rate ($/Day)</label>
+                                                    <input class="form-control" disabled placeholder="Demurrage Rate" type="number" min="0" id="demurragerate" formControlName="Demurrage_rate" required [ngClass]="{
+                              'has-danger':authFormStep2.controls.Demurrage_rate.hasError('required')&&(authFormStep2.controls.Demurrage_rate.touched || formSubmit),
+                              'has-success':!authFormStep2.controls.Demurrage_rate.hasError('required')&&(authFormStep2.controls.Demurrage_rate.touched || formSubmit)}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-sm-4">
+                                            <div class="inputform-group row">
+                                                <div class="col-11">
+                                                    <label class="main_label">On Date Discharge</label>
+                                                    <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="datedischarge" ngbDatepicker #on_date="ngbDatepicker" placement="bottom" ngModelOptions="standalone" id="on_date_discharge" formControlName="on_date_discharge" required [minDate]="minonDatedischarge"
+                                                        [maxDate]="maxonDatedischarge" [ngClass]="{
+                              'error':(authFormStep2.controls.on_date_discharge.status=='INVALID'),
+                                    'has-danger':authFormStep2.controls.on_date_discharge.hasError('required')&&(authFormStep2.controls.on_date_discharge.touched || formSubmit),
+                                    'has-success':!authFormStep2.controls.on_date_discharge.hasError('required')&&(authFormStep2.controls.on_date_discharge.touched || formSubmit)}">
+                                                    <button #buttonEl class="btn btn-outline-secondary calendar" (click)="on_date.toggle()" type="button"></button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="inputform-group row">
+                                                <div class="col-11">
+                                                    <label class="main_label">On Date Discharge Value</label>
+                                                    <input class="form-control" placeholder="On Date Discharge Value" type="number" min="0" id="ondatedischargevalue" formControlName="ondatedischargevalue" required [ngClass]="{
+                              
+                                  'has-danger':authFormStep2.controls.ondatedischargevalue.hasError('required')&&(authFormStep2.controls.ondatedischargevalue.touched || formSubmit),
+                                  'has-success':!authFormStep2.controls.ondatedischargevalue.hasError('required')&&(authFormStep2.controls.ondatedischargevalue.touched || formSubmit)}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="inputform-group row">
+                                                <div class="col-11">
+                                                    <label class="main_label">Vessel Completion date</label>
+                                                    <input class="form-control" placeholder="yyyy-mm-dd" [minDate]="minonDatedischarge_vessel" name="dp" [(ngModel)]="vessel_completion_dp" ngbDatepicker #vessel_dp="ngbDatepicker" placement="bottom" ngModelOptions="standalone" id="vessel_completion_dp" formControlName="vessel_completion_dp"
+                                                        [ngClass]="{
+                                      'has-danger':authFormStep2.controls.vessel_completion_dp.hasError('required')&&(authFormStep2.controls.vessel_completion_dp.touched || formSubmit),
+                                      'has-success':!authFormStep2.controls.vessel_completion_dp.hasError('required')&&(authFormStep2.controls.vessel_completion_dp.touched || formSubmit)}">
+                                                    <button #buttonEl class="btn btn-outline-secondary calendar" (click)="vessel_dp.toggle()" type="button"></button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-12 clearfix">
+                                <div class="row">
+
+                                </div>
+                            </div>
+                            <div class="row" style="  margin-left: 16px;">
+                                <div class="table-div table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>DATE</th>
+                                                <th>FROM</th>
+                                                <th>TO</th>
+                                                <th>Difference</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let itemdate of datestoshow">
+                                                <td>{{itemdate}}</td>
+                                                <td>
+                                                    <div *ngFor="let itemfrom of delaydatainput[itemdate]['From']">
+                                                        {{itemfrom}}</div>
+                                                </td>
+                                                <td>
+                                                    <div *ngFor="let itemto of delaydatainput[itemdate]['To']">
+                                                        {{itemto}}</div>
+                                                </td>
+                                                <td>
+                                                    <div *ngFor="let itemdifference of delaydatainput[itemdate]['Difference']">
+                                                        {{itemdifference}}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div *ngFor="let itemdifference of delaydatainput[itemdate]['Difference']; let i = index">
+                                                        <button type="button" class="close col" aria-label="Close" (click)="deletedtimedifference(itemdate,i,delaydatainput[itemdate]['id'][i])" style="padding-right: 10px;float: left;">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6"></div>
+                                <div class="col-sm-6 text-right" style="padding-top: 30px;">
+                                    <button class="btn-primary mainbutton" type="button" (click)="UpdateDate()">Update
+                                        Delay Data</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 text-left" style="padding-top: 30px;">
+
+                                    <button class="btn-primary mainbutton" type="button" (click)="Back()">BACK</button>
+                                </div>
+                                <div class="col-sm-6 text-right" style="padding-top: 30px;">
+
+                                    <button class="btn-primary mainbutton" type="button" (click)="submitmodal()">UPDATE
+                                        VESSEL</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-template #content1 let-modal>
+        <div>
+            <!-- <h4 class="modal-title">Vessel confirmation</h4> -->
+            <button type="button" class="close" aria-label="Close" (click)="closeModal()" style="padding-right: 10px;">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body text-center">
+            <app-basicvesseldetails [dataVal]="vesselDetails"></app-basicvesseldetails>
+        </div>
+    </ng-template>
+
+    <ng-template #content3 let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Delay Data</h4>
+            <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="DelayDataForm" #uploadDocumentsForm="ngForm" ngNativeValidate>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="inputform-group row">
+                            <div class="col-11">
+                                <label class="main_label">Date</label>
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="DelayDate" ngbDatepicker #DelayDated="ngbDatepicker" placement="bottom" positionTarget="buttonEl" ngModelOptions="standalone" id="DelayDateid" formControlName="Delay_date" required
+                                    [minDate]="minDatelaytime" [ngClass]="{
+                  'has-danger':DelayDataForm.controls.Delay_date.hasError('required')&&(DelayDataForm.controls.Delay_date.touched || formSubmit),
+                  'has-success':!DelayDataForm.controls.Delay_date.hasError('required')&&(DelayDataForm.controls.Delay_date.touched || formSubmit)}">
+                                <button #buttonEl class="btn btn-outline-secondary calendar" (click)="DelayDated.toggle()" type="button"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="inputform-group row">
+                            <div class="col-11">
+                                <label class="main_label">From Time</label>
+
+                                <input class="form-control" (keyup)="diff()" placeholder="00:00:00" type="time" id="From_time" formControlName="From_time" required [ngClass]="{
+                'has-danger':DelayDataForm.controls.From_time.hasError('required')&&(DelayDataForm.controls.From_time.touched || formSubmit),
+                'has-success':!DelayDataForm.controls.From_time.hasError('required')&&(DelayDataForm.controls.From_time.touched || formSubmit)}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="inputform-group row">
+                            <div class="col-11">
+                                <label class="main_label">To Time</label>
+                                <input class="form-control" (keyup)="diff()" placeholder="00:00:00" type="time" id="To_time" formControlName="To_time" required [ngClass]="{
+                  'has-danger':DelayDataForm.controls.To_time.hasError('required')&&(DelayDataForm.controls.To_time.touched || formSubmit),
+                  'has-success':!DelayDataForm.controls.To_time.hasError('required')&&(DelayDataForm.controls.To_time.touched || formSubmit)}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="inputform-group row">
+                            <div class="col-11">
+                                <label class="main_label">Total Difference</label>
+                                <input class="form-control" disabled [(ngModel)]="differencetime" placeholder="00:00:00" type="text" id="Difference_time" formControlName="Difference_time" required [ngClass]="{
+                    'has-danger':DelayDataForm.controls.Difference_time.hasError('required')&&(DelayDataForm.controls.Difference_time.touched || formSubmit),
+                    'has-success':!DelayDataForm.controls.Difference_time.hasError('required')&&(DelayDataForm.controls.Difference_time.touched || formSubmit)}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 text-right" style="padding-top: 30px; float: right">
+                        <button class="btn-primary mainbutton" type="button" (click)="add_delay_data()">ADD</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button> -->
+        </div>
+    </ng-template>
+
+    <ng-template #content2 let-modal>
+        <div>
+            <!-- <h4 class="modal-title">Vessel confirmation</h4> -->
+            <button type="button" class="close" aria-label="Close" (click)="closeModal()" style="padding-right: 10px;">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body text-center">
+            Thank You For Vessel Information Updated Scussessfully
+        </div>
+
+    </ng-template>
+</div>

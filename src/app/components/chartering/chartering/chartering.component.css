@@ -1,0 +1,41 @@
+.has-danger {
+    border-color: red;
+    border-style: solid;
+}
+
+.has-success {
+    border-color: green;
+    border-style: solid;
+}
+
+.error {
+    border-color: red;
+    border-style: solid;
+}
+
+.showForm {
+    display: block;
+}
+
+.hideForm {
+    display: none;
+}
+
+.calendar {
+    background-image: url('/assets/images/cal.png');
+    background-color: #cccccc;
+    /* Used if the image is unavailable */
+    background-color: #c7c0c0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    right: 16px;
+    top: 34px;
+    position: absolute;
+    height: 42px;
+    width: 39px;
+}
+
+.table {
+    border: 1px solid lightgray;
+}

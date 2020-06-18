@@ -1,0 +1,928 @@
+<app-navbar [open]="open" (event)="open=$event"></app-navbar>
+<div class="wrapper">
+    <!-- <app-leftpanel [openValue]="open" [ngClass]="{'open': open, 'closed': !open}"></app-leftpanel> -->
+    <main role="main" class="dispatch-scheduler" [ngClass]="{'portion': open, 'full': !open}">
+        <div class="row" style="margin-top: 20px;margin-bottom: 20px;">
+            <div class="col-12">
+                <!-- <button class="btn btn-primary btn-vedanta" style="width: 150px; margin-right: 5px;" (click)="changeView('JSG');">JSG</button>
+                <button class="btn btn-primary btn-vedanta" style="width: 150px; margin-right: 5px;" (click)="changeView('BALCO');">BALCO</button> -->
+                <span class="" style="    width: 150px;
+                margin-right: 5px;
+                border: 1px solid;
+                padding: 5px;
+                border-radius: 5px;">{{currenMonthName}}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header" style="padding: 5px !important;">
+                        <div class="row" style="margin: 0px !important;">
+                            <div class="col align-self-start">
+                                Plant: JNPT
+                            </div>
+                            <div class="col align-self-center" style="padding: 0px !important;"></div>
+                            <div class="col align-self-end" style="padding: 0px !important;">
+                                <!-- <button class="btn btn-primary btn-sm btn-vedanta float-right" (click)="manualDelay(manualDelayPopup)">
+                  Manual Delay
+                </button> -->
+                                <button class="btn btn-sm btn-vedanta float-right mr-2" (click)="openPreDispatchFirstTimeDataWarning();" style="background: #e44721;">Add
+                                    Data</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body" style="padding: 0px !important; margin: 5px !important;">
+                        <div class="table-div table-responsive custom-table">
+                            <div class="row justify-content-center" style="margin:0" *ngIf="planningResults.length > 0">
+                                <div class="header">
+                                    <div></div>
+                                    <div *ngFor="let key of JSObject.keys(planningResults[0]);let i = index"> {{key}}
+                                    </div>
+                                    <div>Total Supply</div>
+                                </div>
+                                <div class="bodyvalue" *ngFor="let item of  planningResults;let i = index">
+                                    <div class="vedtext">{{cKey[i]}}</div>
+                                    <!-- <div *ngFor="let key of JSObject.keys(item) ;let j = index" id="{{j+1}}" class="mainsec" [ngStyle]="{'width':(((item[JSObject.keys(item)[j]]['remainingTimeofTrip'] /24) * 41 ) + (item[JSObject.keys(item)[j+1]] ? ((item[JSObject.keys(item)[j+1]]['remainingTimeofTrip'] /24) * 41 ) : 0))+'px' }"> -->
+
+                                    <div *ngFor="let key of JSObject.keys(item) ;let j = index" id="{{j+1}}" class="mainsec" [ngStyle]="{'width':(((item[JSObject.keys(item)[j]]['totalWidth']!=undefined ? item[JSObject.keys(item)[j]]['totalWidth']['part']  /100 : 0) )  )+'px' }">
+                                        <div class="title" *ngIf="j === 0">&nbsp;</div>
+                                        <div class="title" (click)="openPopup(i, cKey[i], item, j, item[JSObject.keys(item)[j]], item[JSObject.keys(item)[j+1]],
+                      item[JSObject.keys(item)[j-1]]) " *ngIf="j !== 0">
+
+
+
+
+
+
+                                            {{item[JSObject.keys(item)[j+1]]==undefined ? (item[JSObject.keys(item)[j]]['destination']!=item[JSObject.keys(item)[j]]['next_destination'] ? item[JSObject.keys(item)[j]]['destination']+"-"+item[JSObject.keys(item)[j]]['next_destination'] : '&nbsp;')
+                                            : item[JSObject.keys(item)[j]]['destination']+item[JSObject.keys(item)[j]]['next_destination'] == 'KT' ? 'T-K ': item[JSObject.keys(item)[j]]['destination']+item[JSObject.keys(item)[j]]['next_destination'] ==
+                                            (item[JSObject.keys(item)[j+1]]!=undefined ? item[JSObject.keys(item)[j+1]]['destination'] : "")+(item[JSObject.keys(item)[j+1]]!=undefined ? item[JSObject.keys(item)[j+1]]['next_destination']: "") ? '&nbsp;'
+                                            : item[JSObject.keys(item)[j]]['destination']==undefined && item[JSObject.keys(item)[j]]['next_destination'] == undefined ? '-' : item[JSObject.keys(item)[j]]['destination']+"-"+item[JSObject.keys(item)[j]]['next_destination']}}
+                                        </div>
+                                        <div *ngFor="let xx of item[JSObject.keys(item)[j]]['summery']" [ngClass]="(xx['depot']=='pre_load' || xx['depot']=='plant_load' || xx['depot']=='post_load')?'plantTimePrePost':item[JSObject.keys(item)[j]]['next_destination']" [ngStyle]="{'width':((( xx['part'])  )  )+'%'}"
+                                            (click)="openPopup(i, cKey[i], item, j, item[JSObject.keys(item)[j]], item[JSObject.keys(item)[j+1]],
+item[JSObject.keys(item)[j-1]])"></div>
+
+                                    </div>
+                                    <div class="vedtext">{{btap_sup[i]}}</div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center" style="margin:0" *ngIf="planningResults.length <= 0">
+                                <div class="col-12 text-center">
+                                    <span *ngIf="loadingData.startLoadingData">Loading Data... </span> <br>
+                                    <span *ngIf="!loadingData.startLoadingData">No Data available for this month in
+                                        database.</span><br>
+                                    <span *ngIf="!loadingData.startLoadingData">Please add some...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer" style="padding: 5px !important;">
+                        <div class="row" style="margin: 0px !important;">
+                            <div class="col-6 align-self-end" style="padding: 0px !important;">
+                                <i class="fa fa-square" style="color: yellow;"></i>&nbsp;<span style="color: yellow;">LONI</span>,&nbsp;
+                                <i class="fa fa-square" style="color: red;"></i>&nbsp;<span style="color: red;">KANDLA</span>,&nbsp;
+                                <i class="fa fa-square" style="color: black;"></i>&nbsp;<span style="color: black;">TUTICORIN</span>,&nbsp;
+                                <i class="fa fa-square" style="color: green;"></i>&nbsp;<span style="color: green;">JNPT</span>,
+                                <span style="color: green;">MSPL</span>,&nbsp;
+                                <i class="fa fa-square" style="color: blue;"></i>&nbsp;<span style="color: blue;">In
+                                    Plant(Pre, Plant, Post)</span>&nbsp;
+                            </div>
+                            <div class="col-4 no-padding"></div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="row" style="padding: 20px;">
+          <div class="col-12 text-center">
+          </div>
+        </div> -->
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header" style="padding: 5px !important;">
+                        Total Bulker Required In Month of {{currenMonthName}} : {{((bulkerData[0].kslk_supply + bulkerData[0].lnj_supply) - (bulkerData[0].lnj_plantsupply + bulkerData[0].kslk_plantsupply))/34 | number:'1.0-0'}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-4">
+                <div class="row" style="margin: 0;">
+                    <div class="col-12" style="padding: 0;">
+                        <div class="card">
+                            <div class="card-header" style="padding: 5px !important;">
+                                BOBSN Supply
+                            </div>
+                            <div class="card-body" style="padding: 0px !important; margin: 5px !important;">
+                                <div class="row">
+                                    <div class="col-12" *ngIf="!loadingData.startLoadingPlantStatus" style="padding: 0px !important;">
+                                        <app-chart-chartering [chartData]="chartsData.avgpreberthing?.data" [chartLabels]="chartsData.
+                  avgpreberthing?.labels" [chartType]="chartsData.avgpreberthing?.chartType" [legend]="chartsData.avgpreberthing?.chartLegend">
+                                        </app-chart-chartering>
+                                    </div>
+                                    <div class="col-12 text-center" *ngIf="loadingData.startLoadingPlantStatus">
+                                        <span>Loading Data...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin: 0;">
+                    <div class="col-12" style="padding: 0;">
+                        <div class="card">
+                            <div class="card-header" style="padding: 5px !important;">
+                                BOBSN Supply
+                            </div>
+                            <div class="card-body" style="padding: 0px !important; margin: 5px !important;">
+                                <div class="row">
+                                    <div class="col-12" *ngIf="!loadingData.startLoadingBTAPSupply" style="padding: 0px !important;">
+                                        <!-- <app-chart-chartering [chartData]="chartsData.btapsupply?.data" [chartLabels]="chartsData.
+                  btapsupply?.labels" [chartType]="chartsData.btapsupply?.chartType"
+                      [legend]="chartsData.btapsupply?.chartLegend">
+                    </app-chart-chartering> -->
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>BOBSN Name</th>
+                                                    <th>BOBSN Supply</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let btap of btapSupplyData; let i = index;">
+                                                    <td>{{btap.btap_name}}</td>
+                                                    <td>{{btap.btap_supply}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-12 text-center" *ngIf="loadingData.startLoadingBTAPSupply">
+                                        <span>Loading Data...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="card">
+                    <div class="card-header" style="padding: 5px !important;">
+                        Plant-BOBSN Supply
+                    </div>
+                    <div class="card-body" style="padding: 0px !important; margin: 5px !important;">
+                        <div class="row">
+                            <div class="col-12" *ngIf="!loadingData.startLoadingPlantSupply" style="padding: 0px !important; overflow-x: auto; height: 533px;">
+                                <!-- <app-chart-chartering [chartData]="chartsData.plantbtapsupply?.data" [chartLabels]="chartsData.
+            plantbtapsupply?.labels" [chartType]="chartsData.plantbtapsupply?.chartType"
+                  [legend]="chartsData.plantbtapsupply?.chartLegend">
+                </app-chart-chartering> -->
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>BOBSN Name</th>
+                                            <th>Plant Name</th>
+                                            <th>Entry</th>
+                                            <th>Exit</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let entry of plantSupplyData; let i = index;">
+                                            <td>{{entry.btap_name}}</td>
+                                            <td>{{entry.plant_name}}</td>
+                                            <td>{{entry.plant_entry_date}}</td>
+                                            <td>{{entry.plant_exit_date}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-12 text-center" *ngIf="loadingData.startLoadingPlantSupply">
+                                <span>Loading Data...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<ng-template #preDispatchFirstTimeDataEntryWarning let-modal>
+    <div class="modal-body">
+        Existing data will be lost!!!
+    </div>
+    <div class="modal-footer px-2">
+        <div class="row" style="width: 100%;">
+            <div class="col-md-6 pl-2 pr-2">
+                <button type="button" class="btn btn-outline-danger btn-sm btn-block" (click)="modal.close('Save click')">Cancel</button>
+            </div>
+            <div class="col-md-6 pl-2 pr-2">
+                <button type="button" class="btn btn-outline-success btn-sm btn-block" (click)="openPreDispatchFirstTimeData();modal.close('Save click')">Continue</button>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #preDispatchFirstTimeDataEntry let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Pre Dispatch Data Popup</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-12">
+                <form>
+                    <!-- <div class="form-row">
+            <div class="form-group col-md-3">
+              <label for="s_date">Start Date</label>
+              <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd" name="s_date" [(ngModel)]="delayForm.s_date.date"
+                  ngbDatepicker #s_date="ngbDatepicker" positionTarget="buttonEl" aria-describedby="s_date-addon">
+                <div class="input-group-append">
+                  <button #buttonEl class="btn btn-outline-secondary" id="s_date-addon" (click)="s_date.toggle()"
+                    type="button">
+                    <i class="fa fa-calendar"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-md-3">
+              <label for="s_time">Start Time</label>
+              <input type="time" name="s_time" id="s_time" class="form-control" step="1"
+                [(ngModel)]="delayForm.s_date.time" disabled>
+            </div>
+          </div> -->
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="lnj_jsg">LONI-JNPT (Tons)</label>
+                            <input type="number" min="0" name="lnj_jsg" class="form-control" placeholder="" id="lnj_jsg" [(ngModel)]="delayForm.lnj_jsg" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="kslk_jsg">KANDLA-JNPT (Tons)</label>
+                            <input type="number" min="0" name="kslk_jsg" class="form-control" placeholder="" id="kslk_jsg" [(ngModel)]="delayForm.kslk_jsg" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="lnj_balco">LONI-MSPL (Tons)</label>
+                            <input type="number" min="0" name="lnj_balco" class="form-control" placeholder="" id="lnj_balco" [(ngModel)]="delayForm.lnj_balco" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="kslk_balco">KANDLA-MSPL (Tons)</label>
+                            <input type="number" min="0" name="kslk_balco" class="form-control" placeholder="" id="kslk_balco" [(ngModel)]="delayForm.kslk_balco" required>
+                        </div>
+                    </div>
+                    <label for="delay_ui_json">BOBSN Statuses</label>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="no_of_btap">No of BOBSN</label>
+                                    <input type="number" readonly min="0" name="no_of_btap" class="form-control" id="no_of_btap" placeholder="" [(ngModel)]="delayForm.run_delay_json.no_of_btap" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <!-- Table -->
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>BOBSN Name</th>
+                                                <th>Destination</th>
+                                                <th>BOBSN Category</th>
+                                                <th>Load Status</th>
+                                                <th>Time to Reach(hours)</th>
+                                                <th>TXR</th>
+                                                <th>Remove</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let form of delayForm.run_delay_json.btap_info; let i = index;">
+                                                <td><input type="text" class="form-control cus-in" [name]="'btap_name_'+i" [(ngModel)]="form.btap_name" placeholder="BTAP Name">
+                                                </td>
+                                                <td>
+                                                    <select [id]="'destination_'+i" class="form-control" [name]="'destination_'+i" [(ngModel)]="form.destination">
+                                                        <option *ngFor="let dest of destinationArray; index as i1;"
+                                                            [ngValue]="dest.code">
+                                                            {{dest.name}}
+                                                        </option>
+                                                    </select>
+                                                </td>
+                                                <td><input type="text" readonly min="0" class="form-control cus-in" [name]="'btap_category_'+i" [(ngModel)]="form.btap_category" placeholder="">
+                                                </td>
+                                                <!-- <td *ngIf="(i+1)>originBtap"><input type="text" min="0" class="form-control cus-in" [name]="'btap_category_'+i" [(ngModel)]="form.btap_category" placeholder="">
+                                                </td> -->
+                                                <td>
+                                                    <select [id]="'load_status_'+i" class="form-control" [name]="'load_status_'+i" [(ngModel)]="form.load_status">
+                                                        <option *ngFor="let load of delayLoaded; index as i1;"
+                                                            [ngValue]="load.value">
+                                                            {{load.name}}
+                                                        </option>
+                                                    </select>
+                                                </td>
+                                                <td><input type="number" min="0" class="form-control cus-in" [name]="'tat_'+i" [(ngModel)]="form.tat" placeholder="">
+                                                </td>
+                                                <td>
+                                                    <div class="input-group">
+                                                        <input class="form-control" placeholder="yyyy-mm-dd" name="txr{{i}}" [(ngModel)]="form.txr" ngbDatepicker #txr="ngbDatepicker" [minDate]="{year: getCurrentYear(), month:
+                              getCurrentMonth(), day: 1}" [maxDate]="{year: getCurrentYear(), month: getCurrentMonth(),
+                              day: 31}" positionTarget="buttonEl" aria-describedby="txr-addon">
+                                                        <div class="input-group-append">
+                                                            <button #buttonEl class="btn btn-outline-secondary" id="txr-addon" (click)="txr.toggle()" type="button">
+                                                                <i class="fa fa-calendar"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td><button class="btn btn-danger btn-block btn-sm" (click)="removeBtap(i);">X</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <button class="btn btn-vedanta" (click)="addBtap()" style="width: 100px;">
+                                        +
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-8"></div>
+                        <div class="form-group col-md-4 text-right" style="padding-top: 10px;">
+                            <button class="btn-primary mainbutton" (click)="submitPreDisplayData()" type="submit">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<!-- <ng-template #manualDelayPopup let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add Manual Delay</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-12">
+        <form>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="reason_for_delay">Reason For Delay</label>
+              <select id="reason_for_delay" class="form-control" name="reason_for_delay"
+                [(ngModel)]="delayForm.reason_for_delay">
+                <option *ngFor="let reason of delayReasons; index as i1;" [ngValue]="reason.reason">
+                  {{reason.reason}}
+                </option>
+              </select>
+            </div>
+            <div class="col-md-6"></div>
+          </div>
+          <label for="delay_ui_json">Delay
+            UI JSON</label>
+          <div class="card">
+            <div class="card-body">
+              <div class="form-row">
+                <div class="form-group col-md-3"><label for="plant_name">Plant Name</label>
+                  <input class="form-control" placeholder="" type="text" id="plant_name" name="plant_name"
+                    [(ngModel)]="delayForm.delay_ui_json.plant_name.name" disabled>
+                </div>
+                <div class="form-group col-md-3"><label for="u_btap_name">BTAP Name</label>
+                  <select id="u_btap_name" class="form-control" name="u_btap_name"
+                    [(ngModel)]="delayForm.delay_ui_json.u_btap_name" (ngModelChange)="delayOnChange($event)">
+                    <option *ngFor="let plant of btapNames; index as i1;" [ngValue]="plant[0]">
+                      {{plant[0]}}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group col-md-3"><label for="u_load_s">Load</label>
+                  <select id="u_load_s" class="form-control" name="u_load_s"
+                    [(ngModel)]="delayForm.delay_ui_json.u_load_s" (ngModelChange)="delayOnChange($event)">
+                    <option *ngFor="let load of delayLoad; index as i1;" [ngValue]="load.value">
+                      {{load.name}}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group col-md-3" *ngIf="dispatchIndividualData.length === 0"><label
+                    for="delay_destination">Destination</label>
+                  <div id="delay_destination">
+                    Data will appear here
+                  </div>
+                </div>
+                <div class="form-group col-md-3" *ngIf="dispatchIndividualData.length !== 0"><label
+                    for="delay_destination">Destination</label>
+                  <select id="delay_destination" class="form-control" name="delay_destination"
+                    [(ngModel)]="delayForm.delay_ui_json.delay_destination">
+                    <option *ngFor="let load of dispatchIndividualData; index as i1;" [ngValue]="load">
+                      {{load[1]}} : {{load[0]}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6"><label for="u_dealy_hour">Delay Hour</label>
+                  <input type="text" class="form-control" placeholder="" type="number" min="0" id="u_dealy_hour"
+                    name="u_dealy_hour" [(ngModel)]="delayForm.delay_ui_json.u_dealy_hour"></div>
+                <div class="form-group col-md-3"><label for="c_date">Current Date</label>
+                  <div class="input-group">
+                    <input class="form-control" placeholder="yyyy-mm-dd" name="c_date"
+                      [(ngModel)]="delayForm.delay_ui_json.c_date.date" ngbDatepicker #c_date="ngbDatepicker"
+                      positionTarget="buttonEl" aria-describedby="c_date-addon">
+                    <div class="input-group-append">
+                      <button #buttonEl class="btn btn-outline-secondary" id="c_date-addon" (click)="c_date.toggle()"
+                        type="button">
+                        <i class="fa fa-calendar"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group col-md-3"><label for="c_time">Current Time</label>
+                  <ngb-timepicker id="c_time" name="c_time" [(ngModel)]="delayForm.delay_ui_json.c_date.time"
+                    [seconds]="true" [meridian]="true" [spinners]="false">
+                  </ngb-timepicker>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-danger" (click)="modal.close('Cancel click')">Cancel</button>
+    <button type="button" class="btn btn-outline-success"
+      (click)="submitDelayForm();modal.close('Save click')">Submit</button>
+  </div>
+</ng-template> -->
+
+<!-- <ng-template #customSuccessfulModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Confirmation</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body" style="padding: 0px !important; margin: 5px !important;">
+                        <div class="table-div table-responsive custom-table">
+                            <div class="row justify-content-center" style="margin:0" *ngIf="landingPlanningResults.length > 0">
+                                <div class="header">
+                                    <div></div>
+                                    <div *ngFor="let key of JSObject.keys(landingPlanningResults[0]);let i = index"> {{key}}</div>
+                                </div>
+                                <div class="bodyvalue" *ngFor="let item of  landingPlanningResults;let i = index">
+                                    <div>{{landing_cKey[i]}}</div>
+                                    <div *ngFor="let key of JSObject.keys(item) ;let j = index" id="{{j+1}}" class="mainsec" [ngStyle]="{'width':(((item[JSObject.keys(item)[j]]['remainingTimeofTrip'] /24) * 41 ) + (item[JSObject.keys(item)[j+1]] ? ((item[JSObject.keys(item)[j+1]]['remainingTimeofTrip'] /24) * 41 ) : 0))+'px' }">
+                                        <div class="title" *ngIf="j !== 0">
+                                            {{ item[JSObject.keys(item)[j]]['destination']+item[JSObject.keys(item)[j]]['next_destination'] == (item[JSObject.keys(item)[j+1]]!=undefined ? item[JSObject.keys(item)[j+1]]['destination'] : "")+(item[JSObject.keys(item)[j+1]]!=undefined ? item[JSObject.keys(item)[j+1]]['next_destination']:
+                                            "") ? '&nbsp;' : item[JSObject.keys(item)[j]]['destination']==undefined && item[JSObject.keys(item)[j]]['next_destination'] == undefined ? '-' : item[JSObject.keys(item)[j]]['destination']+"-"+item[JSObject.keys(item)[j]]['next_destination']}}
+                                        </div>
+                                        <div *ngFor="let xx of item[JSObject.keys(item)[j]]['summery']" [ngClass]="(xx['depot']=='pre_load' || xx['depot']=='plant_load' || xx['depot']=='post_load')?'plantTimePrePost':item[JSObject.keys(item)[j]]['destination']" [ngStyle]="{'width':((( xx['part'])  )  )+'%'}"
+                                            (click)="openPopup(i, cKey[i], item, j, item[JSObject.keys(item)[j]], item[JSObject.keys(item)[j+1]],
+item[JSObject.keys(item)[j-1]])"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center" style="margin:0" *ngIf="landingPlanningResults.length <= 0">
+                                <div class="col-12 text-center">
+                                    <span *ngIf="loadingData.startLoadingData">Loading Data... </span> <br>
+                                    <span *ngIf="!loadingData.startLoadingData">No Data available for this month in database.</span><br>
+                                    <span *ngIf="!loadingData.startLoadingData">Please add some...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer" style="padding: 5px !important;">
+                        <div class="row" style="margin: 0px !important;">
+                            <div class="col-4 align-self-end" style="padding: 0px !important;">
+                                <i class="fa fa-square" style="color: yellow;"></i>&nbsp;<span style="color: yellow;">LNJ</span>,&nbsp;
+                                <i class="fa fa-square" style="color: red;"></i>&nbsp;<span style="color: red;">KSLK</span>,&nbsp;
+                                <i class="fa fa-square" style="color: black;"></i>&nbsp;<span style="color: black;">TXR</span>,&nbsp;
+                                <i class="fa fa-square" style="color: green;"></i>&nbsp;<span style="color: green;">JSG</span>,
+                                <span style="color: green;">BALCO</span>,&nbsp;
+                                <i class="fa fa-square" style="color: blue;"></i>&nbsp;<span style="color: blue;">In Plant(Pre, Plant, Post)</span>&nbsp;
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                Data has been submitted successfully.
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="row">
+            <div class="col-md-12">
+                Do you want to save it?
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <button type="button" class="btn btn-outline-success btn-block" (click)="submitConfirmDelay('yes');modal.close('Save click')">Yes</button>
+            </div>
+            <div class="col-md-6">
+                <button type="button" class="btn btn-outline-danger btn-block" (click)="submitConfirmDelay('no');modal.close('Save click')">No</button>
+            </div>
+        </div>
+    </div>
+</ng-template> -->
+
+<ng-template #customSuccessfulModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Confirmation</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body" style="padding: 0px !important; margin: 5px !important;">
+                        <div class="table-div table-responsive custom-table">
+                            <div class="row justify-content-center" style="margin:0" *ngIf="landingPlanningResults.length > 0">
+                                <table class="table table-bordered table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>BOBSN Name</th>
+                                            <th>Next Destination</th>
+                                            <th>Status</th>
+                                            <th>Remaining Time of Trip(Hrs)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let btap of landingPlanningResults; let i = index;">
+                                            <td>{{btap.BTAP_Name}}</td>
+                                            <td>{{btap.next_destination}}</td>
+                                            <td>{{btap.BTAP_status}}</td>
+                                            <td>{{btap.remainingTimeofTrip}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row justify-content-center" style="margin:0" *ngIf="landingPlanningResults.length <= 0">
+                                <div class="col-12 text-center">
+                                    <span *ngIf="loadingData.startLoadingData">Loading Data... </span> <br>
+                                    <span *ngIf="!loadingData.startLoadingData">No Data available for this month in
+                                        database.</span><br>
+                                    <span *ngIf="!loadingData.startLoadingData">Please add some...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                Data has been submitted successfully.
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="row">
+            <div class="col-md-12">
+                Do you want to save it?
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <button type="button" class="btn btn-outline-success btn-block" (click)="submitConfirmDelay('yes');modal.close('Save click')">Yes</button>
+            </div>
+            <div class="col-md-6">
+                <button type="button" class="btn btn-outline-danger btn-block" (click)="submitConfirmDelay('no');modal.close('Save click')">No</button>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+
+<ng-template #changeDelayInput let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Change Manual Delay</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-12">
+                <form>
+
+                    <label for="run_delay_json">Run
+                        Delay JSON</label>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="kslk_balco">BOBSN to Correct</label>
+                                    <input type="number" min="0" readonly="readonly" class="form-control" placeholder="" type="text" id="no_of_btap" name="no_of_btap" [(ngModel)]="delayForm.run_delay_json.no_of_btap">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <!-- Table -->
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>BOBSN Name</th>
+                                                <th>Destination</th>
+                                                <th>Load Status</th>
+                                                <th>Turn Around Time</th>
+                                                <!-- <th>Remove</th> -->
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let form of popupValue; let i = index;">
+                                                <td><input type="text" readonly="readonly" class="form-control cus-in" [name]="'btap_name_'+i" [(ngModel)]="form.BTAP_Name" placeholder="BTAP Name">
+                                                </td>
+                                                <td>
+                                                    <select [id]="'destination_'+i" class="form-control" [name]="'destination_'+i" [(ngModel)]="form.next_destination_fullname">
+                                                        <option *ngFor="let dest of destinationArray; index as i1;"
+                                                            [ngValue]="dest.code">
+                                                            {{dest.name}}
+                                                        </option>
+                                                    </select>
+                                                </td>
+
+                                                <td>
+                                                    <select [id]="'load_status_'+i" class="form-control" [name]="'load_status_'+i" [(ngModel)]="form.status">
+                                                        <option *ngFor="let load of delayLoaded; index as i1;"
+                                                            [ngValue]="load.value">
+                                                            {{load.name}}
+                                                        </option>
+                                                    </select>
+                                                </td>
+                                                <td><input type="number" min="0" class="form-control cus-in" [name]="'tat_'+i" [(ngModel)]="form.remainingTimeofTrip" placeholder="">
+                                                </td>
+
+
+                                            </tr>
+                                        </tbody>
+                                        <!-- <tbody>
+                                            <tr *ngFor="let form of delayForm.run_delay_json.btap_info; let i = index;">
+                                                <td><input type="text" class="form-control cus-in"
+                                                        [name]="'btap_name_'+i" [(ngModel)]="form.btap_name"
+                                                        placeholder="BTAP Name">
+                                                </td>
+                                                <td>
+                                                    <select [id]="'destination_'+i" class="form-control"
+                                                        [name]="'destination_'+i" [(ngModel)]="form.destination">
+                                                        <option *ngFor="let dest of destinationArray; index as i1;"
+                                                            [ngValue]="dest.code">
+                                                            {{dest.name}}
+                                                        </option>
+                                                    </select>
+                                                    
+                                                </td>
+                                                <td><input type="number" min="0" class="form-control cus-in"
+                                                        [name]="'tat_'+i" [(ngModel)]="form.tat"
+                                                        placeholder="Turn Around Time">
+                                                </td>
+                                                <td><button class="btn btn-danger btn-block btn-sm"
+                                                        (click)="removeBtap(i);">X</button></td>
+                                            </tr>
+                                        </tbody> -->
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <button class="btn btn-vedanta" (click)="addBtap()" style="width: 100px;">
+                                        +
+                                    </button>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" (click)="modal.close('Cancel click')">Cancel</button>
+        <button type="button" class="btn btn-outline-success" (click)="submitChangeDelayForm();modal.close('Save click')">Submit</button>
+    </div>
+</ng-template>
+
+<ng-template #successfulSubmit let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Confirmation</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-12">
+                Data has been submitted successfully.
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="reloadPage();modal.close('Save click')">OK</button>
+    </div>
+</ng-template>
+
+<ng-template #ErrorModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Confirmation</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-12">
+                There was an error. Please retry...
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">OK</button>
+    </div>
+</ng-template>
+
+<ng-template #detailsModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{popupValue[0]['Datetime']}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="updateModelData(); modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div *ngFor="let item of popupValue ; let j = index">
+            <div *ngIf="j==0">
+                <div class="row">
+                    <div class="col-md-12 mainsec ">
+                        <div *ngFor="let xx of popupValue[j]['summery']" [ngClass]="(xx['depot']=='pre_load' || xx['depot']=='plant_load' || xx['depot']=='post_load')?'plantTimePrePost':popupValue[j]['destination']" [ngStyle]="{'width':((( xx['part'])  )  )+'%'}"></div>
+                        <!-- <div class="{{popupValue[j]['destination']}} float-left" [ngStyle]="{'width':((((popupValue[j]['remainingTimeofTrip'] /24) * 41 ) / (((popupValue[j]['remainingTimeofTrip'] /24) * 41 ) + (popupValue[j+1] ? ((popupValue[j+1]['remainingTimeofTrip'] /24) * 41 ) : 0)))*100)+'%' }">
+                        </div>
+                        <div class="{{popupValue[j]['next_destination']}} float-left" [ngStyle]="{'width':(((popupValue[j+1] ? ((popupValue[j+1]['remainingTimeofTrip'] /24) * 41 ) : 0) / (((popupValue[j]['remainingTimeofTrip'] /24) * 41 ) + (popupValue[j+1] ? ((popupValue[j+1]['remainingTimeofTrip'] /24) * 41 ) : 0)))*100)+'%' }">
+                        </div> -->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="flex">
+                            <span>Current Destination : </span>
+                            <span style="float: right;">{{popupValue[j]['destination']}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="flex" *ngIf="popupValue[j]['destination']!=popupValue[j]['next_destination']">
+                            <span>Next Destination : </span>
+                            <span style="float: right;">{{popupValue[j]['next_destination']}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="flex">
+                            <span>Remaining Time (in Hr) : </span>
+                            <span style="float: right;">{{popupValue[j]['remainingTimeofTrip']}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="flex">
+                            <span>Status : </span>
+                            <span style="float: right;">{{popupValue[j]['status']}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row pt-3 pl-3 pr-3">
+            <div style="width:100%">Hold</div>
+            <div class="box-body" style="width:100%">
+                <table id="tbl-upload" class="table table-bordered table-sm" *ngIf="!loadingData.holdStatus">
+                    <tbody>
+                        <tr class="active">
+                            <th scope="col">BOBSN Name</th>
+                            <th scope="col">Destination</th>
+                            <th scope="col">Hold Time</th>
+                        </tr>
+                        <tr *ngFor="let a of holdStatus; let i = index;">
+                            <td>
+                                {{a.btap_name}}
+                            </td>
+                            <td>
+                                {{a.current_location}}
+                            </td>
+                            <td>
+                                {{a.Diff}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div *ngIf="loadingData.holdStatus">
+                    Loading Hold Status...
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row pt-3 pl-3 pr-3">
+      <div class="col-md-12 text-center">
+        <button type="button" class="btn btn-sm"
+          [ngClass]="{'btn-primary': !addDelayShown, 'btn-danger': addDelayShown}" (click)="toggleAddDelay();">
+          <span *ngIf="!addDelayShown">Add Delay</span>
+          <span *ngIf="addDelayShown">Cancel</span>
+        </button>
+      </div>
+    </div> -->
+        <div class="row pt-3 pl-3 pr-3">
+            <div class="col-md-12 pl-0 pr-0">
+                <form>
+                    <label for="delay_ui_json">Delay
+                        UI JSON</label>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-3"><label for="plant_name">Plant Name</label>
+                                    <input class="form-control" placeholder="" type="text" id="plant_name" name="plant_name" [(ngModel)]="delayForm.delay_ui_json.plant_name.name" disabled>
+                                </div>
+                                <div class="form-group col-md-3"><label for="u_btap_name">BOBSN Name</label>
+                                    <!-- <select id="u_btap_name" class="form-control" name="u_btap_name"
+                    [(ngModel)]="delayForm.delay_ui_json.u_btap_name" (ngModelChange)="delayOnChange($event)">
+                    <option *ngFor="let plant of btapNames; index as i1;" [ngValue]="plant[0]">
+                      {{plant[0]}}
+                    </option>
+                  </select> -->
+                                    <input class="form-control" placeholder="" type="text" id="u_btap_name" name="u_btap_name" [(ngModel)]="delayForm.delay_ui_json.u_btap_name" disabled>
+                                </div>
+                                <div class="form-group col-md-3"><label for="u_load_s">Load</label>
+                                    <select id="u_load_s" class="form-control" name="u_load_s" [(ngModel)]="delayForm.delay_ui_json.u_load_s" (ngModelChange)="delayOnChange($event)">
+                                        <option *ngFor="let load of delayLoad; index as i1;" [ngValue]="load.value">
+                                            {{load.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3" *ngIf="dispatchIndividualData.length === 0"><label for="delay_destination">Destination</label>
+                                    <div id="delay_destination">
+                                        Data will appear here
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3" *ngIf="dispatchIndividualData.length !== 0"><label for="delay_destination">Destination</label>
+                                    <select id="delay_destination" class="form-control" name="delay_destination" [(ngModel)]="delayForm.delay_ui_json.delay_destination">
+                                        <option *ngFor="let load of dispatchIndividualData; index as i1;"
+                                            [ngValue]="load">
+                                            {{load[1]}} : {{load[0]}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    <label for="reason_for_delay">Reason For Delay</label>
+                                    <select id="reason_for_delay" class="form-control" name="reason_for_delay" [(ngModel)]="delayForm.reason_for_delay">
+                                        <option *ngFor="let reason of delayReasons; index as i1;"
+                                            [ngValue]="reason.reason">
+                                            {{reason.reason}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3"><label for="u_dealy_hour">Delay Hour</label>
+                                    <input type="text" class="form-control" placeholder="" type="number" min="0" id="u_dealy_hour" name="u_dealy_hour" [(ngModel)]="delayForm.delay_ui_json.u_dealy_hour">
+                                </div>
+                                <div class="form-group col-md-3"><label for="c_date">Current Date</label>
+                                    <!-- <div class="input-group">
+                    <input class="form-control" placeholder="yyyy-mm-dd" name="c_date"
+                      [(ngModel)]="delayForm.delay_ui_json.c_date.date" ngbDatepicker #c_date="ngbDatepicker"
+                      positionTarget="buttonEl" aria-describedby="c_date-addon">
+                    <div class="input-group-append">
+                      <button #buttonEl class="btn btn-outline-secondary" id="c_date-addon" (click)="c_date.toggle()"
+                        type="button">
+                        <i class="fa fa-calendar"></i>
+                      </button>
+                    </div>
+                  </div> -->
+                                    <input type="date" class="form-control" placeholder="yyyy-mm-dd" name="c_date" [(ngModel)]="delayForm.delay_ui_json.c_date.date" disabled>
+                                </div>
+                                <div class="form-group col-md-3"><label for="c_time">Current Time</label>
+                                    <!-- <ngb-timepicker id="c_time" name="c_time" [(ngModel)]="delayForm.delay_ui_json.c_date.time"
+                    [seconds]="true" [meridian]="true" [spinners]="false">
+                  </ngb-timepicker> -->
+                                    <input type="time" name="c_time" id="c_time" class="form-control" step="1" [(ngModel)]="delayForm.delay_ui_json.c_date.time" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-success" (click)="submitDelayForm();modal.close('Save click')">Submit</button>
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Cancel click')">Dismiss</button>
+    </div>
+</ng-template>

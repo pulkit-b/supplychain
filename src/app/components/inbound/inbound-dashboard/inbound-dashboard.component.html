@@ -1,0 +1,470 @@
+<app-navbar [open]="open" (event)="open=$event"></app-navbar>
+
+<div class="mainpanel">
+    <div class="table-div table-responsive">
+        <div id="reportContainer" [ngStyle]="{'height':  windowHeight}"></div>
+    </div>
+    <!--     
+    <div class="mainpanel_rightsect" *ngIf="fulldata">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-3">
+                    <div class="card">
+                        <div class="card-header">Port Stock</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <span class="col-6 p-0"></span>
+                                <span class="col-3">P1</span>
+                                <span class="col-3">P2</span>
+                            </div>
+                            <div class="row">
+                                <span class="col-6 p-0">GPL</span>
+                                <span class="col-3">{{portstockdata.Stock_Gpl_P1}}</span>
+                                <span class="col-3">{{portstockdata.Stock_Gpl_P2}}</span>
+                            </div>
+                            <div class="row">
+                                <span class="col-6 p-0">KSPL</span>
+                                <span class="col-3">{{portstockdata.Stock_Kspl_P1}}</span>
+                                <span class="col-3">{{portstockdata.Stock_Kspl_P2}}</span>
+                            </div>
+                            <div class="row">
+                                <span class="col-6 p-0">Vessel Stock</span>
+                                <span class="col-3">{{portstockdata.vessel_stock_p1}}</span>
+                                <span class="col-3">{{portstockdata.vessel_stock_p2}}</span>
+                            </div>
+                            <div class="row">
+                                <span class="col-6 p-0">Total</span>
+                                <span class="col-3">{{portstockdata.total_p1}}</span>
+                                <span class="col-3">{{portstockdata.total_p2}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="card">
+                        <div class="card-header">In Transit Stock</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <span class="col-6 p-0"></span>
+                                <span class="col-3">P1</span>
+                                <span class="col-3">P2</span>
+                            </div>
+                            <div class="row">
+                                <span class="col-6 p-0">Bulker</span>
+                                <span class="col-3">{{transitdata.Bulker_P1}}</span>
+                                <span class="col-3">{{transitdata.Bulker_P2}}</span>
+                            </div>
+                            <div class="row">
+                                <span class="col-6 p-0 ">Truck</span>
+                                <span class="col-3">{{transitdata.Truck_P1}}</span>
+                                <span class="col-3">{{transitdata.Truck_P2}}</span>
+                            </div>
+                            <div class="row">
+                                <span class="col-6 p-0 ">BTAP</span>
+                                <span class="col-3">{{transitdata.BTAP_P1}}</span>
+                                <span class="col-3">{{transitdata.BTAP_P2}}</span>
+                            </div>
+                            <div class="row">
+                                <span class="col-6 p-0">Total</span>
+                                <span class="col-3">{{transitdata.Truck_P1}}</span>
+                                <span class="col-3">{{transitdata.Truck_P1}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="card">
+                        <div class="card-header">Days</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <span class="col-9 p-0">P1 Days</span>
+                                <span class="col-3">{{P1P2days.P1_days}}</span>
+                            </div>
+                            <div class="row">
+                                <span class="col-9 p-0">P2 Days</span>
+                                <span class="col-3">{{P1P2days.P2_days}}</span>
+                            </div>
+                            <div class="row">
+                                <span class="col-9 p-0">Complex Days</span>
+                                <span class="col-3">{{P1P2days.complex_days}}</span>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-2">
+                    <div class="card">
+                        <div class="card-header">Consumption</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <span class="col-6 p-0">P1</span>
+                                <span class="col-6">{{consumption.P1_Consumption}}</span>
+                            </div>
+                            <div class="row">
+                                <span class="col-6 p-0">P2</span>
+                                <span class="col-6">{{consumption.P2_Consumption}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="card">
+                        <div class="card-header">Plant Stock</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <span class="col-6 p-0">Actual</span>
+                                <span class="col-6  p-0">{{plantstock.Actual_Stock}}</span>
+                            </div>
+                            <div class="row">
+                                <span class="col-6 p-0">Planned</span>
+                                <span class="col-6  p-0">{{plantstock.Planned_Stock}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="btap">
+                <div class="row px-2">
+                    <div class="col-6 ">
+                        <div style="text-align: center;border: 2px solid black">
+                            <h4>BTAP Status</h4>
+                        </div>
+                        <div class="row" style="padding: 15px">
+                            <div class="col-1" id="rectangle" style="background-color: #92D050;"></div>
+                            <span class="col-3" style="margin-left: 5px"> Empty Rake </span>
+                            <div class="col-2"></div>
+                            <div class="col-1" id="rectangle" style="background-color:#FF0000; "></div>
+                            <span class="col-3" style="margin-left: 5px"> Loaded Rake </span>
+                        </div>
+
+                        <table class="tableBtap">
+                            <thead>
+                                <tr>
+                                    <th>Lanjigarh <span *ngIf="lengthOfKSLKValuesList" class="float-right">{{btapinlnj}}</span></th>
+                                    <th>KLSK <span *ngIf="lengthOfKSLKValuesList" class="float-right">{{btapinkskl}}</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="tablediv" *ngFor="let lnj of LNJValuesList;let lnjKey of LNJKeysList">
+                                            <div *ngIf="lnj.current_station=='Lanjigarh Road'">
+                                                <div class="stationName">{{lnj.current_station}}</div>
+                                                <div class="stationValue">{{getKeyByValue(lnj.current_station)}}
+                                                    <div id="rectangle" [ngStyle]="{'background-color':lnj.load_status === 'L' ? '#92D050' : '#FF0000' }">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </td>
+                                    <td>
+                                        <div class="tablediv" *ngFor="let kskl of KSLKValuesList;let lnjKey of KSLKValuesList">
+                                            <div *ngIf="kskl.current_station=='Lanjigarh Road'">
+                                                <div class="stationName">{{kskl.current_station}}</div>
+                                                <div class="stationValue">{{getKeyByValue(kskl.current_station)}}
+                                                    <div id="rectangle" [ngStyle]="{'background-color':lnj.load_status === 'L' ? '#92D050' : '#FF0000' }">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>Transit <span *ngIf="lengthOfLNJValuesList" class="float-right">{{transitlnj}}</span></td>
+                                    <td>Transit <span *ngIf="lengthOfLNJValuesList" class="float-right">{{transitkskl}}</span></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="tablediv" *ngFor="let lnj of LNJValuesList;let lnjKey of LNJKeysList">
+                                            <div *ngIf="lnj.current_station!='Lanjigarh Road' && lnj.current_station!='Brundamal '">
+                                                <div class="stationName">{{lnj.current_station}}</div>
+                                                <div class="stationValue">
+                                                    <div id="rectangle" [ngStyle]="{'background-color':lnj.load_status === 'L' ? '#92D050' : '#FF0000' }">
+                                                    </div>
+                                                    {{getKeyByValue(lnj.current_station)}}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </td>
+                                    <td>
+                                        <div class="tablediv" *ngFor="let kslk of KSLKValuesList;let kslkKey of KSLKKeysList">
+                                            <div *ngIf="kslk.current_station!='Kakinada Port' && kslk.current_station!='Brundamal '">
+                                                <div class="stationName">{{kslk.current_station}}</div>
+                                                <div class="stationValue">
+                                                    <div id="rectangle" [ngStyle]="{'background-color':kslk.load_status === 'L' ? '#92D050' : '#FF0000' }">
+                                                    </div>
+                                                    {{getKeyByValue(kslk.current_station)}}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>Jharsuguda <span *ngIf="lengthOfLNJValuesList" class="float-right">{{btapinlnjjharsu}}</span></td>
+                                    <td>Jharsuguda <span *ngIf="lengthOfLNJValuesList" class="float-right">{{btapinkskljharsu}}</span></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="tablediv" *ngFor="let lnj of LNJValuesList;let lnjKey of LNJKeysList;let i = index">
+                                            <div *ngIf="lnj.current_station == 'Brundamal ' ">
+                                                <div class="stationName">{{lnj.current_station}}</div>
+                                                <div class="stationValue">
+                                                    <div id="rectangle" [ngStyle]="{'background-color':lnj.load_status === 'L' ? '#92D050' : '#FF0000' }">
+                                                    </div>
+                                                    {{getKeyByValue(lnj.current_station)}}
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </td>
+                                    <td>
+                                        <div class="tablediv" *ngFor="let kskl of KSLKValuesList;let lnjKey of KSLKValuesList">
+                                            <div *ngIf="kskl.current_station=='Brundamal '">
+                                                <div class="stationName">{{kslk.current_station}}</div>
+                                                <div class="stationValue">
+                                                    <div id="rectangle" [ngStyle]="{'background-color':kskl.load_status === 'L' ? '#92D050' : '#FF0000' }">
+                                                    </div>
+                                                    {{getKeyByValue(kslk.current_station)}}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td> Total Racks in circuit
+                                        <span *ngIf="lengthOfLNJValuesList" class="float-right">{{lengthOfLNJValuesList}}</span> </td>
+
+                                    <td> Total Racks in circuit
+                                        <span *ngIf="lengthOfLNJValuesList" class="float-right">{{lengthOfKSLKValuesList}}</span> </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td colspan="2" class="p-0">
+                                        <table class="tableBtap">
+                                            <tr>
+                                                <td>VIZAG RYD/TXR V1 (TO LNJ) </td>
+                                                <td>TXR</td>
+                                                <td>VIZAG RYD/TXR V9 (TO KLSK)</td>
+                                            </tr>
+                                        </table>
+
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+
+
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <div class="col-6 card p-0">
+                        <div class="card-header">Bulker/Truck Status</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-4 pl-0 pr-1">
+                                    <div class="card">
+                                        <div class="card-header">Bulker and Truck Status/Dispatch A.O.D</div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <span class="col-12">
+                                                        <img class="imagecss" src="/assets/images/bulker.png" />
+                                                </span>
+
+                                            </div>
+                                            <div class="row">
+                                                <span class="col-4 p-1"></span>
+                                                <span class="col-4">P1</span>
+                                                <span class="col-4">P2</span>
+
+                                            </div>
+                                            <div class="row">
+                                                <span class="col-4 p-1">No.</span>
+                                                <span class="col-4 p-1">{{bulkerdispatchaod['Bulker']!=undefined && bulkerdispatchaod['Bulker']['P1']!=undefined ? bulkerdispatchaod['Bulker']['P1'].rec_count:0}}</span>
+                                                <span class="col-4 p-1">{{bulkerdispatchaod['Bulker']!=undefined && bulkerdispatchaod['Bulker']['P2']!=undefined ? bulkerdispatchaod['Bulker']['P2'].rec_count:0}}</span>
+
+                                            </div>
+                                            <div class="row">
+                                                <span class="col-4 p-1">Qty</span>
+                                                <span class="col-4 p-1">{{bulkerdispatchaod['Bulker']!=undefined && bulkerdispatchaod['Bulker']['P1']!=undefined ? bulkerdispatchaod['Bulker']['P1'].Total_Quantity:0}}</span>
+                                                <span class="col-4 p-1">{{bulkerdispatchaod['Bulker']!=undefined && bulkerdispatchaod['Bulker']['P2']!=undefined ? bulkerdispatchaod['Bulker']['P2'].Total_Quantity:0}}</span>
+
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <span class="col-12">
+                                                        <img class="imagecss" src="/assets/images/truck.png" />
+                                                </span>
+
+                                            </div>
+                                            <div class="row">
+                                                <span class="col-4 p-1"></span>
+                                                <span class="col-4">P1</span>
+                                                <span class="col-4">P2</span>
+
+                                            </div>
+                                            <div class="row">
+                                                <span class="col-4 p-1">No.</span>
+                                                <span class="col-4 p-1">{{bulkerdispatchaod['Truck']!=undefined && bulkerdispatchaod['Truck']['P1']!=undefined ? bulkerdispatchaod['Truck']['P1'].rec_count:0}}</span>
+                                                <span class="col-4 p-1">{{bulkerdispatchaod['Truck']!=undefined && bulkerdispatchaod['Truck']['P2']!=undefined ? bulkerdispatchaod['Truck']['P2'].rec_count:0}}</span>
+
+                                            </div>
+                                            <div class="row">
+                                                <span class="col-4 p-1">Qty</span>
+                                                <span class="col-4 p-1">{{bulkerdispatchaod['Truck']!=undefined && bulkerdispatchaod['Truck']['P1']!=undefined ? bulkerdispatchaod['Truck']['P1'].Total_Quantity:0}}</span>
+                                                <span class="col-4 p-1">{{bulkerdispatchaod['Truck']!=undefined && bulkerdispatchaod['Truck']['P2']!=undefined ? bulkerdispatchaod['Truck']['P2'].Total_Quantity:0}}</span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4 px-1">
+                                    <div class="card">
+                                        <div class="card-header">Bulker and Truck Status/Receipt A.O.D</div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <span class="col-12">
+                                                        <img class="imagecss" src="/assets/images/bulker.png" />
+                                                </span>
+
+                                            </div>
+                                            <div class="row">
+                                                <span class="col-4 p-1"></span>
+                                                <span class="col-4 p-1">P1</span>
+                                                <span class="col-4 p-1">P2</span>
+
+                                            </div>
+                                            <div class="row">
+                                                <span class="col-4 p-1">No.</span>
+                                                <span class="col-4 p-1">{{bulkerdispatchreceipt['Bulker']!=undefined ? bulkerdispatchreceipt['Bulker']['PlantNo1']:0}}</span>
+                                                <span class="col-4 p-1">{{bulkerdispatchreceipt['Bulker']!=undefined ? bulkerdispatchreceipt['Bulker']['PlantNo2']:0}}</span>
+
+                                            </div>
+                                            <div class="row">
+                                                <span class="col-4 p-1">Qty</span>
+                                                <span class="col-4 p-1">{{bulkerdispatchreceipt['Bulker']!=undefined ? (bulkerdispatchreceipt['Bulker']['Plant1Qty'] | number: '1.0-0'):0}}</span>
+                                                <span class="col-4 p-1">{{bulkerdispatchreceipt['Bulker']!=undefined ? (bulkerdispatchreceipt['Bulker']['Plant2Qty'] | number: '1.0-0'):0}}</span>
+
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <span class="col-12">
+                                                        <img class="imagecss" src="/assets/images/truck.png" />
+                                                </span>
+
+                                            </div>
+                                            <div class="row">
+                                                <span class="col-4 p-1"></span>
+                                                <span class="col-4 p-1">P1</span>
+                                                <span class="col-4 p-1">P2</span>
+
+                                            </div>
+                                            <div class="row">
+                                                <span class="col-4 p-1">No.</span>
+                                                <span class="col-4 p-1">{{bulkerdispatchreceipt['Truck']!=undefined ? bulkerdispatchreceipt['Truck']['PlantNo1']:0}}</span>
+                                                <span class="col-4 p-1">{{bulkerdispatchreceipt['Truck']!=undefined ? bulkerdispatchreceipt['Truck']['PlantNo2']:0}}</span>
+
+                                            </div>
+                                            <div class="row">
+                                                <span class="col-4 p-1">Qty</span>
+                                                <span class="col-4 p-1">{{bulkerdispatchreceipt['Truck']!=undefined ? (bulkerdispatchreceipt['Truck']['Plant1Qty'] | number: '1.0-0'):0}}</span>
+                                                <span class="col-4 p-1">{{bulkerdispatchreceipt['Truck']!=undefined ? (bulkerdispatchreceipt['Truck']['Plant2Qty'] | number: '1.0-0'):0}}</span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4 pr-0 pl-1">
+                                    <div class="card">
+                                        <div class="card-header">Bulker and Truck Status/Unloaded A.O.D</div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <span class="col-12">
+                                                        <img class="imagecss" src="/assets/images/bulker.png" />
+                                                </span>
+
+                                            </div>
+                                            <div class="row">
+                                                <span class="col-4 p-1"></span>
+                                                <span class="col-4 p-1">P1</span>
+                                                <span class="col-4 p-1">P2</span>
+
+                                            </div>
+                                            <div class="row">
+                                                <span class="col-4 p-1">No.</span>
+                                                <span class="col-4 p-1">{{bulkerdispatchUnload['Bulker']!=undefined ? bulkerdispatchUnload['Bulker']['PlantNo1']:0}}</span>
+                                                <span class="col-4 p-1">{{bulkerdispatchUnload['Bulker']!=undefined ? bulkerdispatchUnload['Bulker']['PlantNo2']:0}}</span>
+
+                                            </div>
+                                            <div class="row">
+                                                <span class="col-4 p-1">Qty</span>
+                                                <span class="col-4 p-1">{{bulkerdispatchUnload['Bulker']!=undefined ? (bulkerdispatchUnload['Bulker']['Plant1Qty'] | number: '1.0-0'):0}}</span>
+                                                <span class="col-4 p-1">{{bulkerdispatchUnload['Bulker']!=undefined ? (bulkerdispatchUnload['Bulker']['Plant2Qty'] | number: '1.0-0'):0}}</span>
+
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <span class="col-12">
+                                                        <img class="imagecss" src="/assets/images/truck.png" />
+                                                </span>
+
+                                            </div>
+                                            <div class="row">
+                                                <span class="col-4 p-1"></span>
+                                                <span class="col-4 p-1">P1</span>
+                                                <span class="col-4 p-1">P2</span>
+
+                                            </div>
+                                            <div class="row">
+                                                <span class="col-4 p-1">No.</span>
+                                                <span class="col-4 p-1">{{bulkerdispatchUnload['Truck']!=undefined ? bulkerdispatchUnload['Truck']['PlantNo1']:0}}</span>
+                                                <span class="col-4 p-1">{{bulkerdispatchUnload['Truck']!=undefined ? bulkerdispatchUnload['Truck']['PlantNo2']:0}}</span>
+
+                                            </div>
+                                            <div class="row">
+                                                <span class="col-4 p-1">Qty</span>
+                                                <span class="col-4 p-1">{{bulkerdispatchUnload['Truck']!=undefined ? (bulkerdispatchUnload['Truck']['Plant1Qty'] | number: '1.0-0'):0}}</span>
+                                                <span class="col-4 p-1">{{bulkerdispatchUnload['Truck']!=undefined ? (bulkerdispatchUnload['Truck']['Plant2Qty'] | number: '1.0-0'):0}}</span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</div>

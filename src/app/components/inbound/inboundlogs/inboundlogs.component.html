@@ -1,0 +1,315 @@
+<app-navbar [open]="open" (event)="open=$event"></app-navbar>
+
+<div class="wrapper">
+    <!-- Sidebar -->
+
+
+    <!-- <app-leftpanel [openValue]="open"></app-leftpanel> -->
+
+
+    <div class="table-div table-responsive">
+        <div id="reportContainer" [ngStyle]="{'height':  windowHeight}"></div>
+        <!-- <iframe src="https://app.powerbi.com/view?r=eyJrIjoiMTgxODllMTEtNWJkNS00NWFmLWJmMTYtZThiZDk2Y2JiMDljIiwidCI6ImU0ZTM0MDM4LWVhMWYtNDg4Mi1iNmU4LWNjZDc3NjQ1OWNhMCJ9" style="border: 0;
+        width: 100%; 
+        float: left;" height="{{windowHeight}}"></iframe> -->
+        <!-- <div class="row" style="margin:0" *ngIf="dbfinaldata.length > 0">
+            <table class="table ">
+                <thead>
+                    <tr>
+                        <td scope="col"></td>
+                        <td scope="col"
+                            *ngFor="let key of JSObject.keys(dbfinaldata[0]?.total_alumina_req);let i = index">
+                            <span *ngIf="key.indexOf('Quarter')>=0">
+                                {{key}}
+                            </span>
+                            <span *ngIf="key.indexOf('Quarter')!=0"> {{key}}</span>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="inputVals" *ngFor="let item of dbfinaldata;let i = index">
+                        <td> {{keysData[i]}}</td>
+                        <td *ngFor="let key of JSObject.keys(item[nlgnlqService.childKey[i]]);let j = index">
+                            <input type="text" name="{{nlgnlqService.childKey[i]}}--{{key}}--{{i}}"
+                                (keyup)="updatevalue($event, key, j, i)" id="{{createId(key, i, j)}}"
+                                readonly="{{nlgnlqService.getTextType(key, i)}}"
+                                value="{{item[nlgnlqService.childKey[i]][key]}}" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="submitBtn"><input type="button" value="submit" (click)="submitData()" /></div>
+        </div>
+        <div class="row" style="margin:0" *ngIf="planningResults.length > 0">
+            <table class="table ">
+                <thead>
+                    <tr>
+                        <td scope="col"></td>
+                        <td scope="col"
+                            *ngFor="let key of JSObject.keys(planningResults[0]?.BTAP_capacity_we_can_get_from_KSPL);let i = index">
+                            <span *ngIf="key.indexOf('Quarter')>=0">
+                                {{key.split('_').join(' ')}}
+                            </span>
+                            <span *ngIf="key.indexOf('Quarter')!=0"> {{key.split('_').join(' ')}}</span>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="inputVals" *ngFor="let item of planningResults;let i = index">
+                        <td> {{cKey[i].split('_').join(' ')}} </td>
+                        <td *ngFor="let key of JSObject.keys(item[cKey[i]]);let j = index">
+                            <span>{{item[cKey[i]][key]}}</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> -->
+    </div>
+
+</div>
+
+<!-- <app-navbar [open]="open" (event)="open=$event"></app-navbar>
+
+<div class="mainpanel">
+
+  <div class="mainpanel_leftsect">
+    <app-leftpanel [openValue]="open"></app-leftpanel>
+  </div>
+
+  <div class="mainpanel_rightsect" *ngIf="inbounddata">
+
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-sm-12">
+          <h2>Inbound Logistics</h2>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-3">
+          <select class="custom-select" [(ngModel)]="userpreferencevalue" id="prefernceid" (change)="getprefernce()">
+            <option value="" disabled selected hidden>Select</option>
+            <option *ngFor="let service of userpreference" value="{{ service }}">{{ service }}</option>
+          </select>
+        </div>
+        <div class="col-3" *ngIf="monthshow">
+          <select class="custom-select" [(ngModel)]="monthvalue" id="monthid">
+            <option value="" disabled selected hidden>Select</option>
+            <option *ngFor="let service of months" value="{{ service.Value }}">{{ service.Month  }}</option>
+          </select>
+        </div>
+        <div class="col-3" *ngIf="quatershow">
+          <select class="custom-select" [(ngModel)]="quatersvalue" id="quatersid">
+            <option value="" disabled selected hidden>Select</option>
+            <option *ngFor="let service of Quaters;let i = index" value="{{ service }}">
+              {{ service }}
+            </option>
+          </select>
+        </div>
+        <div class="col-3" *ngIf="yearshow">
+          <select class="custom-select" [(ngModel)]="yearsvalue" id="yearid">
+            <option value="" disabled selected hidden>Select</option>
+            <option *ngFor="let service of years" value="{{ service }}">{{ service }}</option>
+          </select>
+        </div>
+        <div class="col-3">
+          <button class="btn btn-primary" (click)="getdata()">Get Data</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4">
+
+          <div class="card cardshadow">
+            <div class="card-header">
+              <div>LNJ Import</div>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-6">Actual</div>
+                <div class="col-6">{{inbounddata['Lanjigarh_import']['Actual_Quantity']}}</div>
+              </div>
+              <div class="row">
+                <div class="col-6">Planned</div>
+                <div class="col-6">{{inbounddata['Lanjigarh_import']['Planned_Quantity']}}</div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="card cardshadow">
+            <div class="card-header">
+              <div>Plant Inventory Trend</div>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-6">Actual</div>
+                <div class="col-6">{{inbounddata['Plant_Stock']['Actual_Quantity']}}</div>
+              </div>
+              <div class="row">
+                <div class="col-6">Planned</div>
+                <div class="col-6">{{inbounddata['Plant_Stock']['Planned_Quantity']}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="card cardshadow">
+            <div class="card-header">
+              <div>BTAP's</div>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-4"></div>
+                <div class="col-4">LNJ</div>
+                <div class="col-4">KSPL</div>
+              </div>
+              <div class="row">
+                <div class="col-4">Actual</div>
+                <div class="col-4">{{inbounddata['BTAPs']['lanji_Trips_Actual']}}</div>
+                <div class="col-4">{{inbounddata['BTAPs']['kslk_Trips_Actual']}}</div>
+              </div>
+              <div class="row">
+                <div class="col-4">Planned</div>
+                <div class="col-4">{{inbounddata['BTAPs']['lanji_Trips_Planned']}}</div>
+                <div class="col-4">{{inbounddata['BTAPs']['lanji_Trips_Planned']}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-4">
+          <div class="card cardshadow">
+            <div class="card-header">
+              <div>BTAT TAT Trend</div>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-6">Actual</div>
+                <div class="col-6">{{inbounddata['Tat_trend']['Tat_actual']}}</div>
+              </div>
+              <div class="row">
+                <div class="col-6">Planned</div>
+                <div class="col-6">{{inbounddata['Tat_trend']['Tat_Planned']}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="card cardshadow">
+            <div class="card-header">
+              <div>Bulker - Port Wise</div>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-4"></div>
+                <div class="col-4">GPL</div>
+                <div class="col-4">KSPL</div>
+              </div>
+              <div class="row">
+                <div class="col-4">Actual</div>
+                <div class="col-4">{{inbounddata['Bulker_Portwise']['Gpl_actual']}}</div>
+                <div class="col-4">{{inbounddata['Bulker_Portwise']['kspl_actual']}}</div>
+              </div>
+              <div class="row">
+                <div class="col-4">Planned</div>
+                <div class="col-4">{{inbounddata['Bulker_Portwise']['Gpl_Planned']}}</div>
+                <div class="col-4">{{inbounddata['Bulker_Portwise']['Kspl_Planned']}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="card cardshadow">
+            <div class="card-header">
+              <div>Rail Mix (%)</div>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-6">Actual</div>
+                <div class="col-6">{{inbounddata['Rail_Mix']['Actual']}}</div>
+              </div>
+              <div class="row">
+                <div class="col-6">Planned</div>
+                <div class="col-6">{{inbounddata['Rail_Mix']['Planned']}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-4">
+          <div class="card cardshadow">
+            <div class="card-header">
+              <div>Release To Drawn Out</div>
+            </div>
+            <div class="card-body">
+              <div>{{inbounddata['release_to_drawn_out']['Release_to_drawn_out']}} </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="card cardshadow">
+            <div class="card-header">
+              <div>P1 and P2 Wise Dispatch and Receipt Trend</div>
+            </div>
+            <div class="card-body">
+              <div>SAP Data to be done</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="card cardshadow">
+            <div class="card-header">
+              <div>Reason For Deviation</div>
+            </div>
+            <div class="card-body">
+              <div>Data To Show Here</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+ <div class="col-3">
+    <div class="card">
+      <div class="card-header">
+        <div>Vesssel Arrival Plan</div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-4"></div>
+          <div class="col-2">ETA</div>
+          <div class="col-2">P1</div>
+          <div class="col-2">P2</div>
+          <div class="col-2">TQ</div>
+        </div>
+        <div class="row">
+          <div class="col-4">KSPL</div>
+          <div class="col-2"></div>
+          <div class="col-2"></div>
+          <div class="col-2"></div>
+          <div class="col-2"></div>
+        </div><var>
+          <div class="row">
+            <div class="col-4">GPL</div>
+            <div class="col-2"></div>
+            <div class="col-2"></div>
+            <div class="col-2"></div>
+            <div class="col-2"></div>
+          </div>
+        </var>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </div> -->

@@ -1,0 +1,25 @@
+td {
+    width: 33% !important;
+    vertical-align: middle;
+}
+
+td>div {
+    width: 100% !important;
+    overflow: hidden;
+}
+
+th:empty {
+    display: none;
+}
+
+.form-group {
+    margin: 0 !important;
+}
+
+.form-group>select,
+.form-group>textarea,
+.form-group>input {
+    width: 100%;
+    padding: 5px 0;
+    border-radius: 5px;
+}

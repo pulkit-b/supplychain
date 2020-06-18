@@ -1,0 +1,60 @@
+/* .loginside {
+    background-image: url(/assets/images/nlpbg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+    width: 100%;
+    height: 100vh;
+  } */
+
+.loginside {
+    background-image: url(/assets/images/nlpbg.jpg);
+    background-repeat: no-repeat;
+    background-size: 145% 100%;
+    background-position: top center;
+    width: 100%;
+    height: 100vh;
+}
+
+.loginmain {
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+    /* overflow: hidden; */
+}
+
+.login-form {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.tatalogo {
+    margin: 50px 30px;
+}
+
+.tatalogo img {
+    width: 100%;
+    height: auto;
+}
+
+tr>td {
+    text-align: center;
+    width: 5.88%;
+    border: 1px solid;
+}
+
+td>input {
+    width: 100%;
+    border: none;
+    text-align: right;
+}
+#sidebarCollapse{
+    padding:0;
+}
+.submitBtn{
+        padding: 10px;
+    text-align: right;
+    float: right;
+    width: 100%;
+}

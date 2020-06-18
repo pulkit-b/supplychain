@@ -1,0 +1,428 @@
+<app-navbar [open]="open" (event)="open=$event"></app-navbar>
+
+<div class="mainpanel">
+
+    <div class="mainpanel_rightsect">
+        <div class="container-fluid">
+
+            <form [formGroup]="authForm" (ngSubmit)="submitmodal(content )">
+                <div class="row">
+
+                    <div class="col-8">
+
+                        <div class="col-12 clearfix">
+                                <div class="inputform-group">
+                                        <div class="col-4">
+                                            <label class="main_label">Year </label>
+                                            <select class="form-control" (change)="selectYear($event)" >
+                                                <!-- <option value="">Select</option> -->
+                                                <option *ngFor="let yearVal of yearDropDown"
+                                                    [selected]="yearVal == vedentaService.currentYear"
+                                                    [ngValue]="yearVal">{{yearVal}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                            <div class="inputform-group row">
+                                <div class="col-sm-12">
+                                    <label class="main_label">Arrival Month</label>
+                                    <div class="innerdiv">
+                                        <div *ngFor="let a of vedentaService.Month; let i=index;" class="monthvalue">
+                                            <div *ngIf="(i+1) >=todayMonth && todayYear==vedentaService.currentYear" class="activeMonth" [ngClass]="{
+                                                'active':(((i+1)==currentMonth))}" (click)="updateVal('arrivalMonthVal', (i+1)); currentMonth = (i+1) ">
+                                                <span>
+                                                    {{a}} </span>
+                                            </div>
+                                            <div *ngIf="todayYear<vedentaService.currentYear" class="activeMonth" [ngClass]="{
+                                                'active':(((i+1)==currentMonth))}" (click)="updateVal('arrivalMonthVal', (i+1)); currentMonth = (i+1) ">
+                                                <span>
+                                                    {{a}} </span>
+                                            </div>
+                                            <div *ngIf="(i+1) < todayMonth && todayYear==vedentaService.currentYear" class="disabledMonth" (click)="updateVal('arrivalMonthVal', (i+1)); currentMonth = (i+1)">
+                                                <span>
+                                                    {{a}} </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="inputform-group row">
+
+                                <div class="col-sm-12">
+                                    <label class="main_label">Ports</label>
+                                    <div class="innerdiv">
+                                        <div *ngFor="let a of ports " [ngClass]="{
+                      'active':(a.Source==loadPortVal)}" class="ports" (click)="updateVal('loadPortVal', a.Source); loadPortVal = a.Source">
+                                            <span>{{a.Name}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="inputform-group row">
+                                <div class="col-sm-12">
+                                    <label class="main_label">Plants</label>
+                                    <div class="innerdiv">
+                                        <div *ngFor="let a of plants" [ngClass]="{
+                    'active':(a.Name==plantVal)}" class="plants" (click)="updateVal('plantVal', a.Name); plantVal = a.Name">
+                                            <span>{{a.Name}}</span> </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="customform_design">
+                                <div class="row">
+
+                                    <div class="col-sm-3">
+                                        <div class="inputform-group row">
+                                            <div class="col-12">
+                                                <label class="main_label">Vessel Name</label>
+                                                <input class="form-control" autocomplete="off" placeholder="Vessel Name" type="text" id="vessel_name" formControlName="vessel_nameVal" [ngClass]="{
+                                    'has-danger': authForm.controls.vessel_nameVal.invalid && authForm.controls.vessel_nameVal.dirty,
+                                    'has-success': authForm.controls.vessel_nameVal.valid && authForm.controls.vessel_nameVal.dirty}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="inputform-group row">
+                                            <div class="col-12">
+                                                <label class="main_label">Quantity (in Tons)</label>
+                                                <input class="form-control" placeholder="Quantity" type="number" id="quantity" formControlName="quantityVal" required [ngClass]="{
+                                  'has-danger': authForm.controls.quantityVal.invalid && authForm.controls.quantityVal.dirty,
+                                  'has-success': authForm.controls.quantityVal.valid && authForm.controls.quantityVal.dirty}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="inputform-group row">
+                                            <div class="col-12">
+                                                <label class="main_label">Owner</label>
+                                                <input class="form-control" placeholder="Owner" autocomplete="off" type="text" id="owner" formControlName="ownerVal" required [ngClass]="{
+                                  'has-danger': authForm.controls.ownerVal.invalid && authForm.controls.ownerVal.dirty,
+                                  'has-success': authForm.controls.ownerVal.valid && authForm.controls.ownerVal.dirty}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="inputform-group row">
+                                            <div class="col-12">
+                                                <button type="button" class="btn-primary mainbutton" (click)="getsuggestion()">Get Suggestions
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-12 clearfix">
+                            <div class="row">
+
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <ngb-datepicker class="procurementdash_datepick" #dp [startDate]="{year: vedentaService.currentYear, month: vedentaService.currentMonth}" [markDisabled]="disableDate" [dayTemplate]="t" (select)="onDateSelection($event)" [ngModelOptions]="{standalone: true}"
+                                        [(ngModel)]="modelDate" [navigation]="arrows">
+                                    </ngb-datepicker>
+
+                                    <ng-template #t let-date let-focused="focused" let-disabled="disabled">
+                                        <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)" [class]="isAvailable(date)" [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+                                            {{ date.day }}
+                                        </span>
+                                    </ng-template>
+                                </div>
+
+                                <div class="col-sm-4" style="padding-top: 30px;">
+
+                                    <div class="calendar_colors">
+                                        <div class="colorsgrid">
+                                            <div class="colorcommon notsuggested"></div>Not Suggested
+                                        </div>
+                                        <div class="colorsgrid">
+                                            <div class="colorcommon suggested"></div>Suggested
+                                        </div>
+                                        <div class="colorsgrid">
+                                            <div class="colorcommon locked"></div>Locked
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="selected_dates">
+                                        <div class="dates_label">
+                                            Laycan Selected
+                                        </div>
+                                        <div class="dates_output">
+                                            <input class="form-control readonlyVessel" readonly="readonly"
+                                                placeholder="" type="text" id="dischargePortSuggested"
+                                                formControlName="laycanSelected">
+                                        </div>
+                                    </div>
+
+                                    <div class="selected_dates">
+                                        <div class="dates_label">
+                                            Vessel Placement Suggestion
+                                        </div>
+                                        <div class="dates_output">
+                                            <textarea class="form-control readonlyVessel" readonly="readonly"
+                                                placeholder="" row="2" col="3" id="dischargePortSuggested"
+                                                formControlName="VesselPlacementSuggestion"></textarea>
+                                        </div>
+                                    </div> -->
+
+                                    <button class="btn-primary mainbutton" type="button" (click)="checkSubmit()">Check</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="col-4">
+                        <div class="common_mainlabel col-12">Estimated Vessel Arrival Date</div>
+                        <div class="dates_output" style="margin-left: 15px;">
+                            <input class="form-control readonlyVessel" readonly="readonly" placeholder="" type="text"
+                                id="arrivalDate" formControlName="arrivalDate">
+                        </div>
+                        <div class="inputform-group">
+                            <div class="col-12">
+                                <label class="main_label">Discharge port suggested </label>
+                                <select class="form-control" id="dischargePortSuggested"
+                                    formControlName="dischargePortSuggested" required
+                                    [ngClass]="{
+                                    'has-danger': authForm.controls.dischargePortSuggested.invalid && authForm.controls.dischargePortSuggested.dirty,
+                                    'has-success': authForm.controls.dischargePortSuggested.valid && authForm.controls.dischargePortSuggested.dirty}">
+                                    <option value="">Select</option>
+                                    <option *ngFor="let suggested of suggestedDropValue"
+                                        [selected]="suggested.source == authForm.controls.dischargePortSuggested.value"
+                                        [ngValue]="suggested.source">{{suggested.source}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="inputform-group">
+                            <div class="col-12">
+                                <label class="main_label">Potential Demurrage</label>
+                                <input class="form-control" placeholder="" type="text" id="potentialDemurrage"
+                                    formControlName="potentialDemurrage" required
+                                    [ngClass]="{
+                'has-danger': authForm.controls.potentialDemurrage.invalid && authForm.controls.potentialDemurrage.dirty,
+                'has-success': authForm.controls.potentialDemurrage.valid && authForm.controls.potentialDemurrage.dirty}">
+                            </div>
+                        </div>
+
+                        <div class="inputform-group">
+                            <div class="col-12">
+                                <label class="main_label">Trade off reason</label>
+                                <textarea class="form-control" placeholder="" type="text" id="tradeOffReason"
+                                    formControlName="tradeOffReason" required
+                                    [ngClass]="{
+                'has-danger': authForm.controls.tradeOffReason.invalid && authForm.controls.tradeOffReason.dirty,
+                'has-success': authForm.controls.tradeOffReason.valid && authForm.controls.tradeOffReason.dirty}"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 col-12">
+                            <button class="btn-primary mainbutton" type="submit">Submit
+                                Vessel</button>
+
+                            <ng-template #content let-modal>
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Vessel confirmation</h4>
+                                    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <table class="table table-bordered">
+                                        <thead class="text-center">
+                                            <tr>
+                                                <th scope="col">Vessel</th>
+                                                <th scope="col">Laycan</th>
+                                                <th scope="col">Pedicted demurrage</th>
+                                                <th scope="col">Trade off</th>
+                                                <th scope="col">User comments</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td scope="col">
+                                                    {{authForm.value.vessel_nameVal}}
+                                                </td>
+                                                <td scope="col">
+                                                    {{laycanSelected}}
+                                                </td>
+                                                <td scope="col">
+                                                    {{checkData.Demurrage}}
+                                                </td>
+                                                <td scope="col">
+                                                    {{checkData.TradeOff_comments}}
+                                                </td>
+                                                <td scope="col">
+                                                    <div class="inputform-group">
+                                                        <textarea class="form-control"
+                                                            placeholder="Please enter user comments here" type="text"
+                                                            name="" id="userComment"
+                                                            formControlName="userComment"></textarea>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <div class="text-right">
+                                        <button type="button" class="btn-primary mainbutton"
+                                            (click)="submitConfirm()">Confirm
+                                            Vessel</button>
+                                    </div>
+                                </div>
+
+                            </ng-template>
+                            <ng-template #content1 let-modal>
+                                <div>
+
+                                    <button type="button" class="close" aria-label="Close" (click)="closeModal()"
+                                        style="padding-right: 10px;">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body text-center">
+                                    Successfully Submitted
+
+                                </div>
+
+                            </ng-template>
+                        </div>
+
+                    </div> -->
+                    <ng-template #content let-modal>
+                        <div class="modal-header">
+                            <h4 class="modal-title">Vessel confirmation</h4>
+                            <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <table class="table table-bordered">
+                                <thead class="text-center">
+                                    <tr>
+                                        <th scope="col">Vessel</th>
+                                        <th scope="col">Laycan</th>
+                                        <th scope="col">Predicted demurrage</th>
+                                        <th scope="col">Trade off</th>
+                                        <th scope="col">User comments</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td scope="col">
+                                            {{authForm.value.vessel_nameVal}}
+                                        </td>
+                                        <td scope="col">
+                                            {{laycanSelected}}
+                                        </td>
+                                        <td scope="col">
+                                            {{checkData.Demurrage}}
+                                        </td>
+                                        <td scope="col">
+                                            {{checkData.TradeOff_comments}}
+                                        </td>
+                                        <td scope="col">
+                                            <div class="inputform-group">
+                                                <textarea class="form-control" placeholder="Please enter user comments here" type="text" name="" id="userComment" formControlName="userComment"></textarea>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="text-right">
+                                <button type="button" class="btn-primary mainbutton" (click)="submitConfirm()">Confirm
+                                    Vessel</button>
+                            </div>
+                        </div>
+
+                    </ng-template>
+                    <ng-template #content1 let-modal>
+                        <div>
+
+                            <button type="button" class="close" aria-label="Close" (click)="closeModal()" style="padding-right: 10px;">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body text-center">
+                            Successfully Submitted
+
+                        </div>
+
+                    </ng-template>
+                    <div class="col-4">
+                        <div class="esstimatedvessels">
+                            <div class="esstimatedvessels_image">
+                                <img src="assets/images/procurementship.png">
+                                <div class="vesselinfo1">LAYCAN <br>
+                                    <textarea class="form-control readonlyVessel" readonly="readonly" placeholder="" row="2" col="3" id="dischargePortSuggested" formControlName="laycanSelected"></textarea>
+
+                                </div>
+                                <div class="vesselinfo2">VESSEL ARRIVAL DATE <br>
+                                    <input style="background-color:white !important;border: 0px !important;text-align: center " class="form-control readonlyVessel" readonly="readonly" placeholder="" type="text" id="dischargePortSuggested" formControlName="arrivalDate">
+                                </div>
+                                <div class="vesselinfo3">VESSEL PLACEMENT <br>
+                                    <textarea class="form-control readonlyVessel" readonly="readonly" placeholder="" row="2" col="3" id="VesselPlacementSuggestion" formControlName="VesselPlacementSuggestion"></textarea>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="inputform-group">
+                            <div class="col-12">
+                                <label class="main_label">Discharge port suggested </label>
+                                <select class="form-control" id="dischargePortSuggested" formControlName="dischargePortSuggested" required [ngClass]="{
+                                        'has-danger': authForm.controls.dischargePortSuggested.invalid && authForm.controls.dischargePortSuggested.dirty,
+                                        'has-success': authForm.controls.dischargePortSuggested.valid && authForm.controls.dischargePortSuggested.dirty}">
+                                    <option value="">Select</option>
+                                    <option *ngFor="let suggested of suggestedDropValue"
+                                        [selected]="suggested.source == authForm.controls.dischargePortSuggested.value"
+                                        [ngValue]="suggested.source">{{suggested.source}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="potentiondemaregbox">
+                                <div class="customlabel">Potential <br>Demurrage</div>
+                                <div class="value">
+                                    <input style="background-color:#dd462f !important; color: white;font-weight: bold;border: 0px !important; " class="form-control readonlyVessel" readonly="readonly" placeholder="" type="text" id="dischargePortSuggested" formControlName="potentialDemurrage">
+                                    <!-- {{checkData.Demurrage}} -->$</div>
+                            </div>
+                        </div>
+
+                        <div class="inputform-group">
+                            <div class="col-12">
+                                <label class="main_label">Trade off reason</label>
+                                <textarea class="form-control" placeholder="" type="text" id="tradeOffReason" formControlName="tradeOffReason" required [ngClass]="{
+                    'has-danger': authForm.controls.tradeOffReason.invalid && authForm.controls.tradeOffReason.dirty,
+                    'has-success': authForm.controls.tradeOffReason.valid && authForm.controls.tradeOffReason.dirty}"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-12 text-center">
+                            <button class="btn-primary mainbutton" type="submit">Submit
+                                Vessel</button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+<div *ngIf="uiEnabledDisabled>=1">
+    <div class="processingJob">
+        !!Vessels Updation Running. Please Wait!!
+    </div>
+</div>

@@ -1,0 +1,125 @@
+<div class="login-component">
+  <img src="../../assets/images/wave.svg" class="bottom-img">
+  <div class="container">
+    <div class="login-area">
+      <!-- <img src="../../assets/images/logo.png" class="logo"> -->
+       <p class="name-logo">Supplychain</p>
+        <p class="subname-logo">Powered by <img src="./assets/images/gcp.png" style="width: 5%;"></p>
+      <p class="heading">Login</p>
+      <form
+      #loginForm="ngForm"
+          (ngSubmit)="login()"
+          novalidate
+          >
+        <div class="input-box">
+          <i class="fa fa-user"></i>
+        <input
+         type="text"
+         id="uid"
+                required
+                [(ngModel)]="model.uid"
+                name="uid"
+                #uid="ngModel"
+                placeholder="Email id"
+                >
+      </div>
+      <div class="input-box">
+        <i class="fa fa-key"></i>
+        <input type="password"
+        id="password"
+        required
+                [(ngModel)]="model.password"
+                name="password"
+                #password="ngModel"
+                placeholder="Password">
+      </div>
+      <button type="submit" class="submit-btn">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+        <!-- <form
+          class="login-form"
+          #loginForm="ngForm"
+          (ngSubmit)="login()"
+          novalidate
+        >
+          <div class="container" style="padding: 0px 100px;">
+            <div class="tatalogo">
+              <img src="assets/images/logo.png" width="100%" />
+            </div>
+
+            <div class="m-5 text-center">
+              Sign in with your organizational account
+            </div>
+
+            <div class="form-group customfom_group">
+              <input
+                type="text"
+                class="form-control"
+                id="uid"
+                required
+                [(ngModel)]="model.uid"
+                name="uid"
+                #uid="ngModel"
+                placeholder="Firstname.Lastname"
+              />
+            </div>
+            <div class="form-group customfom_group">
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                [(ngModel)]="model.password"
+                name="password"
+                #password="ngModel"
+                placeholder="password"
+              />
+            </div>
+            <div class="form-group text-center">
+              <button
+                [disabled]="loading"
+                type="submit"
+                class="btn btn-green"
+                style="width:300px;"
+              >
+                <span>Sign In</span>
+                <span *ngIf="loading">
+                  Logging in...
+                  <i class="fa fa-spinner fa-pulse fa-fw"></i>
+                </span>
+              </button>
+            </div>
+          </div>
+        </form> -->
+       
+<ng-template
+  #saveCookieCommon
+  let-c="close"
+  class="cookiemodal"
+  let-d="dismiss"
+>
+  <div class="modal-header" style="padding: 0.2rem 0.8rem; border: 0">
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="d('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body text-center">
+    <div>{{ showMessage }}</div>
+    <div class="mb-1 mt-4">
+      <button
+        type="button"
+        class="btn btn-green mr-2"
+        (click)="d('Cross click')"
+      >
+        Ok
+      </button>
+    </div>
+  </div>
+</ng-template>
